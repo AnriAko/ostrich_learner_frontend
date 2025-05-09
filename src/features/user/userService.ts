@@ -2,15 +2,15 @@ import axiosInstance from "../../shared/api/axiosInstance";
 import UserStorage from "../../shared/storage/userStorage";
 
 class UserService {
-    login(userId: string) {
-        UserStorage.set(userId);
+    login(id: string, nickname: string) {
+        UserStorage.set(id, nickname);
     }
 
     logout() {
         UserStorage.clear();
     }
 
-    getCurrentUserId(): string | null {
+    getCurrentUserId(): { id: string; nickname: string } | null {
         return UserStorage.get();
     }
     async createUser(nickname: string) {
