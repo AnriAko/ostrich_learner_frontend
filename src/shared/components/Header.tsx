@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
-
+// change header color to white and body color to gray 100
 const Header = () => (
-    <header className="bg-blue-600 text-white p-4">
-        <nav className="container mx-auto flex gap-4">
-            <Link to="/">Home</Link>
-            <Link to="/profile">Profile</Link>
+    <header className="bg-white p-3 font-roboto">
+        <nav className="container mx-auto flex justify-between items-center">
+            <Link
+                to="/"
+                className="font-black text-[22px] text-blue-500 flex flex-col leading-tight"
+            >
+                <span>Ostrich</span>
+                <span>Learner</span>
+            </Link>
+            <Link to="/profile" className="font-bold text-xl">
+                Profile
+            </Link>
         </nav>
     </header>
 );

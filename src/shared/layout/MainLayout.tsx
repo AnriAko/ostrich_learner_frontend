@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-gray-200">
             <Header />
             <main className="flex-1 container mx-auto p-4">{children}</main>
             <Footer />
