@@ -1,16 +1,9 @@
 import { createContext } from "react";
+import type { User } from "./UserTypes";
 
-export interface User {
-    id: string;
-    nickname: string;
-}
-
-interface UserContextType {
+export interface UserContextType {
     user: User | null;
-    loading: boolean;
-    error: boolean;
-    login: (user: User) => void;
-    logout: () => void;
+    setUser: (user: User | null) => void;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(

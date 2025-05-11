@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // change header color to white and body color to gray 100
 const Header = () => (
-    <header className="bg-white p-3 font-roboto">
+    <header className="bg-white p-3 font-roboto font-bold">
         <nav className="container mx-auto flex justify-between items-center">
             <Link
                 to="/"
@@ -10,7 +10,7 @@ const Header = () => (
                 <span>Ostrich</span>
                 <span>Learner</span>
             </Link>
-            <Link to="/profile" className="font-bold text-xl">
+            <Link to="/profile" className="text-xl">
                 Profile
             </Link>
         </nav>
