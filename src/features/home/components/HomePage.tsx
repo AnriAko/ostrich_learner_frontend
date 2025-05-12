@@ -4,7 +4,6 @@ import { useUser } from "../../../shared/hooks/useUser";
 
 const HomePage = () => {
     const { user } = useUser();
-
     if (!user) {
         return (
             <Link to="/signin" className="text-xl font-bold">
