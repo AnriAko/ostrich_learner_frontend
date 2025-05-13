@@ -60,12 +60,12 @@ const UsersPage = () => {
                 <p className="text-center text-gray-500">No users found.</p>
             )}
 
-            <hr className="my-8" />
+            <hr className="my-8 text-gray-300" />
 
             <div className="text-center">
                 <Link
                     to="/create"
-                    className="text-blue-600 hover:underline text-sm"
+                    className="text-blue-600 hover:underline text-m"
                 >
                     Create New User
                 </Link>

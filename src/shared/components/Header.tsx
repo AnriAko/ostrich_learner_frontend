@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import UserMenu from "./UserMenu";
+import UserProfileMenu from "./UserProfileMenu/UserProfileMenu";
 
 const Header = () => (
-    <header className="bg-white p-3 font-roboto font-bold">
+    <header className="bg-white p-3">
         <nav className="container mx-auto flex justify-between items-center">
             <Link
                 to="/"
-                className="font-roboto font-black text-[22px] text-blue-500 flex flex-col leading-tight"
+                className="font-[900] text-[22px] text-blue-500 flex flex-col leading-tight"
             >
                 <span>Ostrich</span>
                 <span>Learner</span>
             </Link>
-            <UserMenu />
+            <UserProfileMenu />
         </nav>
     </header>
 );

@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "../assets/fonts/fonts.css";
+
+body {
+    font-family: "IBM Plex Sans";
+    font-weight: 500;
+    font-style: normal;
+}

@@ -27,7 +27,7 @@ const CreateUserPage = () => {
                         );
                         if (fullUser && setUser) {
                             setUser(fullUser);
-                            navigate("/"); // переход после установки пользователя
+                            navigate("/");
                         }
                     } catch (err) {
                         console.error("Failed to fetch full user:", err);

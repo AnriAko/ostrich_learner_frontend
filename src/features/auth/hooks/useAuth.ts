@@ -18,7 +18,7 @@ export const useCreateUser = () => {
         mutationFn: (userData: CreateUserDto) =>
             AuthService.createUser(userData),
         onSuccess: () => {
-            queryClient.invalidateQueries(["users"]);
+            queryClient.invalidateQueries({ queryKey: ["users"] });
         },
     });
 };
