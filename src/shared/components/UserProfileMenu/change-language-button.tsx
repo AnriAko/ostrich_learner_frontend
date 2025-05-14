@@ -11,6 +11,7 @@ const ChangeInterfaceLanguageButton = () => {
     const handleLanguageChange = async (language: InterfaceLanguage) => {
         if (!user) return;
         await mutateAsync({ userId: user.userId, interfaceLanguage: language });
+        setIsOpen(false);
     };
 
     if (!user) return null;
@@ -19,7 +20,7 @@ const ChangeInterfaceLanguageButton = () => {
         <div className="relative">
             <div
                 className={`absolute left-[-20px] right-[-20px] top-0 z-0 transition-all duration-300 ease-out ${
-                    isOpen ? "h-[195px]" : "h-0"
+                    isOpen ? "h-[50px]" : "h-0"
                 } bg-transparent`}
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave={() => setIsOpen(false)}

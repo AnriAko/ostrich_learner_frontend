@@ -49,13 +49,12 @@ const UserProfileMenu = () => {
             >
                 <div
                     className={`absolute left-[-20px] right-[-20px] top-0 z-0 duration-300 ease-out ${
-                        isOpen ? "h-[240px]" : "h-0"
+                        isOpen ? "h-[50px]" : "h-0"
                     }`}
                 />
 
                 <div className="relative z-10">
                     <button
-                        onClick={() => setIsOpen(!isOpen)}
                         className={`flex items-center gap-1 px-2 py-1 text-sm ${
                             isOpen ? "bg-gray-200" : ""
                         } hover:bg-gray-100 rounded cursor-pointer focus:outline-none font-medium`}
@@ -83,6 +82,7 @@ const UserProfileMenu = () => {
                             <Link
                                 to="/progress"
                                 className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                                onClick={() => setIsOpen(false)}
                             >
                                 Achievements
                             </Link>
@@ -90,6 +90,7 @@ const UserProfileMenu = () => {
                             <Link
                                 to="/settings"
                                 className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                                onClick={() => setIsOpen(false)}
                             >
                                 Settings
                             </Link>
