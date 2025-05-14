@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { useCreateUser } from "../hooks/useAuth";
+import { useCreateUser } from "../hooks/use-auth";
 import { Link, useNavigate } from "react-router-dom";
-import type { CreateUserDto } from "../dto/createUser.dto";
-import { AuthService } from "../services/AuthService";
-import { UserContext } from "../../../shared/context/UserContext";
+import type { CreateUserDto } from "../dto/create-user.dto";
+import { AuthService } from "../services/auth-service";
+import { UserContext } from "../../../shared/context/user-context";
 
 const CreateUserPage = () => {
     const [nickname, setNickname] = useState("");

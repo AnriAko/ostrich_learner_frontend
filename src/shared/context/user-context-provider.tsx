@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { UserContext } from "./UserContext";
-import type { User } from "./UserTypes";
+import { UserContext } from "./user-context";
+import type { User } from "../../features/userConfig/types/user";
 import type { ReactNode } from "react";
 
 const LOCAL_STORAGE_KEY = "currentUser";
 
-export const UserProvider = ({ children }: { children: ReactNode }) => {
+export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUserState] = useState<User | null>(null);
 
     useEffect(() => {

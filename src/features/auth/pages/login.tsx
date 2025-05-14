@@ -1,13 +1,13 @@
-import { useState, useContext } from "react";
-import { useGetAllUsers } from "../hooks/useAuth";
+import { useState } from "react";
+import { useGetAllUsers } from "../hooks/use-auth";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthService } from "../services/AuthService";
-import { UserContext } from "../../../shared/context/UserContext";
+import { AuthService } from "../services/auth-service";
+import { useUser } from "../../../shared/hooks/use-user";
 
 const UsersPage = () => {
     const { data: users = [], isLoading } = useGetAllUsers();
     const [search, setSearch] = useState("");
-    const { setUser } = useContext(UserContext)!;
+    const { setUser } = useUser();
     const navigate = useNavigate();
 
     const handleLogin = async (id: string) => {

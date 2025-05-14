@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { AuthService } from "../services/AuthService";
-import type { CreateUserDto } from "../dto/createUser.dto";
-import { GetUserDto } from "../dto/getUser.dto";
-import { User } from "../../../shared/context/UserTypes";
+import { AuthService } from "../services/auth-service";
+import type { CreateUserDto } from "../dto/create-user.dto";
+import { GetUserDto } from "../dto/get-user.dto";
+import { UserConfig } from "../../userConfig/types/user-config";
 
 // Hook for fetching all users
 export const useGetAllUsers = () =>
@@ -32,7 +32,7 @@ export const useGetUserById = (id: string) =>
     });
 
 export const useGetFullUserById = (id: string) =>
-    useQuery<User | null>({
+    useQuery<UserConfig | null>({
         queryKey: ["fullUser", id],
         queryFn: () => AuthService.getFullUserById(id),
         enabled: !!id,

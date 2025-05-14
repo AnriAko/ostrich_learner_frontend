@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import type { User } from "./UserTypes";
+import type { UserConfig } from "../../features/userConfig/types/user-config";
 
 export interface UserContextType {
-    user: User | null;
-    setUser: (user: User | null) => void;
+    user: UserConfig | null;
+    setUser: (user: UserConfig | null) => void;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(

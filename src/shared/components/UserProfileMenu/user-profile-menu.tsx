@@ -1,11 +1,12 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
-import { User } from "../../context/UserTypes";
-import "./UserNavigationStyles.css";
+import "./user-navigation-styles.css";
+import { useUser } from "../../hooks/use-user";
+import ToggleThemeButton from "./toggle-theme-button";
+import ChangeInterfaceLanguageButton from "./change-language-button";
 
 const UserProfileMenu = () => {
-    const { user, setUser } = useContext(UserContext)!;
+    const { user, setUser } = useUser();
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const menuRef = useRef<HTMLDivElement>(null);
@@ -26,27 +27,16 @@ const UserProfileMenu = () => {
         };
     }, []);
 
+    if (!user) {
+        return null;
+    }
+
     const handleLogout = () => {
         localStorage.removeItem("currentUser");
         setUser(null);
         setIsOpen(false);
         navigate("/signin");
     };
-
-    const toggleTheme = () => {
-        if (!user) return;
-
-        const newTheme: "light" | "dark" =
-            user.theme === "light" ? "dark" : "light";
-        const updatedUser: User = { ...user, theme: newTheme };
-
-        setUser(updatedUser);
-        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
-    };
-
-    if (!user) return null;
-
-    const themeIcon = user.theme === "light" ? "☀️" : "🌙";
 
     return (
         <div className="relative" ref={menuRef}>
@@ -73,12 +63,14 @@ const UserProfileMenu = () => {
                         {user.nickname}
                     </div>
                     <hr className="border-gray-400" />
+
                     <Link
                         to="/progress"
                         className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
                     >
-                        Progress
+                        Achievements
                     </Link>
+
                     <Link
                         to="/settings"
                         className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
@@ -86,12 +78,8 @@ const UserProfileMenu = () => {
                         Settings
                     </Link>
 
-                    <button
-                        onClick={toggleTheme}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
-                    >
-                        Theme: {user.theme} {themeIcon}
-                    </button>
+                    <ToggleThemeButton />
+                    <ChangeInterfaceLanguageButton />
 
                     <hr className="border-gray-400" />
                     <button

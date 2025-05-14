@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import UserProfileMenu from "./UserProfileMenu/UserProfileMenu";
+import UserProfileMenu from "./UserProfileMenu/user-profile-menu";
 
 const Header = () => (
     <header className="bg-white p-3">

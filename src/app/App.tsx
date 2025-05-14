@@ -1,12 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
-import AppRouter from "./AppRouter";
-import { UserProvider } from "../shared/context/UserProvider";
+import AppRouter from "./app-router";
+import { UserContextProvider } from "../shared/context/user-context-provider";
 
 const App = () => (
     <BrowserRouter>
-        <UserProvider>
+        <UserContextProvider>
             <AppRouter />
-        </UserProvider>
+        </UserContextProvider>
     </BrowserRouter>
 );
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_BASE_URL } from "./config";
 import { setupInterceptors } from "./interceptors";
 
-const axiosInstance = axios.create({
+const api = axios.create({
     baseURL: API_BASE_URL,
     headers: {
         "Content-Type": "application/json",
@@ -10,6 +10,6 @@ const axiosInstance = axios.create({
     withCredentials: true,
 });
 
-setupInterceptors(axiosInstance);
+setupInterceptors(api);
 
-export default axiosInstance;
+export default api;
