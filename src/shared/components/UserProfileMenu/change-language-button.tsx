@@ -11,7 +11,6 @@ const ChangeInterfaceLanguageButton = () => {
     const handleLanguageChange = async (language: InterfaceLanguage) => {
         if (!user) return;
         await mutateAsync({ userId: user.userId, interfaceLanguage: language });
-        setIsOpen(false);
     };
 
     if (!user) return null;
@@ -36,6 +35,7 @@ const ChangeInterfaceLanguageButton = () => {
                         isOpen ? "bg-gray-200" : ""
                     } hover:bg-gray-100 rounded cursor-pointer focus:outline-none`}
                 >
+                    {/*#2b7fff*/}
                     <img
                         src="src/assets/icons/globe.svg"
                         alt="Language translation"
