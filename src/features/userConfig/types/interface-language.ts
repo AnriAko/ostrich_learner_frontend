@@ -1,5 +1,5 @@
 export const enum InterfaceLanguage {
-    English = "en",
-    Georgian = "ka",
-    Russian = "ru",
+    English = "EN",
+    Georgian = "KA",
+    Russian = "RU",
 }

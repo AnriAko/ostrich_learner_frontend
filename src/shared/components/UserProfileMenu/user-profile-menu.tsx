@@ -39,57 +39,74 @@ const UserProfileMenu = () => {
     };
 
     return (
-        <div className="relative" ref={menuRef}>
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1 focus:outline-none cursor-pointer"
+        <div className="flex items-center gap-12">
+            <ChangeInterfaceLanguageButton />
+            <div
+                className="relative"
+                ref={menuRef}
+                onMouseEnter={() => setIsOpen(true)}
+                onMouseLeave={() => setIsOpen(false)}
             >
-                <img
-                    src="src/assets/icons/circle-user-round.svg"
-                    alt="User Menu"
-                    className="w-8 h-8"
+                <div
+                    className={`absolute left-[-20px] right-[-20px] top-0 z-0 duration-300 ease-out ${
+                        isOpen ? "h-[240px]" : "h-0"
+                    }`}
                 />
-                <span
-                    className={`w-5 h-5 flex items-center justify-center text-gray-500 text-sm transition-all duration-200
-        ${isOpen ? "bg-gray-200 rounded-full scale-110" : ""}`}
-                >
-                    {isOpen ? "▲" : "▼"}
-                </span>
-            </button>
 
-            {isOpen && (
-                <div className="absolute font-medium right-0 mt-2 w-56 bg-white border border-gray-400 rounded-lg shadow-lg z-10 scrollbar-custom overflow-y-auto max-h-60">
-                    <div className="px-4 py-2 font-bold text-sm">
-                        {user.nickname}
-                    </div>
-                    <hr className="border-gray-400" />
-
-                    <Link
-                        to="/progress"
-                        className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
-                    >
-                        Achievements
-                    </Link>
-
-                    <Link
-                        to="/settings"
-                        className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
-                    >
-                        Settings
-                    </Link>
-
-                    <ToggleThemeButton />
-                    <ChangeInterfaceLanguageButton />
-
-                    <hr className="border-gray-400" />
+                <div className="relative z-10">
                     <button
-                        onClick={handleLogout}
-                        className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600 text-sm cursor-pointer"
+                        onClick={() => setIsOpen(!isOpen)}
+                        className={`flex items-center gap-1 px-2 py-1 text-sm ${
+                            isOpen ? "bg-gray-200" : ""
+                        } hover:bg-gray-100 rounded cursor-pointer focus:outline-none font-medium`}
                     >
-                        Log out
+                        <img
+                            src="src/assets/icons/circle-user-round.svg"
+                            alt="User Menu"
+                            className="w-8 h-8"
+                        />
+                        <span className="w-auto text-left text-[16px]">
+                            Profile
+                        </span>
+                        <span className="w-5 h-5 flex items-center justify-center text-gray-500 text-sm transition-all duration-200">
+                            {isOpen ? "▲" : "▼"}
+                        </span>
                     </button>
+
+                    {isOpen && (
+                        <div className="absolute font-medium translate-x-[10px] right-0 mt-2 w-36 bg-white border border-gray-400 rounded-lg shadow-lg z-10 scrollbar-custom overflow-y-auto max-h-60">
+                            <div className="px-4 py-2 font-bold text-sm">
+                                {user.nickname}
+                            </div>
+                            <hr className="border-gray-400" />
+
+                            <Link
+                                to="/progress"
+                                className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                            >
+                                Achievements
+                            </Link>
+
+                            <Link
+                                to="/settings"
+                                className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                            >
+                                Settings
+                            </Link>
+
+                            <ToggleThemeButton />
+
+                            <hr className="border-gray-400" />
+                            <button
+                                onClick={handleLogout}
+                                className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600 text-sm cursor-pointer"
+                            >
+                                Log out
+                            </button>
+                        </div>
+                    )}
                 </div>
-            )}
+            </div>
         </div>
     );
 };
