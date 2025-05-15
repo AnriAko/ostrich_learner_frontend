@@ -1,0 +1,17 @@
+{
+    "please_log_in": "Пожалуйста, войдите",
+    "welcome_user": "Добро пожаловать, {{nickname}}!",
+    "createUser.title": "Создать пользователя",
+    "createUser.placeholder": "Введите имя пользователя",
+    "createUser.creating": "Создание...",
+    "createUser.button": "Создать",
+    "createUser.success": "Пользователь успешно создан!",
+    "createUser.error": "Ошибка:",
+    "createUser.unknownError": "Неизвестная ошибка",
+    "createUser.or": "или",
+    "createUser.login": "Войти",
+    "userMenu.profile": "Профиль",
+    "userMenu.achievements": "Достижения",
+    "userMenu.settings": "Настройки",
+    "userMenu.logout": "Выйти"
+}

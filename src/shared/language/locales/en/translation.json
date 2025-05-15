@@ -1,0 +1,17 @@
+{
+    "please_log_in": "Please log in",
+    "welcome_user": "Welcome, {{nickname}}!",
+    "createUser.title": "Create User",
+    "createUser.placeholder": "Enter nickname",
+    "createUser.creating": "Creating...",
+    "createUser.button": "Create",
+    "createUser.success": "User created successfully!",
+    "createUser.error": "Error:",
+    "createUser.unknownError": "Unknown error",
+    "createUser.or": "Or",
+    "createUser.login": "Log In",
+    "userMenu.profile": "Profile",
+    "userMenu.achievements": "Achievements",
+    "userMenu.settings": "Settings",
+    "userMenu.logout": "Log out"
+}

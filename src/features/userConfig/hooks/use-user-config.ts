@@ -9,6 +9,7 @@ import { Theme } from "../types/theme";
 import { InterfaceLanguage } from "../types/interface-language";
 import { useUser } from "../../../shared/hooks/use-user";
 import UserStorage from "../../../shared/storage/user-storage";
+import i18n from "../../../shared/language/i18n";
 
 export const useGetUserConfig = (userId: string) => {
     return useQuery({
@@ -62,6 +63,9 @@ export const useUpdateUserInterfaceLanguage = () => {
         onSuccess: (data) => {
             setUser(data!);
             UserStorage.set(data!);
+            i18n.changeLanguage(data!.interfaceLanguage).then(() => {
+                console.log("Language changed to:", i18n.language);
+            });
         },
     });
 };
