@@ -42,7 +42,7 @@ const UserProfileMenu = () => {
     };
 
     return (
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-8">
             <ChangeInterfaceLanguageButton />
 
             <div
