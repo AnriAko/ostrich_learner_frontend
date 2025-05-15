@@ -77,7 +77,11 @@ const UserProfileMenu = () => {
                         <span className="w-auto text-left text-[16px]">
                             {t("userMenu.profile")}
                         </span>
-                        <span className="w-5 h-5 flex items-center justify-center text-gray-500 text-sm transition-all duration-200">
+                        <span
+                            className={`w-5 h-5 flex items-center justify-center text-sm transition-all duration-200 ${
+                                isDark ? "text-gray-300" : "text-gray-500"
+                            }`}
+                        >
                             {isOpen ? "▲" : "▼"}
                         </span>
                     </button>

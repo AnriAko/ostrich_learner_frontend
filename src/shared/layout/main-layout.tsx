@@ -10,7 +10,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
 
     const bgClass = isDark
         ? "bg-gray-800 text-gray-200"
-        : "bg-gray-100 text-gray-900";
+        : "bg-gray-200 text-gray-900";
 
     return (
         <div className={`min-h-screen flex flex-col font-ibm-plex ${bgClass}`}>
