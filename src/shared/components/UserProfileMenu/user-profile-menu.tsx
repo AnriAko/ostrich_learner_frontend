@@ -5,13 +5,16 @@ import "./user-navigation-styles.css";
 import { useUser } from "../../hooks/use-user";
 import ToggleThemeButton from "./toggle-theme-button";
 import ChangeInterfaceLanguageButton from "./change-language-button";
+import { Theme } from "../../../features/userConfig/types/theme";
 
 const UserProfileMenu = () => {
-    const { t } = useTranslation(); // добавлено
+    const { t } = useTranslation();
     const { user, setUser } = useUser();
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const menuRef = useRef<HTMLDivElement>(null);
+
+    const isDark = user?.theme === Theme.dark;
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -29,9 +32,7 @@ const UserProfileMenu = () => {
         };
     }, []);
 
-    if (!user) {
-        return null;
-    }
+    if (!user) return null;
 
     const handleLogout = () => {
         localStorage.removeItem("currentUser");
@@ -43,6 +44,7 @@ const UserProfileMenu = () => {
     return (
         <div className="flex items-center gap-12">
             <ChangeInterfaceLanguageButton />
+
             <div
                 className="relative"
                 ref={menuRef}
@@ -57,9 +59,15 @@ const UserProfileMenu = () => {
 
                 <div className="relative z-10">
                     <button
-                        className={`flex items-center gap-1 px-2 py-1 text-sm w-38 ${
-                            isOpen ? "bg-gray-200" : ""
-                        } hover:bg-gray-100 rounded cursor-pointer focus:outline-none font-medium`}
+                        className={`flex items-center gap-1 px-2 py-1 text-sm w-38 rounded cursor-pointer focus:outline-none font-medium ${
+                            isDark
+                                ? `${
+                                      isOpen ? "bg-gray-700" : ""
+                                  } hover:bg-gray-600 text-white`
+                                : `${
+                                      isOpen ? "bg-gray-200" : ""
+                                  } hover:bg-gray-100`
+                        }`}
                     >
                         <img
                             src="src/assets/icons/circle-user-round.svg"
@@ -75,15 +83,31 @@ const UserProfileMenu = () => {
                     </button>
 
                     {isOpen && (
-                        <div className="absolute font-medium right-0 mt-2 w-38 bg-white border border-gray-400 rounded-lg shadow-lg z-10 scrollbar-custom overflow-y-auto max-h-60">
+                        <div
+                            className={`absolute right-0 mt-2 w-38 rounded-lg shadow-lg z-10 scrollbar-custom overflow-y-auto max-h-60 border ${
+                                isDark
+                                    ? "bg-gray-800 border-gray-600 text-white"
+                                    : "bg-white border-gray-400"
+                            }`}
+                        >
                             <div className="px-4 py-2 font-bold text-sm">
                                 {user.nickname}
                             </div>
-                            <hr className="border-gray-400" />
+                            <hr
+                                className={`${
+                                    isDark
+                                        ? "border-gray-600"
+                                        : "border-gray-400"
+                                }`}
+                            />
 
                             <Link
                                 to="/progress"
-                                className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                                className={`block px-4 py-2 text-sm cursor-pointer ${
+                                    isDark
+                                        ? "hover:bg-gray-700"
+                                        : "hover:bg-gray-100"
+                                }`}
                                 onClick={() => setIsOpen(false)}
                             >
                                 {t("userMenu.achievements")}
@@ -91,7 +115,11 @@ const UserProfileMenu = () => {
 
                             <Link
                                 to="/settings"
-                                className="block px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                                className={`block px-4 py-2 text-sm cursor-pointer ${
+                                    isDark
+                                        ? "hover:bg-gray-700"
+                                        : "hover:bg-gray-100"
+                                }`}
                                 onClick={() => setIsOpen(false)}
                             >
                                 {t("userMenu.settings")}
@@ -99,10 +127,21 @@ const UserProfileMenu = () => {
 
                             <ToggleThemeButton />
 
-                            <hr className="border-gray-400" />
+                            <hr
+                                className={`${
+                                    isDark
+                                        ? "border-gray-600"
+                                        : "border-gray-400"
+                                }`}
+                            />
+
                             <button
                                 onClick={handleLogout}
-                                className="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600 text-sm cursor-pointer"
+                                className={`block w-full text-left px-4 py-2 text-sm cursor-pointer ${
+                                    isDark
+                                        ? "text-red-400 hover:bg-red-900"
+                                        : "text-red-600 hover:bg-red-100"
+                                }`}
                             >
                                 {t("userMenu.logout")}
                             </button>

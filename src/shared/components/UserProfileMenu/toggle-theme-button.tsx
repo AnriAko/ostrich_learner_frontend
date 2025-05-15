@@ -9,9 +9,7 @@ const ToggleThemeButton = () => {
     const { mutateAsync } = useUpdateUserTheme();
     const { user } = useUser();
 
-    if (!user) {
-        return null;
-    }
+    if (!user) return null;
 
     const themeIconMap: Record<Theme, string> = {
         light: "☀️",
@@ -31,10 +29,14 @@ const ToggleThemeButton = () => {
         await mutateAsync({ userId: user.userId, theme: updatedUser.theme });
     };
 
+    const isDark = user.theme === Theme.dark;
+
     return (
         <button
             onClick={handleToggleTheme}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+            className={`block w-full text-left px-4 py-2 text-sm cursor-pointer ${
+                isDark ? "hover:bg-gray-700 text-white" : "hover:bg-gray-100"
+            }`}
         >
             {t("userMenu.theme")}: {themeLabelMap[user.theme]}{" "}
             {themeIconMap[user.theme]}
