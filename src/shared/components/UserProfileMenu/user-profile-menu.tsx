@@ -52,7 +52,7 @@ const UserProfileMenu = () => {
                 onMouseLeave={() => setIsOpen(false)}
             >
                 <div
-                    className={`absolute left-[-20px] right-[-0px] top-0 z-0 duration-300 ease-out ${
+                    className={`absolute left-[-0px] right-[-0px] top-0 z-0 duration-300 ease-out ${
                         isOpen ? "h-[50px]" : "h-0"
                     }`}
                 />

@@ -13,7 +13,7 @@ const Header = () => {
                 <Link
                     to="/"
                     className={`font-[900] text-[22px] flex flex-col leading-tight ${
-                        isDark ? "text-blue-300" : "text-blue-500"
+                        isDark ? "text-blue-400" : "text-blue-500"
                     }`}
                 >
                     <span>Ostrich</span>
