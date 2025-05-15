@@ -13,5 +13,8 @@
     "userMenu.profile": "Профиль",
     "userMenu.achievements": "Достижения",
     "userMenu.settings": "Настройки",
-    "userMenu.logout": "Выйти"
+    "userMenu.logout": "Выйти",
+    "userMenu.theme": "Тема",
+    "userMenu.theme.light": "Светлая",
+    "userMenu.theme.dark": "Тёмная"
 }

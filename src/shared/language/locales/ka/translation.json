@@ -13,5 +13,8 @@
     "userMenu.profile": "პროფილი",
     "userMenu.achievements": "მიღწევები",
     "userMenu.settings": "პარამეტრები",
-    "userMenu.logout": "გასვლა"
+    "userMenu.logout": "გასვლა",
+    "userMenu.theme": "თემა",
+    "userMenu.theme.light": "ღია",
+    "userMenu.theme.dark": "მუქი"
 }

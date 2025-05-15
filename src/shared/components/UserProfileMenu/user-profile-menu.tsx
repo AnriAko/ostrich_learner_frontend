@@ -57,7 +57,7 @@ const UserProfileMenu = () => {
 
                 <div className="relative z-10">
                     <button
-                        className={`flex items-center gap-1 px-2 py-1 text-sm w-[150px] ${
+                        className={`flex items-center gap-1 px-2 py-1 text-sm w-38 ${
                             isOpen ? "bg-gray-200" : ""
                         } hover:bg-gray-100 rounded cursor-pointer focus:outline-none font-medium`}
                     >
@@ -75,7 +75,7 @@ const UserProfileMenu = () => {
                     </button>
 
                     {isOpen && (
-                        <div className="absolute font-medium right-0 mt-2 w-36 bg-white border border-gray-400 rounded-lg shadow-lg z-10 scrollbar-custom overflow-y-auto max-h-60">
+                        <div className="absolute font-medium right-0 mt-2 w-38 bg-white border border-gray-400 rounded-lg shadow-lg z-10 scrollbar-custom overflow-y-auto max-h-60">
                             <div className="px-4 py-2 font-bold text-sm">
                                 {user.nickname}
                             </div>

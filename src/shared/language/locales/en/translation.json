@@ -13,5 +13,8 @@
     "userMenu.profile": "Profile",
     "userMenu.achievements": "Achievements",
     "userMenu.settings": "Settings",
-    "userMenu.logout": "Log out"
+    "userMenu.logout": "Log out",
+    "userMenu.theme": "Theme",
+    "userMenu.theme.light": "Light",
+    "userMenu.theme.dark": "Dark"
 }
