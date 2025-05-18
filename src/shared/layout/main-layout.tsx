@@ -1,12 +1,12 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { ReactNode } from "react";
-import { useUser } from "../hooks/use-user";
 import { Theme } from "../../features/userConfig/types/theme";
+import { useTheme } from "../context/theme-context/use-theme";
 
 const MainLayout = ({ children }: { children: ReactNode }) => {
-    const { user } = useUser();
-    const isDark = user?.theme === Theme.dark;
+    const { theme } = useTheme();
+    const isDark = theme === Theme.dark;
 
     const bgClass = isDark
         ? "bg-gray-800 text-gray-200"

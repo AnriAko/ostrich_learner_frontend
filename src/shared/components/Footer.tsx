@@ -1,9 +1,9 @@
-import { useUser } from "../hooks/use-user";
 import { Theme } from "../../features/userConfig/types/theme";
+import { useTheme } from "../context/theme-context/use-theme";
 
 const Footer = () => {
-    const { user } = useUser();
-    const isDark = user?.theme === Theme.dark;
+    const { theme } = useTheme();
+    const isDark = theme === Theme.dark;
 
     return (
         <footer

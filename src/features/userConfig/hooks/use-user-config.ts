@@ -7,7 +7,7 @@ import {
 } from "../service/user-config";
 import { Theme } from "../types/theme";
 import { InterfaceLanguage } from "../types/interface-language";
-import { useUser } from "../../../shared/hooks/use-user";
+import { useUser } from "../../../shared/context/user-context/use-user";
 import UserStorage from "../../../shared/storage/user-storage";
 import i18n from "../../../shared/language/i18n";
 

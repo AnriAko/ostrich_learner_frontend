@@ -1,6 +1,6 @@
 // src/shared/context/useUser.ts
 import { useContext } from "react";
-import { UserContext } from "../context/user-context";
+import { UserContext } from "./user-context";
 
 export const useUser = () => {
     const context = useContext(UserContext);

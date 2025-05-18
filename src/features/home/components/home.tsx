@@ -1,6 +1,6 @@
 // src/features/home/components/HomePage.tsx
 import { Link } from "react-router-dom";
-import { useUser } from "../../../shared/hooks/use-user";
+import { useUser } from "../../../shared/context/user-context/use-user";
 
 const HomePage = () => {
     const { user } = useUser();

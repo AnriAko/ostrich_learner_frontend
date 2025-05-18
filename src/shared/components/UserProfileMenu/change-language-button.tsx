@@ -1,31 +1,45 @@
-import { useUser } from "../../hooks/use-user";
 import { useUpdateUserInterfaceLanguage } from "../../../features/userConfig/hooks/use-user-config";
 import { useState } from "react";
 import { InterfaceLanguage } from "../../../features/userConfig/types/interface-language";
 import { Theme } from "../../../features/userConfig/types/theme";
+import { useUser } from "../../context/user-context/use-user";
+import { useInterfaceLanguage } from "../../context/language-context/use-interface-language";
+import { useTheme } from "../../context/theme-context/use-theme";
+import LanguageDropdown from "./language-dropdown";
+import i18n from "../../language/i18n";
+
+const LOCAL_STORAGE_KEY = "interfaceLanguage";
 
 const ChangeInterfaceLanguageButton = () => {
     const { mutateAsync } = useUpdateUserInterfaceLanguage();
     const { user } = useUser();
+    const { interfaceLanguage, setInterfaceLanguage } = useInterfaceLanguage();
+    const { theme } = useTheme();
     const [isOpen, setIsOpen] = useState(false);
 
-    if (!user) return null;
-
-    const isDark = user.theme === Theme.dark;
+    const isDark = theme === Theme.dark;
 
     const handleLanguageChange = async (language: InterfaceLanguage) => {
-        if (!user) return;
-        await mutateAsync({ userId: user.userId, interfaceLanguage: language });
+        if (user) {
+            await mutateAsync({
+                userId: user.userId,
+                interfaceLanguage: language,
+            });
+        } else {
+            localStorage.setItem(LOCAL_STORAGE_KEY, language);
+            setInterfaceLanguage(language);
+            await i18n.changeLanguage(language);
+            console.log("Language changed to:", i18n.language);
+        }
         setIsOpen(false);
     };
 
     return (
-        <div className="relative">
-            {/* placeholder div */}
+        <div className="relative flex items-center">
             <div
-                className={`absolute left-[-20px] right-[-20px] top-0 z-0 transition-all duration-300 ease-out ${
-                    isOpen ? "h-[50px]" : "h-0"
-                } bg-transparent`}
+                className={`absolute left-[-10px] right-[-10px] top-0 z-0 transition-all duration-300 ease-out ${
+                    isOpen ? "h-[50px] " : "h-0"
+                } `}
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave={() => setIsOpen(false)}
             />
@@ -36,7 +50,7 @@ const ChangeInterfaceLanguageButton = () => {
                 onMouseLeave={() => setIsOpen(false)}
             >
                 <button
-                    className={`flex w-28 items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer focus:outline-none font-medium ${
+                    className={`flex w-24 items-center gap-1 px-2 py-1 text-sm rounded cursor-pointer focus:outline-none font-medium ${
                         isDark
                             ? `${
                                   isOpen ? "bg-gray-700" : ""
@@ -47,15 +61,17 @@ const ChangeInterfaceLanguageButton = () => {
                     }`}
                 >
                     <img
-                        src="src/assets/icons/globe.svg"
+                        src={`src/assets/icons/globe${
+                            isDark ? `_alt` : ""
+                        }.svg`}
                         alt="Language translation"
-                        className="w-8 h-8"
+                        className="w-7 h-7 flex-shrink-0"
                     />
-                    <span className="w-auto text-left text-[16px] truncate">
-                        {user.interfaceLanguage}
+                    <span className="w-auto text-left text-[16px] truncate leading-none">
+                        {interfaceLanguage}
                     </span>
                     <span
-                        className={`w-5 h-5 flex items-center justify-center text-sm transition-all duration-200 ${
+                        className={`w-5 h-5 flex-shrink-0 flex items-center justify-center text-sm transition-all duration-200 ${
                             isDark ? "text-gray-300" : "text-gray-500"
                         }`}
                     >
@@ -64,60 +80,10 @@ const ChangeInterfaceLanguageButton = () => {
                 </button>
 
                 {isOpen && (
-                    <div
-                        className={`absolute top-full w-28 left-0 mt-2 rounded-lg shadow-lg z-10 border ${
-                            isDark
-                                ? "bg-gray-800 border-gray-600 text-white"
-                                : "bg-white border-gray-400 text-black"
-                        }`}
-                    >
-                        <div
-                            className={`px-4 py-2 cursor-pointer rounded-t-lg ${
-                                isDark
-                                    ? "hover:bg-gray-700"
-                                    : "hover:bg-gray-100"
-                            }`}
-                            onClick={() =>
-                                handleLanguageChange(InterfaceLanguage.English)
-                            }
-                        >
-                            English
-                        </div>
-                        <hr
-                            className={`my-1 mx-2 ${
-                                isDark ? "border-gray-600" : "border-gray-400"
-                            }`}
-                        />
-                        <div
-                            className={`px-4 py-2 cursor-pointer ${
-                                isDark
-                                    ? "hover:bg-gray-700"
-                                    : "hover:bg-gray-100"
-                            }`}
-                            onClick={() =>
-                                handleLanguageChange(InterfaceLanguage.Georgian)
-                            }
-                        >
-                            ქართული
-                        </div>
-                        <hr
-                            className={`my-1 mx-2 ${
-                                isDark ? "border-gray-600" : "border-gray-400"
-                            }`}
-                        />
-                        <div
-                            className={`px-4 py-2 cursor-pointer rounded-b-lg ${
-                                isDark
-                                    ? "hover:bg-gray-700"
-                                    : "hover:bg-gray-100"
-                            }`}
-                            onClick={() =>
-                                handleLanguageChange(InterfaceLanguage.Russian)
-                            }
-                        >
-                            Русский
-                        </div>
-                    </div>
+                    <LanguageDropdown
+                        isDark={isDark}
+                        onSelect={handleLanguageChange}
+                    />
                 )}
             </div>
         </div>

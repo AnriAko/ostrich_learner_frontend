@@ -1,20 +1,33 @@
 {
-    "please_log_in": "Пожалуйста, войдите",
-    "welcome_user": "Добро пожаловать, {{nickname}}!",
-    "createUser.title": "Создать пользователя",
-    "createUser.placeholder": "Введите имя пользователя",
-    "createUser.creating": "Создание...",
-    "createUser.button": "Создать",
-    "createUser.success": "Пользователь успешно создан!",
-    "createUser.error": "Ошибка:",
-    "createUser.unknownError": "Неизвестная ошибка",
-    "createUser.or": "или",
-    "createUser.login": "Войти",
-    "userMenu.profile": "Профиль",
-    "userMenu.achievements": "Достижения",
-    "userMenu.settings": "Настройки",
-    "userMenu.logout": "Выйти",
-    "userMenu.theme": "Тема",
-    "userMenu.theme.light": "Светлая",
-    "userMenu.theme.dark": "Тёмная"
+    "common": {
+        "please_log_in": "Пожалуйста, войдите",
+        "welcome_user": "Добро пожаловать, {{nickname}}!"
+    },
+    "auth": {
+        "title": "Вход",
+        "searchPlaceholder": "Поиск пользователей...",
+        "loading": "Загрузка пользователей...",
+        "noUsers": "Пользователи не найдены.",
+        "createLink": "Создать нового пользователя",
+        "createUser": {
+            "title": "Создать пользователя",
+            "placeholder": "Введите имя пользователя",
+            "creating": "Создание...",
+            "button": "Создать",
+            "success": "Пользователь успешно создан!",
+            "error": "Ошибка:",
+            "unknownError": "Неизвестная ошибка",
+            "or": "или",
+            "login": "Войти"
+        }
+    },
+    "userMenu": {
+        "profile": "Профиль",
+        "achievements": "Достижения",
+        "settings": "Настройки",
+        "logout": "Выйти",
+        "theme": "Тема",
+        "theme.light": "Светлая",
+        "theme.dark": "Тёмная"
+    }
 }

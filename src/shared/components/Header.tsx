@@ -1,42 +1,49 @@
 import { Link } from "react-router-dom";
 import UserProfileMenu from "./UserProfileMenu/user-profile-menu";
-import { useUser } from "../hooks/use-user";
+import { useUser } from "../context/user-context/use-user";
 import { Theme } from "../../features/userConfig/types/theme";
 import ChangeInterfaceLanguageButton from "./UserProfileMenu/change-language-button";
+import { useTheme } from "../context/theme-context/use-theme";
+import ToggleThemeIconButton from "./UserProfileMenu/toggle-theme-icon-button";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
     const { user } = useUser();
-    const isDark = user?.theme === Theme.dark;
+    const { theme } = useTheme();
+    const { t } = useTranslation();
+    const isDark = theme === Theme.dark;
+
+    const textColor = isDark ? "text-yellow-300" : "text-blue-500";
+    const buttonTextColor = isDark ? "text-yellow-300" : "text-blue-500";
+    const buttonHoverBg = isDark ? "hover:bg-gray-600" : "hover:bg-gray-100";
 
     return (
         <header className={`${isDark ? "bg-gray-900" : "bg-white"} p-3`}>
             <nav className="container mx-auto flex justify-between items-center">
                 <Link
                     to="/"
-                    className={`font-[900] text-[22px] flex flex-col leading-tight ${
-                        isDark ? "text-blue-400" : "text-blue-500"
-                    }`}
+                    className={`font-[900] text-[22px] flex flex-col leading-tight ${textColor}`}
                 >
-                    <span>Ostrich</span>
-                    <span>Learner</span>
+                    <span>Ostrich Learner</span>
                 </Link>
 
                 {user ? (
                     <UserProfileMenu />
                 ) : (
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 items-center">
                         <ChangeInterfaceLanguageButton />
+                        <ToggleThemeIconButton />
                         <Link
                             to="/create"
-                            className="px-4 py-2 rounded border border-blue-500 text-blue-500 hover:bg-blue-50 transition"
+                            className={`px-4 py-2 rounded ${buttonTextColor} ${buttonHoverBg} transition w-24 text-center block`}
                         >
-                            Create User
+                            {t("auth.createUser.button")}
                         </Link>
                         <Link
                             to="/signin"
-                            className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
+                            className={`px-4 py-2 rounded ${buttonTextColor} ${buttonHoverBg} transition w-20 text-center block`}
                         >
-                            Login
+                            {t("auth.createUser.login")}
                         </Link>
                     </div>
                 )}

@@ -1,20 +1,33 @@
 {
-    "please_log_in": "Please log in",
-    "welcome_user": "Welcome, {{nickname}}!",
-    "createUser.title": "Create User",
-    "createUser.placeholder": "Enter nickname",
-    "createUser.creating": "Creating...",
-    "createUser.button": "Create",
-    "createUser.success": "User created successfully!",
-    "createUser.error": "Error:",
-    "createUser.unknownError": "Unknown error",
-    "createUser.or": "Or",
-    "createUser.login": "Log In",
-    "userMenu.profile": "Profile",
-    "userMenu.achievements": "Achievements",
-    "userMenu.settings": "Settings",
-    "userMenu.logout": "Log out",
-    "userMenu.theme": "Theme",
-    "userMenu.theme.light": "Light",
-    "userMenu.theme.dark": "Dark"
+    "common": {
+        "please_log_in": "Please log in",
+        "welcome_user": "Welcome, {{nickname}}!"
+    },
+    "auth": {
+        "title": "Log in",
+        "searchPlaceholder": "Search users...",
+        "loading": "Loading users...",
+        "noUsers": "No users found.",
+        "createLink": "Create new user",
+        "createUser": {
+            "title": "Create User",
+            "placeholder": "Enter nickname",
+            "creating": "Creating...",
+            "button": "Create",
+            "success": "User created successfully!",
+            "error": "Error:",
+            "unknownError": "Unknown error",
+            "or": "Or",
+            "login": "Log in"
+        }
+    },
+    "userMenu": {
+        "profile": "Profile",
+        "achievements": "Achievements",
+        "settings": "Settings",
+        "logout": "Log out",
+        "theme": "Theme",
+        "theme.light": "Light",
+        "theme.dark": "Dark"
+    }
 }

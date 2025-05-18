@@ -2,25 +2,17 @@ import { useUpdateUserTheme } from "../../../features/userConfig/hooks/use-user-
 import { Theme } from "../../../features/userConfig/types/theme";
 import { useUser } from "../../context/user-context/use-user";
 import { useTheme } from "../../context/theme-context/use-theme";
-import { useTranslation } from "react-i18next";
 
 const LOCAL_STORAGE_KEY = "theme";
 
-const ToggleThemeButton = () => {
-    const { t } = useTranslation();
+const ToggleThemeIconButton = () => {
     const { mutateAsync } = useUpdateUserTheme();
     const { user } = useUser();
     const { theme, setTheme } = useTheme();
-
-    const themeIconMap: Record<Theme, string> = {
-        light: "☀️",
-        dark: "🌙",
-    };
-
-    const themeLabelMap: Record<Theme, string> = {
-        light: t("userMenu.theme.light"),
-        dark: t("userMenu.theme.dark"),
-    };
+    const ALT_SUN = "Light mode";
+    const ALT_MOON = "Dark mode";
+    const sunIconSrc = "src/assets/icons/sun.svg";
+    const moonIconSrc = "src/assets/icons/moon.svg";
 
     const handleToggleTheme = async () => {
         const newTheme: Theme =
@@ -39,13 +31,18 @@ const ToggleThemeButton = () => {
     return (
         <button
             onClick={handleToggleTheme}
-            className={`block w-full text-left px-4 py-2 text-sm cursor-pointer ${
-                isDark ? "hover:bg-gray-700 text-white" : "hover:bg-gray-100"
-            }`}
+            className={`p-2 rounded focus:outline-none transition
+            ${isDark ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
+            aria-label={isDark ? ALT_MOON : ALT_SUN}
+            title={isDark ? ALT_MOON : ALT_SUN}
         >
-            {t("userMenu.theme")}: {themeLabelMap[theme]} {themeIconMap[theme]}
+            <img
+                src={isDark ? moonIconSrc : sunIconSrc}
+                alt={isDark ? ALT_MOON : ALT_SUN}
+                className="w-7 h-7"
+            />
         </button>
     );
 };
 
-export default ToggleThemeButton;
+export default ToggleThemeIconButton;

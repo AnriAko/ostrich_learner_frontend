@@ -3,7 +3,7 @@ import { useCreateUser } from "../hooks/use-auth";
 import { Link, useNavigate } from "react-router-dom";
 import type { CreateUserDto } from "../dto/create-user.dto";
 import { AuthService } from "../services/auth-service";
-import { UserContext } from "../../../shared/context/user-context";
+import { UserContext } from "../../../shared/context/user-context/user-context";
 import { useTranslation } from "react-i18next";
 
 const CreateUserPage = () => {

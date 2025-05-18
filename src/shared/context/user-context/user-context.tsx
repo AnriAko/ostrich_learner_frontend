@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { UserConfig } from "../../features/userConfig/types/user-config";
+import type { UserConfig } from "../../../features/userConfig/types/user-config";
 
 export interface UserContextType {
     user: UserConfig | null;

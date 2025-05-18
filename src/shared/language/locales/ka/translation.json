@@ -1,20 +1,33 @@
 {
-    "please_log_in": "გთხოვთ, შეხვიდეთ",
-    "welcome_user": "კეთილი იყოს თქვენი მობრძანება, {{nickname}}!",
-    "createUser.title": "მომხმარებლის შექმნა",
-    "createUser.placeholder": "შეიყვანეთ მომხმარებლის სახელი",
-    "createUser.creating": "შექმნა მიმდინარეობს...",
-    "createUser.button": "შექმნა",
-    "createUser.success": "მომხმარებელი წარმატებით შეიქმნა!",
-    "createUser.error": "შეცდომა:",
-    "createUser.unknownError": "უცნობი შეცდომა",
-    "createUser.or": "ან",
-    "createUser.login": "შესვლა",
-    "userMenu.profile": "პროფილი",
-    "userMenu.achievements": "მიღწევები",
-    "userMenu.settings": "პარამეტრები",
-    "userMenu.logout": "გასვლა",
-    "userMenu.theme": "თემა",
-    "userMenu.theme.light": "ღია",
-    "userMenu.theme.dark": "მუქი"
+    "common": {
+        "please_log_in": "გთხოვთ, შეხვიდეთ",
+        "welcome_user": "კეთილი იყოს თქვენი მობრძანება, {{nickname}}!"
+    },
+    "auth": {
+        "title": "შესვლა",
+        "searchPlaceholder": "მომხმარებლების ძიება...",
+        "loading": "მომხმარებლების ჩატვირთვა...",
+        "noUsers": "მომხმარებლები არ მოიძებნა.",
+        "createLink": "შექმენით ახალი მომხმარებელი",
+        "createUser": {
+            "title": "მომხმარებლის შექმნა",
+            "placeholder": "შეიყვანეთ მომხმარებლის სახელი",
+            "creating": "შექმნა მიმდინარეობს...",
+            "button": "შექმნა",
+            "success": "მომხმარებელი წარმატებით შეიქმნა!",
+            "error": "შეცდომა:",
+            "unknownError": "უცნობი შეცდომა",
+            "or": "ან",
+            "login": "შესვლა"
+        }
+    },
+    "userMenu": {
+        "profile": "პროფილი",
+        "achievements": "მიღწევები",
+        "settings": "პარამეტრები",
+        "logout": "გასვლა",
+        "theme": "თემა",
+        "theme.light": "ღია",
+        "theme.dark": "მუქი"
+    }
 }
