@@ -37,8 +37,8 @@ const ChangeInterfaceLanguageButton = () => {
     return (
         <div className="relative flex items-center">
             <div
-                className={`absolute left-[-10px] right-[-10px] top-0 z-0 transition-all duration-300 ease-out ${
-                    isOpen ? "h-[50px] " : "h-0"
+                className={`absolute left-[-10px] right-[-10px] top-0 z-0 ${
+                    isOpen ? "h-[50px]" : "h-0"
                 } `}
                 onMouseEnter={() => setIsOpen(true)}
                 onMouseLeave={() => setIsOpen(false)}

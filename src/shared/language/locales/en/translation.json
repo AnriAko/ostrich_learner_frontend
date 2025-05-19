@@ -8,18 +8,18 @@
         "searchPlaceholder": "Search users...",
         "loading": "Loading users...",
         "noUsers": "No users found.",
-        "createLink": "Create new user",
-        "createUser": {
-            "title": "Create User",
-            "placeholder": "Enter nickname",
-            "creating": "Creating...",
-            "button": "Create",
-            "success": "User created successfully!",
-            "error": "Error:",
-            "unknownError": "Unknown error",
-            "or": "Or",
-            "login": "Log in"
-        }
+        "createLink": "Create new user"
+    },
+    "createUser": {
+        "title": "Create User",
+        "placeholder": "Enter nickname",
+        "creating": "Creating...",
+        "button": "Create",
+        "success": "User created successfully!",
+        "error": "Error:",
+        "unknownError": "Unknown error",
+        "or": "Or",
+        "login": "Log in"
     },
     "userMenu": {
         "profile": "Profile",

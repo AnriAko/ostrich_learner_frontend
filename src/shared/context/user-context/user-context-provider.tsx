@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { USER_LOCAL_STORAGE_KEY } from "./user-local-storage";
 import { useTheme } from "../theme-context/use-theme";
 import { useInterfaceLanguage } from "../language-context/use-interface-language";
+import i18n from "../../language/i18n";
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUserState] = useState<User | null>(null);
@@ -20,6 +21,7 @@ export const UserContextProvider = ({ children }: { children: ReactNode }) => {
                 setUserState(parsedUser);
                 setTheme(parsedUser.theme);
                 setInterfaceLanguage(parsedUser.interfaceLanguage);
+                i18n.changeLanguage(parsedUser.interfaceLanguage);
             } catch (e) {
                 console.error("Failed to parse user from localStorage", e);
             }

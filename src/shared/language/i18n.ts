@@ -4,16 +4,28 @@ import translationEN from "./locales/en/translation.json";
 import translationRU from "./locales/ru/translation.json";
 import translationKA from "./locales/ka/translation.json";
 import UserStorage from "../storage/user-storage";
+import { INTERFACE_LANGUAGE_LOCAL_STORAGE_KEY } from "../context/language-context/interface-language-local-storage";
+
+const storedLang = localStorage.getItem(INTERFACE_LANGUAGE_LOCAL_STORAGE_KEY);
+const userLang = UserStorage.getInterfaceLanguage();
+
+const normalizeLang = (lang: string | null) => {
+    const code = lang?.toLowerCase();
+    if (code === "en" || code === "ru" || code === "ka") return code;
+    return null;
+};
+
+const initialLang =
+    normalizeLang(storedLang) || normalizeLang(userLang) || "en";
 
 i18n.use(initReactI18next).init({
     resources: {
-        EN: { translation: translationEN },
-        RU: { translation: translationRU },
-        KA: { translation: translationKA },
+        en: { translation: translationEN },
+        ru: { translation: translationRU },
+        ka: { translation: translationKA },
     },
-    lng: UserStorage.getInterfaceLanguage() || "en",
-
-    fallbackLng: "EN",
+    lng: initialLang,
+    fallbackLng: "en",
     interpolation: { escapeValue: false },
     detection: {
         order: [],

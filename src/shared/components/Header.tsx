@@ -37,13 +37,13 @@ const Header = () => {
                             to="/create"
                             className={`px-4 py-2 rounded ${buttonTextColor} ${buttonHoverBg} transition w-24 text-center block`}
                         >
-                            {t("auth.createUser.button")}
+                            {t("createUser.button")}
                         </Link>
                         <Link
                             to="/signin"
                             className={`px-4 py-2 rounded ${buttonTextColor} ${buttonHoverBg} transition w-20 text-center block`}
                         >
-                            {t("auth.createUser.login")}
+                            {t("createUser.login")}
                         </Link>
                     </div>
                 )}

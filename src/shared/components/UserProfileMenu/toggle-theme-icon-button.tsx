@@ -39,7 +39,7 @@ const ToggleThemeIconButton = () => {
             <img
                 src={isDark ? moonIconSrc : sunIconSrc}
                 alt={isDark ? ALT_MOON : ALT_SUN}
-                className="w-7 h-7"
+                className="w-7 h-7 w-min-7"
             />
         </button>
     );

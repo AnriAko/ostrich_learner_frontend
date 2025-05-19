@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InterfaceLanguageContext } from "../language-context/interface-language-context";
 import { InterfaceLanguage } from "../../../features/userConfig/types/interface-language";
 import type { ReactNode } from "react";
 import { INTERFACE_LANGUAGE_LOCAL_STORAGE_KEY } from "./interface-language-local-storage";
+import i18n from "../../language/i18n";
 
 export const InterfaceLanguageContextProvider = ({
     children,
@@ -29,6 +30,8 @@ export const InterfaceLanguageContextProvider = ({
     const [interfaceLanguage, setInterfaceLanguageState] =
         useState<InterfaceLanguage>(getInitialLanguage);
 
+    const [isLanguageReady, setIsLanguageReady] = useState(false);
+
     const setInterfaceLanguage = (language: InterfaceLanguage | null) => {
         if (language) {
             localStorage.setItem(
@@ -41,6 +44,19 @@ export const InterfaceLanguageContextProvider = ({
             setInterfaceLanguageState(InterfaceLanguage.English);
         }
     };
+
+    useEffect(() => {
+        const langCode = interfaceLanguage.toLowerCase();
+        if (i18n.language !== langCode) {
+            i18n.changeLanguage(langCode).then(() => {
+                setIsLanguageReady(true);
+            });
+        } else {
+            setIsLanguageReady(true);
+        }
+    }, [interfaceLanguage]);
+
+    if (!isLanguageReady) return null; // или <Loader /> если хочешь спиннер
 
     return (
         <InterfaceLanguageContext.Provider
