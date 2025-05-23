@@ -22,7 +22,7 @@ const Header = () => {
 
     return (
         <header className={`${isDark ? "bg-gray-900" : "bg-white"} p-3`}>
-            <nav className="container mx-auto flex justify-between items-center">
+            <nav className="container mx-auto flex justify-between items-center pl-6 pr-6">
                 <Link
                     to="/"
                     className={`font-[900] text-[22px] flex flex-col leading-tight ${textColor}`}
