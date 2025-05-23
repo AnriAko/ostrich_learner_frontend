@@ -19,20 +19,15 @@ const normalizeLang = (lang: string | null) => {
 const initialLang =
     normalizeLang(storedLang) || normalizeLang(userLang) || "en";
 
-export const i18nInitPromise = i18n
-    .use(initReactI18next)
-    .init({
-        resources: {
-            en: { translation: translationEN },
-            ru: { translation: translationRU },
-            ka: { translation: translationKA },
-        },
-        lng: initialLang,
-        fallbackLng: "en",
-        interpolation: { escapeValue: false },
-    })
-    .then(() => {
-        console.log("i18n initialized with language:", i18n.language);
-    });
+export const i18nInitPromise = i18n.use(initReactI18next).init({
+    resources: {
+        en: { translation: translationEN },
+        ru: { translation: translationRU },
+        ka: { translation: translationKA },
+    },
+    lng: initialLang,
+    fallbackLng: "en",
+    interpolation: { escapeValue: false },
+});
 
 export default i18n;

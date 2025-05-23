@@ -9,17 +9,12 @@ import { useTranslation } from "react-i18next";
 
 const Header = () => {
     const { user } = useUser();
-    console.log("User in header:", user);
 
     const { theme } = useTheme();
-    console.log("Theme in header:", theme);
 
-    const { t, i18n } = useTranslation();
-    console.log("Language in header:", i18n.language);
+    const { t } = useTranslation();
 
     const isDark = theme === Theme.dark;
-    console.log("Current in header:", i18n.language);
-    console.log(t("userMenu.achievements"));
 
     const textColor = isDark ? "text-yellow-300" : "text-blue-500";
     const buttonTextColor = isDark ? "text-yellow-300" : "text-blue-500";
