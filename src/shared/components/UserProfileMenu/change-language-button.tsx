@@ -68,7 +68,7 @@ const ChangeInterfaceLanguageButton = () => {
                         className="w-7 h-7 flex-shrink-0"
                     />
                     <span className="w-auto text-left text-[16px] truncate leading-none">
-                        {interfaceLanguage}
+                        {interfaceLanguage?.toUpperCase()}
                     </span>
                     <span
                         className={`w-5 h-5 flex-shrink-0 flex items-center justify-center text-sm transition-all duration-200 ${

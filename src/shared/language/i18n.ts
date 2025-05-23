@@ -1,3 +1,4 @@
+// i18n.ts
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import translationEN from "./locales/en/translation.json";
@@ -18,19 +19,20 @@ const normalizeLang = (lang: string | null) => {
 const initialLang =
     normalizeLang(storedLang) || normalizeLang(userLang) || "en";
 
-i18n.use(initReactI18next).init({
-    resources: {
-        en: { translation: translationEN },
-        ru: { translation: translationRU },
-        ka: { translation: translationKA },
-    },
-    lng: initialLang,
-    fallbackLng: "en",
-    interpolation: { escapeValue: false },
-    detection: {
-        order: [],
-        caches: [],
-    },
-});
+export const i18nInitPromise = i18n
+    .use(initReactI18next)
+    .init({
+        resources: {
+            en: { translation: translationEN },
+            ru: { translation: translationRU },
+            ka: { translation: translationKA },
+        },
+        lng: initialLang,
+        fallbackLng: "en",
+        interpolation: { escapeValue: false },
+    })
+    .then(() => {
+        console.log("i18n initialized with language:", i18n.language);
+    });
 
 export default i18n;

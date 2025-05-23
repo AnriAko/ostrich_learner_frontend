@@ -4,6 +4,7 @@ import { useTheme } from "../context/theme-context/use-theme";
 const Footer = () => {
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
+    console.log("FOOOOTER");
 
     return (
         <footer

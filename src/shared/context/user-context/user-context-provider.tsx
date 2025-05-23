@@ -1,4 +1,3 @@
-// src/shared/context/user-context/user-context-provider.tsx
 import { useState, useEffect } from "react";
 import { UserContext } from "./user-context";
 import type { User } from "../../../features/userConfig/types/user";
@@ -9,30 +8,34 @@ import { useInterfaceLanguage } from "../language-context/use-interface-language
 import i18n from "../../language/i18n";
 
 export const UserContextProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUserState] = useState<User | null>(null);
-    const { setTheme } = useTheme();
-    const { setInterfaceLanguage } = useInterfaceLanguage();
+    const [user, setUserState] = useState<User | null>(() => {
+        const stored = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
+        try {
+            return stored ? JSON.parse(stored) : null;
+        } catch {
+            return null;
+        }
+    });
+
+    const { theme: currentTheme, setTheme } = useTheme();
+    const { interfaceLanguage: currentLanguage, setInterfaceLanguage } =
+        useInterfaceLanguage();
 
     useEffect(() => {
-        const storedUser = localStorage.getItem(USER_LOCAL_STORAGE_KEY);
-        if (storedUser) {
-            try {
-                const parsedUser: User = JSON.parse(storedUser);
-                setUserState(parsedUser);
-                setTheme(parsedUser.theme);
-                setInterfaceLanguage(parsedUser.interfaceLanguage);
-                i18n.changeLanguage(parsedUser.interfaceLanguage);
-            } catch (e) {
-                console.error("Failed to parse user from localStorage", e);
+        if (user) {
+            if (user.theme !== currentTheme) {
+                setTheme(user.theme);
+            }
+            if (user.interfaceLanguage !== currentLanguage) {
+                setInterfaceLanguage(user.interfaceLanguage);
+                i18n.changeLanguage(user.interfaceLanguage);
             }
         }
-    }, [setTheme, setInterfaceLanguage]);
+    }, [user, currentLanguage, setInterfaceLanguage, currentTheme, setTheme]);
 
     const setUser = (user: User | null) => {
         if (user) {
             localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
-            setTheme(user.theme);
-            setInterfaceLanguage(user.interfaceLanguage);
         } else {
             localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
         }
