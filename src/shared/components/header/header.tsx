@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import UserProfileMenu from "../UserProfileMenu/user-profile-menu";
+import UserProfileMenu from "./UserProfileMenu/user-profile-menu";
 import { useUser } from "../../context/user-context/use-user";
 import { Theme } from "../../../features/userConfig/types/theme";
-import ChangeInterfaceLanguageButton from "../UserProfileMenu/change-language-button";
+import ChangeInterfaceLanguageButton from "./UserProfileMenu/change-language-button";
 import { useTheme } from "../../context/theme-context/use-theme";
-import ToggleThemeIconButton from "../UserProfileMenu/toggle-theme-icon-button";
+import ToggleThemeIconButton from "./UserProfileMenu/toggle-theme-icon-button";
 import { useTranslation } from "react-i18next";
 
 const Header = () => {

@@ -1,12 +1,12 @@
-import { useUpdateUserInterfaceLanguage } from "../../../features/userConfig/hooks/use-user-config";
+import { useUpdateUserInterfaceLanguage } from "../../../../features/userConfig/hooks/use-user-config";
 import { useState } from "react";
-import { InterfaceLanguage } from "../../../features/userConfig/types/interface-language";
-import { Theme } from "../../../features/userConfig/types/theme";
-import { useUser } from "../../context/user-context/use-user";
-import { useInterfaceLanguage } from "../../context/language-context/use-interface-language";
-import { useTheme } from "../../context/theme-context/use-theme";
+import { InterfaceLanguage } from "../../../../features/userConfig/types/interface-language";
+import { Theme } from "../../../../features/userConfig/types/theme";
+import { useUser } from "../../../context/user-context/use-user";
+import { useInterfaceLanguage } from "../../../context/language-context/use-interface-language";
+import { useTheme } from "../../../context/theme-context/use-theme";
 import LanguageDropdown from "./language-dropdown";
-import i18n from "../../language/i18n";
+import i18n from "../../../language/i18n";
 
 const LOCAL_STORAGE_KEY = "interfaceLanguage";
 
