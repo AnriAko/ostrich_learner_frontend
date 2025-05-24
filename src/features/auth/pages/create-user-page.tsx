@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
-import { useCreateUser } from "../../hooks/use-auth";
+import { useCreateUser } from "../hooks/use-auth";
 import { useNavigate } from "react-router-dom";
-import type { CreateUserDto } from "../../dto/create-user.dto";
-import { AuthService } from "../../services/auth-service";
+import type { CreateUserDto } from "../dto/create-user.dto";
+import { AuthService } from "../services/auth-service";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
-import { useUser } from "../../../../shared/context/user-context/use-user";
-import { Theme } from "../../../../features/userConfig/types/theme";
-import { InterfaceLanguage } from "../../../../features/userConfig/types/interface-language";
-import { THEME_LOCAL_STORAGE_KEY } from "../../../../shared/context/theme-context/theme-local-storage";
+import { useTheme } from "../../../shared/context/theme-context/use-theme";
+import { useUser } from "../../../shared/context/user-context/use-user";
+import { Theme } from "../../userConfig/types/theme";
+import { InterfaceLanguage } from "../../userConfig/types/interface-language";
+import { THEME_LOCAL_STORAGE_KEY } from "../../../shared/context/theme-context/theme-local-storage";
 
-import CreateUserForm from "./create-user-form";
-import CreateUserStatusMessage from "./create-user-status-message";
-import CreateUserAlternativeLink from "./create-user-alternative-link";
-import { INTERFACE_LANGUAGE_LOCAL_STORAGE_KEY } from "../../../../shared/context/language-context/interface-language-local-storage";
+import CreateUserForm from "../components/createUser/create-user-form";
+import CreateUserStatusMessage from "../components/createUser/create-user-status-message";
+import CreateUserAlternativeLink from "../components/createUser/create-user-alternative-link";
+import { INTERFACE_LANGUAGE_LOCAL_STORAGE_KEY } from "../../../shared/context/language-context/interface-language-local-storage";
 
 const CreateUserPage = () => {
     const [nickname, setNickname] = useState("");

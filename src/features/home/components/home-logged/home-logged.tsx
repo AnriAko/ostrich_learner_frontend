@@ -1,5 +1,5 @@
 // src/features/home/components/HomeLogged.tsx
-import { useUser } from "../../../shared/context/user-context/use-user";
+import { useUser } from "../../../../shared/context/user-context/use-user";
 
 const HomeLogged = () => {
     const { user } = useUser();

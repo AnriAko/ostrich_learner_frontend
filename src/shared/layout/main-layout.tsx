@@ -1,21 +1,37 @@
+// src/shared/layout/main-layout.tsx
+
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "../components/header/header";
+import Sidebar from "../components/sidebar/sidebar";
 import Footer from "../components/footer";
-import { ReactNode } from "react";
 import { Theme } from "../../features/userConfig/types/theme";
 import { useTheme } from "../context/theme-context/use-theme";
 
-const MainLayout = ({ children }: { children: ReactNode }) => {
+const MainLayout = () => {
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
 
     const bgClass = isDark
         ? "bg-gray-800 text-gray-200"
-        : "bg-gray-200 text-gray-900";
+        : "bg-gray-100 text-gray-900";
+
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+    const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
     return (
         <div className={`min-h-screen flex flex-col font-ibm-plex ${bgClass}`}>
-            <Header />
-            <main className="flex-1 container mx-auto w-full">{children}</main>
+            <Header
+                isSidebarOpen={isSidebarOpen}
+                toggleSidebar={toggleSidebar}
+            />
+            <div className="flex flex-1 overflow-hidden">
+                <Sidebar isOpen={isSidebarOpen} />
+                <main className="flex-1 container w-full overflow-auto">
+                    <Outlet />
+                </main>
+            </div>
             <Footer />
         </div>
     );

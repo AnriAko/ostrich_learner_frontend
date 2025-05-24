@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useGetAllUsers } from "../../hooks/use-auth";
+import { useGetAllUsers } from "../hooks/use-auth";
 import { useNavigate } from "react-router-dom";
-import { AuthService } from "../../services/auth-service";
-import { useUser } from "../../../../shared/context/user-context/use-user";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
-import { Theme } from "../../../../features/userConfig/types/theme";
+import { AuthService } from "../services/auth-service";
+import { useUser } from "../../../shared/context/user-context/use-user";
+import { useTheme } from "../../../shared/context/theme-context/use-theme";
+import { Theme } from "../../userConfig/types/theme";
 
-import LoginSearchInput from "./login-search-input";
-import UserList from "./user-list";
-import CreateUserLink from "./create-user-link";
+import LoginSearchInput from "../components/login/login-search-input";
+import UserList from "../components/login/user-list";
+import CreateUserLink from "../components/login/create-user-link";
 
 const LoginPage = () => {
     const { data: users = [], isLoading } = useGetAllUsers();

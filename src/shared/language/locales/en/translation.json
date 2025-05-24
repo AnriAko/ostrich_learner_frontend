@@ -29,5 +29,11 @@
         "theme": "Theme",
         "theme.light": "Light",
         "theme.dark": "Dark"
+    },
+    "sidebar": {
+        "study": "Exercise Words ",
+        "addWords": "Add Words",
+        "repeat": "Remind Words",
+        "wordList": "Library"
     }
 }
