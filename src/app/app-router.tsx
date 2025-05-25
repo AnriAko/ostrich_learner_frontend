@@ -18,7 +18,7 @@ const AppRouter = () => {
             <Route element={<MainLayout />}>
                 {/* Public */}
                 <Route path="/" element={<HomePage />} />
-                <Route path="/signin" element={<LoginPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/create" element={<CreateUserPage />} />
 
                 {/* Private DashboardLayout */}

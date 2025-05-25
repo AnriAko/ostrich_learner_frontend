@@ -26,7 +26,7 @@ const UserProfileMenu = () => {
         localStorage.removeItem("currentUser");
         setUser(null);
         setIsOpen(false);
-        navigate("/signin");
+        navigate("/login");
     };
 
     return (

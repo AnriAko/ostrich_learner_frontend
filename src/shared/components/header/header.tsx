@@ -1,3 +1,5 @@
+// src/shared/components/header/header.tsx
+
 import { Link } from "react-router-dom";
 import UserProfileMenu from "./UserProfileMenu/user-profile-menu";
 import { useUser } from "../../context/user-context/use-user";
@@ -26,26 +28,27 @@ const Header = ({
     return (
         <header className={`${isDark ? "bg-gray-900" : "bg-white"} pt-3 pb-3`}>
             <nav className="flex justify-between items-center px-3">
-                {" "}
                 <div className="flex items-center">
-                    <button
-                        onClick={toggleSidebar}
-                        className={`focus:outline-none mr-3 transition-colors duration-200 rounded-md px-1 py-1 ${
-                            isDark
-                                ? " hover:bg-gray-700 active:bg-gray-600"
-                                : " hover:bg-gray-100 active:bg-gray-200"
-                        } cursor-pointer`}
-                        aria-label="Toggle sidebar"
-                    >
-                        <Menu
-                            className={`w-7 h-7 ${
-                                isDark ? "text-yellow-300" : "text-blue-500"
-                            }`}
-                        />
-                    </button>
+                    {user && (
+                        <button
+                            onClick={toggleSidebar}
+                            className={`focus:outline-none mr-3 transition-colors duration-200 rounded-md px-1 py-1 ${
+                                isDark
+                                    ? " hover:bg-gray-700 active:bg-gray-600"
+                                    : " hover:bg-gray-100 active:bg-gray-200"
+                            } cursor-pointer`}
+                            aria-label="Toggle sidebar"
+                        >
+                            <Menu
+                                className={`w-7 h-7 ${
+                                    isDark ? "text-yellow-300" : "text-blue-500"
+                                }`}
+                            />
+                        </button>
+                    )}
 
                     <Link
-                        to="/"
+                        to={user ? "/dashboard" : ""}
                         className={`font-[900] text-[22px] flex flex-col leading-tight ml-3 ${textColor}`}
                     >
                         <span className="whitespace-nowrap">
@@ -53,6 +56,7 @@ const Header = ({
                         </span>
                     </Link>
                 </div>
+
                 {user ? (
                     <UserProfileMenu />
                 ) : (

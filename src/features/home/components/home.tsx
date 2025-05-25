@@ -1,11 +1,11 @@
 // src/features/home/components/HomePage.tsx
+import { Navigate } from "react-router-dom";
 import { useUser } from "../../../shared/context/user-context/use-user";
-import HomeGuest from "./home-guest";
-import HomeLogged from "./home-logged/home-logged";
 
 const HomePage = () => {
     const { user } = useUser();
-    return user ? <HomeLogged /> : <HomeGuest />;
+    if (!user) return <Navigate to="/login" />;
+    if (user) return <Navigate to="/dashboard" />;
 };
 
 export default HomePage;

@@ -17,10 +17,7 @@ const CreateUserAlternativeLink = ({
             {t("createUser.or")}
         </div>
         <div className="text-center">
-            <Link
-                to="/signin"
-                className="text-blue-600 hover:underline text-xl"
-            >
+            <Link to="/login" className="text-blue-600 hover:underline text-xl">
                 {t("createUser.login")}
             </Link>
         </div>

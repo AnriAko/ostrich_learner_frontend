@@ -1,10 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { Theme } from "../../features/userConfig/types/theme";
 import { useTheme } from "../context/theme-context/use-theme";
+import { useUser } from "../context/user-context/use-user";
 
 const DashboardLayout = () => {
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
+    const { user } = useUser();
+    if (!user) return <Navigate to="/login" />;
 
     const bgClass = isDark
         ? "bg-gray-800 text-gray-200"
