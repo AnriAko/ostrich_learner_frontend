@@ -70,7 +70,7 @@ const Header = ({
                             {t("createUser.button")}
                         </Link>
                         <Link
-                            to="/signin"
+                            to="/login"
                             className={`px-4 py-2 rounded ${buttonTextColor} ${buttonHoverBg} transition w-20 text-center block`}
                         >
                             {t("createUser.login")}

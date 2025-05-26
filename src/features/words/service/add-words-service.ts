@@ -1,5 +1,5 @@
 import api from "../../../shared/api/axios-instance";
-import type { CreateWordDto } from "../dto/create-word.dto";
+import type { CreateWordDto } from "../add-words/dto/create-word.dto";
 import type { UpdateWordDto } from "../dto/update-word.dto";
 import type { TestWordDto } from "../dto/test-word.dto";
 import type { WordDto } from "../dto/word.dto";

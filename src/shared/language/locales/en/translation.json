@@ -35,5 +35,21 @@
         "addWords": "Add Words",
         "repeat": "Remind Words",
         "wordList": "Vocabulary"
+    },
+    "addWordsPage": {
+        "title": "Add a new word",
+        "fromLanguage": "Original language",
+        "toLanguage": "Translation language",
+        "original": "Original word",
+        "translation": "Translation",
+        "submit": "Add word",
+        "success": "Word saved successfully!",
+        "wordExists": "This word already exists in your vocabulary. Would you like to practice it?",
+        "practice": "Practice now"
+    },
+    "languages": {
+        "english": "English",
+        "russian": "Russian",
+        "georgian": "Georgian"
     }
 }

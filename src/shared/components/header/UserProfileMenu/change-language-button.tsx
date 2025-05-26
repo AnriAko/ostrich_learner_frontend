@@ -7,6 +7,7 @@ import { useInterfaceLanguage } from "../../../context/language-context/use-inte
 import { useTheme } from "../../../context/theme-context/use-theme";
 import LanguageDropdown from "./language-dropdown";
 import i18n from "../../../language/i18n";
+import { Globe } from "lucide-react";
 
 const LOCAL_STORAGE_KEY = "interfaceLanguage";
 
@@ -34,6 +35,11 @@ const ChangeInterfaceLanguageButton = () => {
         setIsOpen(false);
     };
 
+    // Цвета из Tailwind для lucide (превращаем в hex)
+    const blue500 = "#3b82f6"; // blue-500
+    const yellow300 = "#fcd34d"; // yellow-300
+    const iconColor = isDark ? yellow300 : blue500;
+
     return (
         <div className="relative flex items-center">
             <div
@@ -60,12 +66,9 @@ const ChangeInterfaceLanguageButton = () => {
                               } hover:bg-gray-100 text-black`
                     }`}
                 >
-                    <img
-                        src={`src/assets/icons/globe${
-                            isDark ? `_alt` : ""
-                        }.svg`}
-                        alt="Language translation"
+                    <Globe
                         className="w-7 h-7 flex-shrink-0"
+                        color={iconColor}
                     />
                     <span className="w-auto text-left text-[16px] truncate leading-none">
                         {interfaceLanguage?.toUpperCase()}

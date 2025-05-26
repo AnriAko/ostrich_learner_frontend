@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { User } from "../../../../features/user-config/types/user";
+import { CircleUserRound } from "lucide-react";
 
 interface Props {
     isOpen: boolean;
@@ -18,15 +19,15 @@ const UserProfileDropdownButton: FC<Props> = ({ isOpen, isDark, user }) => {
                     ? `${
                           isOpen ? "bg-gray-700" : ""
                       } hover:bg-gray-600 text-white`
-                    : `${isOpen ? "bg-gray-200" : ""} hover:bg-gray-100`
+                    : `${
+                          isOpen ? "bg-gray-200" : ""
+                      } hover:bg-gray-100 text-gray-900`
             }`}
         >
-            <img
-                src={`src/assets/icons/circle-user-round${
-                    isDark ? "_alt" : ""
-                }.svg`}
-                alt={user ? t("userMenu.profile") : t("userMenu.menu")}
-                className="w-7 h-7"
+            <CircleUserRound
+                className={`w-7 h-7 ${
+                    isDark ? "text-yellow-300" : "text-blue-500"
+                }`}
             />
             <span className="w-auto text-[16px] text-center block">
                 {user ? t("userMenu.profile") : t("userMenu.menu")}

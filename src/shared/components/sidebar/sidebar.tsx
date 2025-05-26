@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { getMenuItems } from "./menu-config";
 import { useTheme } from "../../context/theme-context/use-theme";
 import { Theme } from "../../../features/user-config/types/theme";
+import "./side-bar-styles.css";
 
 const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
     const { t } = useTranslation();
@@ -31,13 +32,15 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
                         to={to}
                         className={({ isActive }) =>
                             `flex items-center gap-2 py-2 px-4 whitespace-nowrap overflow-hidden transition-colors duration-200
-                            ${hoverColor}
-                            ${
-                                isActive
-                                    ? "font-bold underline underline-offset-4"
-                                    : ""
-                            }
-                            ${linkColor}`
+                        ${hoverColor}
+                        ${
+                            isActive
+                                ? isDark
+                                    ? "inner-border-yellow"
+                                    : "inner-border-blue"
+                                : ""
+                        }
+                        ${linkColor}`
                         }
                     >
                         <span className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
