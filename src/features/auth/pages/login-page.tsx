@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthService } from "../services/auth-service";
 import { useUser } from "../../../shared/context/user-context/use-user";
 import { useTheme } from "../../../shared/context/theme-context/use-theme";
-import { Theme } from "../../userConfig/types/theme";
+import { Theme } from "../../user-config/types/theme";
 
 import LoginSearchInput from "../components/login/login-search-input";
 import UserList from "../components/login/user-list";

@@ -1,5 +1,5 @@
-import { useUpdateUserTheme } from "../../../../features/userConfig/hooks/use-user-config";
-import { Theme } from "../../../../features/userConfig/types/theme";
+import { useUpdateUserTheme } from "../../../../features/user-config/hooks/use-user-config";
+import { Theme } from "../../../../features/user-config/types/theme";
 import { useUser } from "../../../context/user-context/use-user";
 import { useTheme } from "../../../context/theme-context/use-theme";
 import { useTranslation } from "react-i18next";

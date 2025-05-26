@@ -6,8 +6,8 @@ import { AuthService } from "../services/auth-service";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../shared/context/theme-context/use-theme";
 import { useUser } from "../../../shared/context/user-context/use-user";
-import { Theme } from "../../userConfig/types/theme";
-import { InterfaceLanguage } from "../../userConfig/types/interface-language";
+import { Theme } from "../../user-config/types/theme";
+import { InterfaceLanguage } from "../../user-config/types/interface-language";
 import { THEME_LOCAL_STORAGE_KEY } from "../../../shared/context/theme-context/theme-local-storage";
 
 import CreateUserForm from "../components/createUser/create-user-form";

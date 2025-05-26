@@ -1,7 +1,7 @@
-import { useUpdateUserInterfaceLanguage } from "../../../../features/userConfig/hooks/use-user-config";
+import { useUpdateUserInterfaceLanguage } from "../../../../features/user-config/hooks/use-user-config";
 import { useState } from "react";
-import { InterfaceLanguage } from "../../../../features/userConfig/types/interface-language";
-import { Theme } from "../../../../features/userConfig/types/theme";
+import { InterfaceLanguage } from "../../../../features/user-config/types/interface-language";
+import { Theme } from "../../../../features/user-config/types/theme";
 import { useUser } from "../../../context/user-context/use-user";
 import { useInterfaceLanguage } from "../../../context/language-context/use-interface-language";
 import { useTheme } from "../../../context/theme-context/use-theme";

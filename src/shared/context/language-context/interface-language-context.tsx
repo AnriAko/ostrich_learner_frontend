@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { InterfaceLanguage } from "../../../features/userConfig/types/interface-language";
+import { InterfaceLanguage } from "../../../features/user-config/types/interface-language";
 
 export interface InterfaceLanguageContextType {
     interfaceLanguage: InterfaceLanguage | null;

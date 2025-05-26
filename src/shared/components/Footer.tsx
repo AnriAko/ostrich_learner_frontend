@@ -1,4 +1,4 @@
-import { Theme } from "../../features/userConfig/types/theme";
+import { Theme } from "../../features/user-config/types/theme";
 import { useTheme } from "../context/theme-context/use-theme";
 
 const Footer = () => {

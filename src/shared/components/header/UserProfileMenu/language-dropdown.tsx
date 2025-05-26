@@ -1,4 +1,4 @@
-import { InterfaceLanguage } from "../../../../features/userConfig/types/interface-language";
+import { InterfaceLanguage } from "../../../../features/user-config/types/interface-language";
 
 type LanguageDropdownProps = {
     isDark: boolean;

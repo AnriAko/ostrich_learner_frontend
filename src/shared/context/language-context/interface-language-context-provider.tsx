@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { InterfaceLanguageContext } from "../language-context/interface-language-context";
-import { InterfaceLanguage } from "../../../features/userConfig/types/interface-language";
+import { InterfaceLanguage } from "../../../features/user-config/types/interface-language";
 import type { ReactNode } from "react";
 import { INTERFACE_LANGUAGE_LOCAL_STORAGE_KEY } from "./interface-language-local-storage";
 import i18n from "../../language/i18n";

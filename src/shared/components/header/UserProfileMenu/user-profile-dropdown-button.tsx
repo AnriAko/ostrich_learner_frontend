@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { User } from "../../../../features/userConfig/types/user";
+import { User } from "../../../../features/user-config/types/user";
 
 interface Props {
     isOpen: boolean;

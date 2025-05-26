@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ThemeContext } from "./theme-context";
-import { Theme } from "../../../features/userConfig/types/theme";
+import { Theme } from "../../../features/user-config/types/theme";
 import type { ReactNode } from "react";
 import { THEME_LOCAL_STORAGE_KEY } from "./theme-local-storage";
 

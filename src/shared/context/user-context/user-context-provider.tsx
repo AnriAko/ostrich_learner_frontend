@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { UserContext } from "./user-context";
-import type { User } from "../../../features/userConfig/types/user";
+import type { User } from "../../../features/user-config/types/user";
 import type { ReactNode } from "react";
 import { USER_LOCAL_STORAGE_KEY } from "./user-local-storage";
 import { useTheme } from "../theme-context/use-theme";

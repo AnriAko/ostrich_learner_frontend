@@ -1,6 +1,6 @@
-import { InterfaceLanguage } from "../../features/userConfig/types/interface-language";
-import { Theme } from "../../features/userConfig/types/theme";
-import { UserConfig } from "../../features/userConfig/types/user-config";
+import { InterfaceLanguage } from "../../features/user-config/types/interface-language";
+import { Theme } from "../../features/user-config/types/theme";
+import { UserConfig } from "../../features/user-config/types/user-config";
 
 class UserStorage {
     private static key = "currentUser";

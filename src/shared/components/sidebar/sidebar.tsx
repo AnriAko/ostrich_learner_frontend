@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getMenuItems } from "./menu-config";
 import { useTheme } from "../../context/theme-context/use-theme";
-import { Theme } from "../../../features/userConfig/types/theme";
+import { Theme } from "../../../features/user-config/types/theme";
 
 const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
     const { t } = useTranslation();

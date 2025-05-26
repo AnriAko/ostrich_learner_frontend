@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./user-navigation-styles.css";
 import { useUser } from "../../../context/user-context/use-user";
 import { useTheme } from "../../../context/theme-context/use-theme";
-import { Theme } from "../../../../features/userConfig/types/theme";
+import { Theme } from "../../../../features/user-config/types/theme";
 import ToggleThemeIconButton from "./toggle-theme-icon-button";
 import ChangeInterfaceLanguageButton from "./change-language-button";
 import UserProfileDropdownButton from "./user-profile-dropdown-button";

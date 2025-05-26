@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ToggleThemeButton from "./toggle-theme-button";
-import { User } from "../../../../features/userConfig/types/user";
+import { User } from "../../../../features/user-config/types/user";
 
 interface Props {
     isDark: boolean;

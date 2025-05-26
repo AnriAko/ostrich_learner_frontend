@@ -1,8 +1,7 @@
-// src/services/AuthService.ts
 import api from "../../../shared/api/axios-instance";
 import type { CreateUserDto } from "../dto/create-user.dto";
 import { GetUserDto } from "../dto/get-user.dto";
-import { UserConfig } from "../../userConfig/types/user-config";
+import { UserConfig } from "../../user-config/types/user-config";
 
 const ROUTE_URL = "user";
 export class AuthService {
