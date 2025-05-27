@@ -6,7 +6,7 @@ import DashboardLayout from "../shared/layout/dashboard-layout";
 import HomePage from "../features/home/components/home";
 import LoginPage from "../features/auth/pages/login-page";
 import CreateUserPage from "../features/auth/pages/create-user-page";
-import AddWordsPage from "../features/words/add-words/components/add-word-page";
+import AddWordsPage from "../features/words/features/add-words/components/add-word-page";
 
 // import LearnWords from "../features/dashboard/pages/learn-words";
 // import NewWords from "../features/dashboard/pages/new-words";

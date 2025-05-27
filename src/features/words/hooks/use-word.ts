@@ -5,8 +5,8 @@ import {
     UseMutationResult,
     UseQueryResult,
 } from "@tanstack/react-query";
-import { WordService } from "../service/add-words-service";
-import type { CreateWordDto } from "../add-words/dto/create-word.dto";
+import { WordService } from "../service/words-service";
+import type { CreateWordDto } from "../features/add-words/dto/create-word.dto";
 import type { UpdateWordDto } from "../dto/update-word.dto";
 import type { TestWordDto } from "../dto/test-word.dto";
 import type { WordDto } from "../dto/word.dto";
@@ -98,4 +98,22 @@ export const useGetLearningStats = (
         queryKey: ["learningStats", userId],
         queryFn: () => WordService.getLearningStats(userId),
         enabled: !!userId,
+    });
+
+export const useGetAvailableForTestWords = (
+    vocabularyId: string
+): UseQueryResult<WordDto[]> =>
+    useQuery({
+        queryKey: ["words", "availableForTest", vocabularyId],
+        queryFn: () => WordService.getAvailableForTestWords(vocabularyId),
+        enabled: !!vocabularyId,
+    });
+
+export const useGetWordsForRepetition = (
+    vocabularyId: string
+): UseQueryResult<WordDto[]> =>
+    useQuery({
+        queryKey: ["words", "forRepetition", vocabularyId],
+        queryFn: () => WordService.getWordsForRepetition(vocabularyId),
+        enabled: !!vocabularyId,
     });

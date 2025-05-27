@@ -2,7 +2,7 @@
 import { useTranslation } from "react-i18next";
 import { LanguageSelector } from "./language-selector";
 import { WordInputs } from "./word-inputs";
-import { useAddWordLogic } from "../../hooks/use-add-word-logic";
+import { useAddWordLogic } from "../hooks/use-add-word-logic";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
 

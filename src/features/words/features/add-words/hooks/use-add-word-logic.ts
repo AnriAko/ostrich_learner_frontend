@@ -1,12 +1,12 @@
 // src/features/add-words/hooks/use-add-word-logic.ts
 import { useState } from "react";
-import { useCreateWord } from "../../hooks/use-word";
-import { useUser } from "../../../../shared/context/user-context/use-user";
-import type { CreateWordDto } from "../dto/create-word.dto";
-import { Language } from "../../types/language";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { useUser } from "../../../../../shared/context/user-context/use-user";
+import type { CreateWordDto } from "../../../features/add-words/dto/create-word.dto";
+import { useCreateWord } from "../../../hooks/use-word";
+import { Language } from "../../../types/language";
 
 export const useAddWordLogic = () => {
     const { user } = useUser();
