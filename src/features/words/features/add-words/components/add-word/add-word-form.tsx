@@ -1,7 +1,7 @@
 // src/features/add-words/components/add-word-form.tsx
 import { useTranslation } from "react-i18next";
-import { LanguageSelector } from "./language-selector";
-import { WordInputs } from "./word-inputs";
+import { LanguageSelector } from "../../add-word/language-selector";
+import { WordInputs } from "../../add-word/word-inputs";
 import { useAddWordLogic } from "../../hooks/use-add-word-logic";
 import { useTheme } from "../../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../../user-config/types/theme";
