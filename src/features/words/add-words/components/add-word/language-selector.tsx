@@ -1,8 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { Language, SupportedLanguages } from "../../types/language";
-import { useLanguageSelector } from "../hooks/use-language-selector";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
-import { Theme } from "../../../user-config/types/theme";
+import { Language, SupportedLanguages } from "../../../types/language";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { Theme } from "../../../../user-config/types/theme";
 
 const reverseLanguageMap: Record<Language, string> = {
     [Language.English]: "english",
@@ -10,37 +9,55 @@ const reverseLanguageMap: Record<Language, string> = {
     [Language.Georgian]: "georgian",
 };
 
-export const LanguageSelector = () => {
+interface LanguageSelectorProps {
+    sourceLang: Language;
+    targetLang: Language;
+    setSourceLang: (lang: Language) => void;
+    setTargetLang: (lang: Language) => void;
+}
+
+export const LanguageSelector = ({
+    sourceLang,
+    targetLang,
+    setSourceLang,
+    setTargetLang,
+}: LanguageSelectorProps) => {
     const { t } = useTranslation();
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
 
-    const {
-        sourceLang,
-        targetLang,
-        handleSourceLangChange,
-        handleTargetLangChange,
-        handleSwapLanguages,
-    } = useLanguageSelector();
+    const handleSourceLangChange = (
+        e: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+        setSourceLang(e.target.value as Language);
+    };
 
-    const labelClass = isDark ? "text-gray-300" : "text-gray-800";
+    const handleTargetLangChange = (
+        e: React.ChangeEvent<HTMLSelectElement>
+    ) => {
+        setTargetLang(e.target.value as Language);
+    };
+
+    const handleSwapLanguages = () => {
+        setSourceLang(targetLang);
+        setTargetLang(sourceLang);
+    };
+
     const selectClass =
-        "w-full p-2 border rounded " +
+        "w-40 h-[42px] p-2 rounded focus:outline-none " +
         (isDark
-            ? "dark:bg-gray-800 dark:text-gray-300 border-gray-600"
-            : "bg-white text-gray-800 border-gray-300");
+            ? "bg-gray-800 text-gray-300 border border-gray-600"
+            : "bg-white text-gray-800 border border-gray-300");
+
     const buttonClass =
-        "h-[42px] px-3 border rounded " +
+        "w-20 h-[42px] rounded  border-1  flex items-center justify-center  " +
         (isDark
-            ? "bg-gray-800 text-gray-300 hover:bg-gray-700 border-gray-600"
-            : "bg-white text-gray-800 hover:bg-gray-100 border-gray-300");
+            ? "bg-gray-800 text-gray-300 border border-gray-600"
+            : "bg-white text-gray-800 border border-gray-300");
 
     return (
-        <div className="grid grid-cols-3 gap-4">
-            <div className="flex flex-col">
-                <label className={`mb-1 ${labelClass}`}>
-                    {t("addWordsPage.fromLanguage", "Original language")}
-                </label>
+        <div className="flex justify-between gap-2">
+            <div>
                 <select
                     value={reverseLanguageMap[sourceLang]}
                     onChange={handleSourceLangChange}
@@ -54,8 +71,7 @@ export const LanguageSelector = () => {
                 </select>
             </div>
 
-            <div className="flex flex-col items-center justify-end">
-                <label className="mb-1 invisible">Swap</label>
+            <div>
                 <button
                     type="button"
                     onClick={handleSwapLanguages}
@@ -69,10 +85,7 @@ export const LanguageSelector = () => {
                 </button>
             </div>
 
-            <div className="flex flex-col">
-                <label className={`mb-1 ${labelClass}`}>
-                    {t("addWordsPage.toLanguage", "Translation language")}
-                </label>
+            <div>
                 <select
                     value={reverseLanguageMap[targetLang]}
                     onChange={handleTargetLangChange}

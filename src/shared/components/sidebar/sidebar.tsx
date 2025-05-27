@@ -20,7 +20,7 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
 
     return (
         <aside
-            className={`transition-all duration-300 ${bgClass}
+            className={`${bgClass}
                 ${isOpen ? "w-64" : "w-16"} ${
                 isDark ? "border-y border-gray-700" : "border-y border-gray-200"
             } overflow-hidden`}
@@ -31,7 +31,7 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
                         key={to}
                         to={to}
                         className={({ isActive }) =>
-                            `flex items-center gap-2 py-2 px-4 whitespace-nowrap overflow-hidden transition-colors duration-200
+                            `flex items-center gap-2 py-2 px-4 whitespace-nowrap overflow-hidden 
                         ${hoverColor}
                         ${
                             isActive
@@ -48,7 +48,7 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
                         </span>
 
                         <span
-                            className={`transition-all duration-300 inline-block ${
+                            className={`inline-block ${
                                 isOpen
                                     ? "opacity-100 w-auto ml-2"
                                     : "opacity-0 w-0 ml-0"

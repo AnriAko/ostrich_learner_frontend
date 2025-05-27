@@ -35,7 +35,6 @@ const ChangeInterfaceLanguageButton = () => {
         setIsOpen(false);
     };
 
-    // Цвета из Tailwind для lucide (превращаем в hex)
     const blue500 = "#3b82f6"; // blue-500
     const yellow300 = "#fcd34d"; // yellow-300
     const iconColor = isDark ? yellow300 : blue500;
@@ -63,7 +62,7 @@ const ChangeInterfaceLanguageButton = () => {
                               } hover:bg-gray-600 text-white`
                             : `${
                                   isOpen ? "bg-gray-200" : ""
-                              } hover:bg-gray-100 text-black`
+                              } hover:bg-gray-100 text-gray-800`
                     }`}
                 >
                     <Globe

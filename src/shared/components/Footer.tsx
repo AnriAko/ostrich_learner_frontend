@@ -6,8 +6,8 @@ const Footer = () => {
     const isDark = theme === Theme.dark;
     return (
         <footer
-            className={`text-center text-sm p-4 transition-colors duration-300 ${
-                isDark ? "bg-gray-900 text-gray-300" : "bg-white text-gray-700"
+            className={`text-center text-sm p-4 ${
+                isDark ? "bg-gray-900 text-gray-300" : "bg-white text-gray-800"
             }`}
         >
             © {new Date().getFullYear()} Ostrich Learner

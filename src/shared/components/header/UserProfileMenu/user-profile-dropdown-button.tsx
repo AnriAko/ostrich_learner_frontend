@@ -21,7 +21,7 @@ const UserProfileDropdownButton: FC<Props> = ({ isOpen, isDark, user }) => {
                       } hover:bg-gray-600 text-white`
                     : `${
                           isOpen ? "bg-gray-200" : ""
-                      } hover:bg-gray-100 text-gray-900`
+                      } hover:bg-gray-100 text-gray-800`
             }`}
         >
             <CircleUserRound

@@ -1,18 +1,27 @@
+// src/features/add-words/components/word-inputs.tsx
 import { useTranslation } from "react-i18next";
-import { useWordInputs } from "../hooks/use-word-inputs";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
-import { Theme } from "../../../user-config/types/theme";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { Theme } from "../../../../user-config/types/theme";
 
-export const WordInputs = () => {
+interface WordInputsProps {
+    word: string;
+    translate: string;
+    onWordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onTranslateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const WordInputs = ({
+    word,
+    translate,
+    onWordChange,
+    onTranslateChange,
+}: WordInputsProps) => {
     const { t } = useTranslation();
-    const { word, translate, onWordChange, onTranslateChange } =
-        useWordInputs();
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
 
     const inputBaseClasses =
         "w-full p-2 border rounded focus:outline-none focus:ring-0";
-
     const inputClasses = isDark
         ? `${inputBaseClasses} bg-gray-800 text-gray-300 border-gray-700`
         : `${inputBaseClasses} bg-gray-50 text-gray-800 border-gray-300`;

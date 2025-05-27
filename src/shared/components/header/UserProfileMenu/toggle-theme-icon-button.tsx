@@ -30,7 +30,7 @@ const ToggleThemeIconButton = () => {
     return (
         <button
             onClick={handleToggleTheme}
-            className={`p-2 rounded focus:outline-none transition
+            className={`p-1 rounded focus:outline-none transition
             ${isDark ? "hover:bg-gray-600" : "hover:bg-gray-100"}`}
             aria-label={isDark ? ALT_MOON : ALT_SUN}
             title={isDark ? ALT_MOON : ALT_SUN}

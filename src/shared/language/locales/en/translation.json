@@ -51,5 +51,9 @@
         "english": "English",
         "russian": "Russian",
         "georgian": "Georgian"
+    },
+    "errors": {
+        "wordExists": "Word with this translation already exists in the dictionary. Do you want to repeat?",
+        "default": "An unexpected error occurred."
     }
 }
