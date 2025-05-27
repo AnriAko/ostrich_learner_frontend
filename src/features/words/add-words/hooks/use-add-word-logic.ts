@@ -6,9 +6,11 @@ import type { CreateWordDto } from "../dto/create-word.dto";
 import { Language } from "../../types/language";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 
 export const useAddWordLogic = () => {
     const { user } = useUser();
+    const { theme } = useTheme();
     const [word, setWord] = useState("");
     const [translate, setTranslate] = useState("");
     const [sourceLang, setSourceLang] = useState<Language>(Language.English);
@@ -31,7 +33,10 @@ export const useAddWordLogic = () => {
 
         mutate(dto, {
             onSuccess: () => {
-                toast.success(t("wordAdded", "Word successfully added!"));
+                toast.success(t("wordAdded", "Word successfully added!"), {
+                    theme,
+                    toastId: "word-added", // ✅ предотвращает дубликат
+                });
                 setWord("");
                 setTranslate("");
             },
@@ -42,17 +47,19 @@ export const useAddWordLogic = () => {
                     "";
 
                 let key = "errors.default";
+                let toastId = "word-error";
+
                 if (raw.includes("already exists")) {
                     key = "errors.wordExists";
+                    toastId = "word-exists";
                 }
 
-                toast.error(t(key, "This word already exists!"));
+                toast.error(t(key, "This word already exists!"), {
+                    theme,
+                    toastId, // ✅ toastId для разных ошибок
+                });
             },
         });
-    };
-
-    const onPracticeClick = () => {
-        console.log("Go to practice page"); // replace with real logic
     };
 
     return {
@@ -66,6 +73,5 @@ export const useAddWordLogic = () => {
         targetLang,
         setSourceLang,
         setTargetLang,
-        onPracticeClick,
     };
 };

@@ -13,7 +13,11 @@ const App = () => (
             <ThemeContextProvider>
                 <UserContextProvider>
                     <AppRouter />
-                    <ToastContainer position="bottom-right" autoClose={3000} />
+                    <ToastContainer
+                        position="bottom-right"
+                        autoClose={3000}
+                        limit={2}
+                    />
                 </UserContextProvider>
             </ThemeContextProvider>
         </InterfaceLanguageContextProvider>

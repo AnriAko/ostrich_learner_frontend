@@ -35,7 +35,7 @@ export const AddWordForm = () => {
     const buttonTextClass = "text-white";
 
     return (
-        <div className={` mr-auto p-6 w-xl ${bgClass}`}>
+        <div className={`p-6 w-xl ${bgClass}`}>
             <h1 className={`text-xl font-bold mb-4 ${textClass}`}>
                 {t("addWordsPage.title", "Add a new word")}
             </h1>
