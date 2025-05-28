@@ -44,16 +44,16 @@ export const LanguageSelector = ({
     };
 
     const selectClass =
-        "w-40 h-[42px] p-2 rounded focus:outline-none " +
+        "w-40 h-[42px] p-2 rounded focus:outline-none cursor-pointer " +
         (isDark
-            ? "bg-gray-800 text-gray-300 border border-gray-600"
-            : "bg-white text-gray-800 border border-gray-300");
+            ? "bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-700 active:bg-gray-600"
+            : "bg-white text-gray-800 border border-gray-300 hover:bg-gray-100 active:bg-gray-200");
 
     const buttonClass =
-        "w-20 h-[42px] rounded  border-1  flex items-center justify-center  " +
+        "w-20 h-[42px] rounded border flex items-center justify-center cursor-pointer " +
         (isDark
-            ? "bg-gray-800 text-gray-300 border border-gray-600"
-            : "bg-white text-gray-800 border border-gray-300");
+            ? "bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700 active:bg-gray-600"
+            : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100 active:bg-gray-200");
 
     return (
         <div className="flex justify-between gap-2">
@@ -75,7 +75,7 @@ export const LanguageSelector = ({
                 <button
                     type="button"
                     onClick={handleSwapLanguages}
-                    className={buttonClass}
+                    className={`${buttonClass} cursor-pointer`}
                     aria-label={t(
                         "addWordsPage.swapLanguages",
                         "Swap languages"

@@ -1,5 +1,5 @@
 // src/features/add-words/pages/add-words-page.tsx
-import { AddWordForm } from "../add-word/add-word-form";
+import { AddWordForm } from "../add-word-form/add-word-form";
 
 const AddWordsPage = () => {
     return <AddWordForm />;

@@ -1,13 +1,16 @@
 // src/features/add-words/components/add-word-form.tsx
 import { useTranslation } from "react-i18next";
-import { LanguageSelector } from "../../add-word/language-selector";
-import { WordInputs } from "../../add-word/word-inputs";
-import { useAddWordLogic } from "../../hooks/use-add-word-logic";
-import { useTheme } from "../../../../../../shared/context/theme-context/use-theme";
-import { Theme } from "../../../../../user-config/types/theme";
+import { LanguageSelector } from "./language-selector";
+import { WordInputs } from "./word-inputs";
+import { useAddWordLogic } from "../hooks/use-add-word-logic";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { Theme } from "../../../../user-config/types/theme";
+import { useEffect, useRef } from "react";
 
 export const AddWordForm = () => {
     const { t } = useTranslation();
+    const inputRef = useRef<HTMLInputElement>(null); // 👈 создаем ref
+
     const {
         handleSubmit,
         isLoading,
@@ -30,9 +33,15 @@ export const AddWordForm = () => {
         ? "bg-gray-800 text-white"
         : "bg-gray-100 text-black";
     const buttonBgClass = isDark
-        ? "bg-yellow-600 hover:bg-yellow-700"
-        : "bg-blue-600 hover:bg-blue-700";
+        ? "bg-yellow-600 hover:bg-yellow-700 active:bg-yellow-800"
+        : "bg-blue-600 hover:bg-blue-700 active:bg-blue-800";
     const buttonTextClass = "text-white";
+
+    useEffect(() => {
+        if (!isLoading && inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [isLoading]);
 
     return (
         <div className={`p-6 w-xl ${bgClass}`}>
@@ -51,6 +60,7 @@ export const AddWordForm = () => {
                     setTargetLang={setTargetLang}
                 />
                 <WordInputs
+                    ref={inputRef} // 👈 передаем ref
                     word={word}
                     translate={translate}
                     onWordChange={(e) => setWord(e.target.value)}
@@ -60,7 +70,7 @@ export const AddWordForm = () => {
                 <button
                     type="submit"
                     disabled={isLoading}
-                    className={`w-full py-2 px-4 rounded disabled:opacity-50 ${buttonBgClass} ${buttonTextClass}`}
+                    className={`w-full py-2 px-4 rounded transition disabled:opacity-50 disabled:cursor-not-allowed ${buttonBgClass} ${buttonTextClass} cursor-pointer`}
                 >
                     {t("addWordsPage.submit", "Add word")}
                 </button>

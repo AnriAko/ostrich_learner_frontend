@@ -1,7 +1,7 @@
 export interface CreateWordDto {
     userId: string;
-    word: string;
-    translate: string;
+    origin: string;
+    translation: string;
     sourceLang: string;
     targetLang: string;
 }

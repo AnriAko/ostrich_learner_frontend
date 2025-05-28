@@ -1,5 +1,5 @@
 export interface UpdateWordDto {
-    text?: string;
+    origin?: string;
     translation?: string;
     language?: string;
     vocabularyId?: string;

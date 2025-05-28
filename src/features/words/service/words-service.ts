@@ -4,74 +4,102 @@ import type { UpdateWordDto } from "../dto/update-word.dto";
 import type { TestWordDto } from "../dto/test-word.dto";
 import type { WordDto } from "../dto/word.dto";
 import type { LearningStatsDto } from "../dto/learning-stats.dto";
+import type { TestWordResponse } from "../dto/test-word-response.dto";
+import { WordFilterDto } from "../dto/word-filter.dto";
 
 const ROUTE_URL = "word";
 
+interface FilteredWordsResponse {
+    data: WordDto[];
+    total: number;
+}
+
 export class WordService {
     static async createWord(data: CreateWordDto): Promise<WordDto> {
-        const response = await api.post(`${ROUTE_URL}`, data);
-        return response.data;
+        const { data: word } = await api.post(ROUTE_URL, data);
+        return word;
     }
 
     static async getWordById(id: string): Promise<WordDto | null> {
-        const response = await api.get(`${ROUTE_URL}/${id}`);
-        return response.data;
+        const { data: word } = await api.get(`${ROUTE_URL}/${id}`);
+        return word;
     }
 
     static async updateWord(id: string, data: UpdateWordDto): Promise<WordDto> {
-        const response = await api.patch(`${ROUTE_URL}/${id}`, data);
-        return response.data;
+        const { data: word } = await api.patch(`${ROUTE_URL}/${id}`, data);
+        return word;
     }
 
     static async deleteWord(id: string): Promise<void> {
-        const response = await api.delete(`${ROUTE_URL}/${id}`);
-        return response.data;
+        await api.delete(`${ROUTE_URL}/${id}`);
     }
 
     static async testWord(
         id: string,
         data: TestWordDto
-    ): Promise<{ correct: boolean; updated: WordDto }> {
-        const response = await api.post(`${ROUTE_URL}/${id}/test`, data);
-        return response.data;
+    ): Promise<TestWordResponse> {
+        const { data: result } = await api.post(
+            `${ROUTE_URL}/${id}/test`,
+            data
+        );
+        return result;
     }
 
     static async getWordsByVocabulary(
         vocabularyId: string
     ): Promise<WordDto[]> {
-        const response = await api.get(
+        const { data: words } = await api.get(
             `${ROUTE_URL}/vocabulary/${vocabularyId}`
         );
-        return response.data;
+        return words;
     }
 
     static async getWordsByUser(userId: string): Promise<WordDto[]> {
-        const response = await api.get(`${ROUTE_URL}/user/${userId}`);
-        return response.data;
+        const { data: words } = await api.get(`${ROUTE_URL}/user/${userId}`);
+        return words;
     }
 
     static async getLearningStats(userId: string): Promise<LearningStatsDto> {
-        const response = await api.get(
+        const { data: stats } = await api.get(
             `${ROUTE_URL}/user/${userId}/learning-stats`
         );
-        return response.data;
+        return stats;
     }
 
-    static async getAvailableForTestWords(
-        vocabularyId: string
-    ): Promise<WordDto[]> {
-        const response = await api.get(
-            `${ROUTE_URL}/available-for-test/${vocabularyId}`
+    static async getWordsForRepetition(userId: string): Promise<WordDto[]> {
+        const { data: words } = await api.get(
+            `${ROUTE_URL}/available-for-repetition/${userId}`
         );
-        return response.data;
+        return words;
     }
 
-    static async getWordsForRepetition(
-        vocabularyId: string
-    ): Promise<WordDto[]> {
-        const response = await api.get(
-            `${ROUTE_URL}/for-repetition/${vocabularyId}`
+    static async getAvailableForLearning(userId: string): Promise<WordDto[]> {
+        const { data: words } = await api.get(
+            `${ROUTE_URL}/available-for-learning/${userId}`
         );
-        return response.data;
+        return words;
+    }
+    static async getFilteredWords(
+        filters: WordFilterDto
+    ): Promise<FilteredWordsResponse> {
+        const params: Record<string, any> = {};
+
+        if (filters.userId) params.userId = filters.userId;
+        if (filters.origin) params.origin = filters.origin;
+        if (filters.translation) params.translation = filters.translation;
+        if (filters.memoryScore !== undefined && !isNaN(filters.memoryScore))
+            params.memoryScore = filters.memoryScore;
+        if (filters.page) params.page = filters.page;
+        if (filters.pageSize) params.pageSize = filters.pageSize;
+        if (filters.sortBy) params.sortBy = filters.sortBy;
+        if (filters.sortOrder) params.sortOrder = filters.sortOrder;
+
+        console.log(`${ROUTE_URL}/filtered`, { params });
+
+        const { data } = await api.get<FilteredWordsResponse>(
+            `${ROUTE_URL}/filtered`,
+            { params }
+        );
+        return data;
     }
 }

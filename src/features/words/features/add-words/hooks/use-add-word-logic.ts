@@ -25,8 +25,8 @@ export const useAddWordLogic = () => {
 
         const dto: CreateWordDto = {
             userId: user.userId,
-            word: word.trim(),
-            translate: translate.trim(),
+            origin: word.trim(),
+            translation: translate.trim(),
             sourceLang,
             targetLang,
         };
@@ -35,7 +35,7 @@ export const useAddWordLogic = () => {
             onSuccess: () => {
                 toast.success(t("wordAdded", "Word successfully added!"), {
                     theme,
-                    toastId: "word-added", // ✅ предотвращает дубликат
+                    toastId: "word-added",
                 });
                 setWord("");
                 setTranslate("");

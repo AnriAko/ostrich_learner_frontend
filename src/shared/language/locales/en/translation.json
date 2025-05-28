@@ -31,7 +31,7 @@
         "theme.dark": "Dark"
     },
     "sidebar": {
-        "study": "Practice Words ",
+        "study": "Study Words ",
         "addWords": "Add Words",
         "repeat": "Remind Words",
         "wordList": "Vocabulary"
@@ -53,7 +53,7 @@
         "georgian": "Georgian"
     },
     "errors": {
-        "wordExists": "Word with this translation already exists in the dictionary. Do you want to practice?",
+        "wordExists": "Word with this translation already exists in the dictionary.",
         "default": "An unexpected error occurred."
     }
 }

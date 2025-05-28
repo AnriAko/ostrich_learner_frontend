@@ -10,7 +10,7 @@ export interface MenuItems {
 
 export const getMenuItems = (t: TFunction): MenuItems[] => [
     {
-        to: "/dashboard/add-word",
+        to: "/dashboard/add",
         label: t("sidebar.addWords"),
         icon: NotebookPen,
     },

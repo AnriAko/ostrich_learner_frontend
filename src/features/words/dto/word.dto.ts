@@ -1,7 +1,7 @@
 export interface WordDto {
     id: number;
-    word: string;
-    translate: string;
+    origin: string;
+    translation: string;
     memoryScore: number;
     learningDate: string | null;
     dateForRepetition: string | null;
