@@ -34,7 +34,8 @@
         "study": "Study Words ",
         "addWords": "Add Words",
         "repeat": "Remind Words",
-        "wordList": "Vocabulary"
+        "wordList": "Vocabulary",
+        "manageWords": "Manage Words"
     },
     "addWordsPage": {
         "title": "Add a new word",
@@ -48,12 +49,27 @@
         "practice": "Practice now"
     },
     "languages": {
-        "english": "English",
-        "russian": "Russian",
-        "georgian": "Georgian"
+        "en": "English",
+        "ru": "Russian",
+        "ka": "Georgian"
     },
     "errors": {
         "wordExists": "Word with this translation already exists in the dictionary.",
         "default": "An unexpected error occurred."
+    },
+    "pagination": {
+        "prev": "Prev",
+        "next": "Next",
+        "page": "Page:",
+        "itemsPerPage": "Words per page"
+    },
+    "table": {
+        "origin": "Origin",
+        "translation": "Translation",
+        "vocabulary": "Vocabulary",
+        "memoryScore": "Memory Score",
+        "learned": "Learned",
+        "repeat": "Repeat",
+        "addedToVocab": "Added"
     }
 }

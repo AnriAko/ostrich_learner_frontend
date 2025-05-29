@@ -21,9 +21,9 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
     return (
         <aside
             className={`${bgClass}
-                ${isOpen ? "w-64" : "w-16"} ${
-                isDark ? "border-y border-gray-700" : "border-y border-gray-200"
-            } overflow-hidden`}
+                ${
+                    isOpen ? "w-64" : "w-16"
+                } overflow-hidden transition-[width] duration-200`}
         >
             <nav className="flex flex-col">
                 {menuItems.map(({ to, label, icon: Icon }) => (

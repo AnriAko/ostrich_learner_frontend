@@ -1,4 +1,3 @@
-// types/language.ts
 export enum Language {
     English = "en",
     Georgian = "ka",
@@ -6,7 +5,7 @@ export enum Language {
 }
 
 export const SupportedLanguages = [
-    { id: "english" },
-    { id: "russian" },
-    { id: "georgian" },
+    { id: Language.English },
+    { id: Language.Russian },
+    { id: Language.Georgian },
 ];

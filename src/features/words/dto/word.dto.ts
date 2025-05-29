@@ -5,5 +5,7 @@ export interface WordDto {
     memoryScore: number;
     learningDate: string | null;
     dateForRepetition: string | null;
+    creationDate?: string;
     vocabularyId: string;
+    vocabularyName?: string;
 }

@@ -3,12 +3,6 @@ import { Language, SupportedLanguages } from "../../../types/language";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
 
-const reverseLanguageMap: Record<Language, string> = {
-    [Language.English]: "english",
-    [Language.Russian]: "russian",
-    [Language.Georgian]: "georgian",
-};
-
 interface LanguageSelectorProps {
     sourceLang: Language;
     targetLang: Language;
@@ -35,6 +29,7 @@ export const LanguageSelector = ({
     const handleTargetLangChange = (
         e: React.ChangeEvent<HTMLSelectElement>
     ) => {
+        console.log(e.target.value);
         setTargetLang(e.target.value as Language);
     };
 
@@ -59,7 +54,7 @@ export const LanguageSelector = ({
         <div className="flex justify-between gap-2">
             <div>
                 <select
-                    value={reverseLanguageMap[sourceLang]}
+                    value={sourceLang}
                     onChange={handleSourceLangChange}
                     className={selectClass}
                 >
@@ -87,7 +82,7 @@ export const LanguageSelector = ({
 
             <div>
                 <select
-                    value={reverseLanguageMap[targetLang]}
+                    value={targetLang}
                     onChange={handleTargetLangChange}
                     className={selectClass}
                 >

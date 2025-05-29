@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
 
 export const AddWordForm = () => {
     const { t } = useTranslation();
-    const inputRef = useRef<HTMLInputElement>(null); // 👈 создаем ref
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const {
         handleSubmit,
@@ -60,7 +60,7 @@ export const AddWordForm = () => {
                     setTargetLang={setTargetLang}
                 />
                 <WordInputs
-                    ref={inputRef} // 👈 передаем ref
+                    ref={inputRef}
                     word={word}
                     translate={translate}
                     onWordChange={(e) => setWord(e.target.value)}

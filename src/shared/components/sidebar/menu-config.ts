@@ -1,6 +1,12 @@
 // src/shared/components/sidebar/menu-config.ts
 import { TFunction } from "i18next";
-import { Brain, NotebookPen, BookOpenCheck, BookA } from "lucide-react";
+import {
+    Brain,
+    NotebookPen,
+    BookOpenCheck,
+    BookA,
+    Settings2,
+} from "lucide-react";
 
 export interface MenuItems {
     to: string;
@@ -14,9 +20,11 @@ export const getMenuItems = (t: TFunction): MenuItems[] => [
         label: t("sidebar.addWords"),
         icon: NotebookPen,
     },
-
-    { to: "/dashboard/study", label: t("sidebar.study"), icon: Brain },
-
+    {
+        to: "/dashboard/study",
+        label: t("sidebar.study"),
+        icon: Brain,
+    },
     {
         to: "/dashboard/repeat",
         label: t("sidebar.repeat"),
@@ -26,5 +34,10 @@ export const getMenuItems = (t: TFunction): MenuItems[] => [
         to: "/dashboard/wordList",
         label: t("sidebar.wordList"),
         icon: BookA,
+    },
+    {
+        to: "/dashboard/manage",
+        label: t("sidebar.manageWords"),
+        icon: Settings2,
     },
 ];

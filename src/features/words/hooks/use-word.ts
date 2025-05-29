@@ -7,12 +7,12 @@ import {
 } from "@tanstack/react-query";
 import { WordService } from "../service/words-service";
 import { WordDto } from "../dto/word.dto";
-import { CreateWordDto } from "../features/add-words/dto/create-word.dto";
+import { CreateWordDto } from "../components/add-words/dto/create-word.dto";
 import { UpdateWordDto } from "../dto/update-word.dto";
 import { TestWordResponse } from "../dto/test-word-response.dto";
 import { TestWordDto } from "../dto/test-word.dto";
 import { LearningStatsDto } from "../dto/learning-stats.dto";
-import { WordFilterDto } from "../dto/word-filter.dto";
+import { WordFilterDto } from "../components/word-management/dto/word-filter.dto";
 
 interface FilteredWordsResponse {
     data: WordDto[];

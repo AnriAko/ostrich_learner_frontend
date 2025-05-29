@@ -1,11 +1,11 @@
 import api from "../../../shared/api/axios-instance";
-import type { CreateWordDto } from "../features/add-words/dto/create-word.dto";
+import type { CreateWordDto } from "../components/add-words/dto/create-word.dto";
 import type { UpdateWordDto } from "../dto/update-word.dto";
 import type { TestWordDto } from "../dto/test-word.dto";
 import type { WordDto } from "../dto/word.dto";
 import type { LearningStatsDto } from "../dto/learning-stats.dto";
 import type { TestWordResponse } from "../dto/test-word-response.dto";
-import { WordFilterDto } from "../dto/word-filter.dto";
+import { WordFilterDto } from "../components/word-management/dto/word-filter.dto";
 
 const ROUTE_URL = "word";
 
@@ -82,19 +82,15 @@ export class WordService {
     static async getFilteredWords(
         filters: WordFilterDto
     ): Promise<FilteredWordsResponse> {
+        const allowedKeys = Object.keys(filters) as (keyof WordFilterDto)[];
         const params: Record<string, any> = {};
 
-        if (filters.userId) params.userId = filters.userId;
-        if (filters.origin) params.origin = filters.origin;
-        if (filters.translation) params.translation = filters.translation;
-        if (filters.memoryScore !== undefined && !isNaN(filters.memoryScore))
-            params.memoryScore = filters.memoryScore;
-        if (filters.page) params.page = filters.page;
-        if (filters.pageSize) params.pageSize = filters.pageSize;
-        if (filters.sortBy) params.sortBy = filters.sortBy;
-        if (filters.sortOrder) params.sortOrder = filters.sortOrder;
-
-        console.log(`${ROUTE_URL}/filtered`, { params });
+        for (const key of allowedKeys) {
+            const value = filters[key];
+            if (value !== undefined && value !== null) {
+                params[key] = value;
+            }
+        }
 
         const { data } = await api.get<FilteredWordsResponse>(
             `${ROUTE_URL}/filtered`,

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { useUser } from "../../../../../shared/context/user-context/use-user";
-import type { CreateWordDto } from "../../../features/add-words/dto/create-word.dto";
+import type { CreateWordDto } from "../dto/create-word.dto";
 import { useCreateWord } from "../../../hooks/use-word";
 import { Language } from "../../../types/language";
 
@@ -30,6 +30,7 @@ export const useAddWordLogic = () => {
             sourceLang,
             targetLang,
         };
+        console.log(targetLang);
 
         mutate(dto, {
             onSuccess: () => {

@@ -6,8 +6,8 @@ import DashboardLayout from "../shared/layout/dashboard-layout";
 import HomePage from "../features/home/components/home";
 import LoginPage from "../features/auth/pages/login-page";
 import CreateUserPage from "../features/auth/pages/create-user-page";
-import AddWordsPage from "../features/words/features/add-words/page/add-word-page";
-import { TestPage } from "../features/words/features/practice-words/features/flashcard/components/test-page";
+import AddWordsPage from "../features/words/components/add-words/page/add-word-page";
+import { TestPage } from "../features/words/components/practice-words/features/flashcard/components/test-page";
 import WordManagement from "../features/words/components/word-management/word-management";
 
 // import LearnWords from "../features/dashboard/pages/learn-words";
