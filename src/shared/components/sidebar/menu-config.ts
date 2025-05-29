@@ -5,7 +5,7 @@ import {
     NotebookPen,
     BookOpenCheck,
     BookA,
-    Settings2,
+    FolderKanban,
 } from "lucide-react";
 
 export interface MenuItems {
@@ -38,6 +38,6 @@ export const getMenuItems = (t: TFunction): MenuItems[] => [
     {
         to: "/dashboard/manage",
         label: t("sidebar.manageWords"),
-        icon: Settings2,
+        icon: FolderKanban,
     },
 ];

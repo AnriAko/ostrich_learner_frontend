@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next"; // импорт
 import { useGetFilteredWords } from "../../hooks/use-word";
 import { useUser } from "../../../../shared/context/user-context/use-user";
 import { WordFilterDto } from "./dto/word-filter.dto";
@@ -9,6 +10,7 @@ import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../user-config/types/theme";
 
 const WordManagement: React.FC = () => {
+    const { t } = useTranslation(); // хук перевода
     const { user } = useUser();
     const { theme } = useTheme();
 
@@ -60,7 +62,7 @@ const WordManagement: React.FC = () => {
     return (
         <div className={`p-4 ${containerBg} h-[80vh] flex flex-col`}>
             <h2 className={`text-xl font-bold mb-4 ${titleColor}`}>
-                Manage Words
+                {t("manageWords")}
             </h2>
 
             <div className="flex-1 overflow-y-auto min-h-0 word-table-scroll">

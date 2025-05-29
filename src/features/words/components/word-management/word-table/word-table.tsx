@@ -82,7 +82,7 @@ export const WordTable = ({
             : "border border-gray-300";
 
     return (
-        <div className="word-table-wrapper">
+        <div className="word-table-wrapper mx-auto">
             <div className="word-table-scroll">
                 <table className={tableClassNames}>
                     <thead className={headerClassNames}>
