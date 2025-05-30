@@ -59,6 +59,18 @@ const WordManagement: React.FC = () => {
     const titleColor =
         theme === Theme.dark ? "text-yellow-300" : "text-blue-600";
 
+    const [cachedData, setCachedData] = React.useState<typeof data | null>(
+        null
+    );
+
+    React.useEffect(() => {
+        if (data) {
+            setCachedData(data); // обновляем кеш, когда приходит новый ответ
+        }
+    }, [data]);
+
+    const isInitialLoad = isLoading && !cachedData; // загрузка и нет кеша — первый раз
+
     return (
         <div className={`p-4 ${containerBg} h-[80vh] flex flex-col`}>
             <h2 className={`text-xl font-bold mb-4 ${titleColor}`}>
@@ -76,11 +88,18 @@ const WordManagement: React.FC = () => {
                     maxPage={maxPage}
                 />
 
-                {isLoading && <p>Loading...</p>}
+                {isInitialLoad && (
+                    <div className="p-4 text-center text-gray-500">
+                        {/* Можно заменить на скелетон */}
+                        {t("loading")}
+                    </div>
+                )}
+
                 {error && <p>Error: {error.message}</p>}
-                {!isLoading && !error && data && (
+
+                {!isInitialLoad && cachedData && (
                     <WordTable
-                        words={data.data}
+                        words={cachedData.data}
                         sortBy={filters.sortBy}
                         sortOrder={filters.sortOrder}
                         onSortChange={(field) => {
