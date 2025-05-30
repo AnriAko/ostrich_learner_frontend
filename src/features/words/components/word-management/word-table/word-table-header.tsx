@@ -1,3 +1,4 @@
+// WordTableHeader.tsx
 import { WordFilterDto } from "../dto/word-filter.dto";
 import { Theme } from "../../../../user-config/types/theme";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
@@ -10,6 +11,8 @@ interface HeaderProps {
     sortBy?: WordFilterDto["sortBy"];
     sortOrder?: WordFilterDto["sortOrder"];
     onSortChange: (field: WordFilterDto["sortBy"]) => void;
+    allSelected: boolean;
+    onToggleSelectAll: () => void;
 }
 
 export const WordTableHeader = ({
@@ -17,6 +20,8 @@ export const WordTableHeader = ({
     sortBy,
     sortOrder,
     onSortChange,
+    allSelected,
+    onToggleSelectAll,
 }: HeaderProps) => {
     const { theme } = useTheme();
 
@@ -26,7 +31,7 @@ export const WordTableHeader = ({
             : "bg-gray-300 text-gray-900 border-b border-gray-300";
 
     const headerCellClass =
-        "w-32 px-0.5 py-0 cursor-pointer select-none text-center h-6 " +
+        "w-12 max-w-12 min-w-12 px-0.5 py-0 cursor-pointer select-none text-center h-6 " +
         (theme === Theme.dark
             ? "border-b border-x border-gray-600"
             : "border-t border-x border-gray-400 border-b border-gray-300");
@@ -34,6 +39,16 @@ export const WordTableHeader = ({
     return (
         <thead className={headerRowClass}>
             <tr>
+                <th className={headerCellClass}>
+                    <input
+                        type="checkbox"
+                        checked={allSelected}
+                        onChange={onToggleSelectAll}
+                        className={`custom-checkbox ${
+                            theme === Theme.dark ? "dark" : "light"
+                        }`}
+                    />
+                </th>
                 {headers.map(({ field, label }) => {
                     const isActive = sortBy === field;
                     const arrow = isActive

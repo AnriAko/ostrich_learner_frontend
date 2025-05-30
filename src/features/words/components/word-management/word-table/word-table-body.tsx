@@ -1,3 +1,4 @@
+// WordTableBody.tsx
 import { WordDto } from "../../../dto/word.dto";
 import { WordFilterDto } from "../dto/word-filter.dto";
 import { Theme } from "../../../../user-config/types/theme";
@@ -12,6 +13,8 @@ interface BodyProps {
     }[];
     formatDate: (dateStr: string) => string;
     formatDateTime: (dateStr: string) => string;
+    selectedIds: string[];
+    onToggleWord: (id: string) => void;
 }
 
 export const WordTableBody = ({
@@ -19,6 +22,8 @@ export const WordTableBody = ({
     headers,
     formatDate,
     formatDateTime,
+    selectedIds,
+    onToggleWord,
 }: BodyProps) => {
     const { theme } = useTheme();
 
@@ -27,7 +32,7 @@ export const WordTableBody = ({
             ? "border border-gray-600"
             : "border border-gray-300";
 
-    const cellContentClass = "w-32 px-0.5 py-0 overflow-x-auto text-center";
+    const cellContentClass = "w-32 px-0.5 py-0 overflow-x-auto text-center h-7";
 
     const getRowBgClass = (index: number) =>
         theme === Theme.dark
@@ -67,6 +72,18 @@ export const WordTableBody = ({
         <tbody>
             {words.map((word, index) => (
                 <tr key={word.id} className={getRowBgClass(index)}>
+                    <td
+                        className={`w-2 max-w-2 p-0.5 text-center ${cellBorderClass}`}
+                    >
+                        <input
+                            type="checkbox"
+                            checked={selectedIds.includes(String(word.id))}
+                            onChange={() => onToggleWord(String(word.id))}
+                            className={`custom-checkbox ${
+                                theme === Theme.dark ? "dark" : "light"
+                            }`}
+                        />
+                    </td>
                     {headers.map(({ field, type }) =>
                         renderCell(word, field as keyof WordDto, type)
                     )}

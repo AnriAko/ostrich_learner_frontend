@@ -7,6 +7,7 @@ import { useTheme } from "../../../../../shared/context/theme-context/use-theme"
 import { WordTableHeader } from "./word-table-header";
 import { WordTableBody } from "./word-table-body";
 import { getWordTableHeaders } from "./word-table-header.config";
+import { useEffect, useState } from "react";
 
 interface Props {
     words: WordDto[];
@@ -23,9 +24,31 @@ export const WordTable = ({
 }: Props) => {
     const { t } = useTranslation();
     const { theme } = useTheme();
-
     const headers = getWordTableHeaders(t);
 
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+    useEffect(() => {
+        setSelectedIds([]);
+    }, [words]);
+
+    const allSelected =
+        words.length > 0 &&
+        words.every((w) => selectedIds.includes(String(w.id)));
+
+    const toggleSelectAll = () => {
+        if (allSelected) {
+            setSelectedIds([]);
+        } else {
+            setSelectedIds(words.map((w) => String(w.id)));
+        }
+    };
+
+    const toggleWordSelection = (id: string) => {
+        setSelectedIds((prev) =>
+            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+        );
+    };
     const tableClass =
         "text-xs border-collapse whitespace-nowrap " +
         (theme === Theme.dark
@@ -65,12 +88,16 @@ export const WordTable = ({
                     sortBy={sortBy}
                     sortOrder={sortOrder}
                     onSortChange={onSortChange}
+                    allSelected={allSelected}
+                    onToggleSelectAll={toggleSelectAll}
                 />
                 <WordTableBody
                     words={words}
                     headers={headers}
                     formatDate={formatDate}
                     formatDateTime={formatDateTime}
+                    selectedIds={selectedIds}
+                    onToggleWord={toggleWordSelection}
                 />
             </table>
         </div>
