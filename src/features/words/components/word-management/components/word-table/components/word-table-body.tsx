@@ -1,8 +1,8 @@
 // WordTableBody.tsx
-import { WordDto } from "../../../dto/word.dto";
-import { WordFilterDto } from "../dto/word-filter.dto";
-import { Theme } from "../../../../user-config/types/theme";
-import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { WordDto } from "../../../../../dto/word.dto";
+import { WordFilterDto } from "../../../dto/word-filter.dto";
+import { Theme } from "../../../../../../user-config/types/theme";
+import { useTheme } from "../../../../../../../shared/context/theme-context/use-theme";
 
 interface BodyProps {
     words: WordDto[];

@@ -63,7 +63,8 @@
         "prev": "უკან",
         "next": "წინ",
         "page": "გვერდი:",
-        "itemsPerPage": "სიტყვები გვერდზე"
+        "itemsPerPage": "სიტყვები გვერდზე",
+        "totalFound": "სულ ნაპოვნია: {{count}}"
     },
     "table": {
         "origin": "საწყისი",
@@ -73,5 +74,13 @@
         "learned": "ნასწავლი",
         "repeat": "გამეორების თარიღი",
         "addedToVocab": "დამატებულია"
+    },
+    "wordActionMenu": {
+        "clearSelection": "გაუქმება",
+        "delete": "წაშლა",
+        "createFlashcards": "Create flashcards",
+        "selectedCount": "ამორჩეულია: {{count}} ",
+        "deleteConfirm": "დარწმუნებული ხართ, რომ გსურთ წაშალოთ {{count}} ელემენტი(ები)?",
+        "deleteSuccess": "{{count}} ელემენტი წარმატებით წაიშალა!"
     }
 }

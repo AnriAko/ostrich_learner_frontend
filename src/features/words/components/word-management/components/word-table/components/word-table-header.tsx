@@ -1,7 +1,7 @@
 // WordTableHeader.tsx
-import { WordFilterDto } from "../dto/word-filter.dto";
-import { Theme } from "../../../../user-config/types/theme";
-import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { WordFilterDto } from "../../../dto/word-filter.dto";
+import { Theme } from "../../../../../../user-config/types/theme";
+import { useTheme } from "../../../../../../../shared/context/theme-context/use-theme";
 
 interface HeaderProps {
     headers: {

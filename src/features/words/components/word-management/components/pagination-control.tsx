@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { useState, useEffect } from "react";
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
     onPageChange: (page: number) => void;
     onPageSizeChange: (pageSize: number) => void;
     maxPage?: number;
+    totalItems?: number;
 }
 
 export function PaginationControls({
@@ -16,6 +17,7 @@ export function PaginationControls({
     onPageChange,
     onPageSizeChange,
     maxPage,
+    totalItems,
 }: Props) {
     const { t } = useTranslation();
     const { theme } = useTheme();
@@ -89,7 +91,7 @@ export function PaginationControls({
         <div
             className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-2 py-1 text-xs ${themeClasses.container} rounded-sm w-max max-w-full mb-2`}
         >
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 flex-wrap">
                 <button
                     onClick={handlePrev}
                     disabled={page <= 1}
@@ -141,6 +143,12 @@ export function PaginationControls({
                     </select>
                 </div>
             </div>
+
+            {typeof totalItems === "number" && (
+                <div className="text-xs text-gray-500">
+                    {t("pagination.totalFound", { count: totalItems })}
+                </div>
+            )}
         </div>
     );
 }

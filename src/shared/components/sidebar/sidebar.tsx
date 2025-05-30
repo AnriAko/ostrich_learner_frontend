@@ -22,7 +22,7 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
         <aside
             className={`${bgClass}
                 ${
-                    isOpen ? "w-64" : "w-16"
+                    isOpen ? "w-60" : "w-16"
                 } overflow-hidden transition-[width] duration-200`}
         >
             <nav className="flex flex-col">

@@ -62,7 +62,8 @@
         "prev": "Prev",
         "next": "Next",
         "page": "Page:",
-        "itemsPerPage": "Words per page"
+        "itemsPerPage": "Words per page",
+        "totalFound": "Total words found: {{count}}"
     },
     "table": {
         "origin": "Origin",
@@ -72,5 +73,14 @@
         "learned": "Learned",
         "repeat": "Repeat",
         "addedToVocab": "Added"
+    },
+    "wordActionMenu": {
+        "clearSelection": "Cancel",
+        "delete": "Delete",
+        "export": "Export",
+        "createFlashcards": "Create flashcards",
+        "selectedCount": "Selected: {{count}} ",
+        "deleteConfirm": "Are you sure you wanna delete {{count}} element(s)?",
+        "deleteSuccess": "{{count}} word(s) deleted successfully!"
     }
 }

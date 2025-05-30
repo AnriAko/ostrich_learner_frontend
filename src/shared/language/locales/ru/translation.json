@@ -37,7 +37,6 @@
         "wordList": "Словарь",
         "manageWords": "Просмотр слов"
     },
-
     "addWordsPage": {
         "title": "Добавить новое слово",
         "fromLanguage": "Исходный язык",
@@ -45,34 +44,42 @@
         "original": "Исходное слово",
         "translation": "Перевод",
         "submit": "Добавить слово",
-        "success": "Слово сохранено добавлено!",
+        "success": "Слово успешно сохранено!",
         "wordExists": "Слово с этим переводом уже есть в вашем словаре.",
         "practice": "Попрактиковать"
     },
     "languages": {
-        "english": "Английский",
-        "russian": "Русский",
-        "georgian": "Грузинский"
+        "en": "Английский",
+        "ru": "Русский",
+        "ka": "Грузинский"
     },
     "errors": {
-        "wordExists": "Слово с таким переводом уже есть в словаре. Не желателе повторить? ",
+        "wordExists": "Слово с таким переводом уже есть в словаре. Хотите повторить?",
         "default": "Произошла неизвестная ошибка."
     },
     "manageWords": "Просмотр слов",
-
     "pagination": {
-        "prev": "Пребыдущая",
-        "next": "Следующая",
+        "prev": "Назад",
+        "next": "Вперёд",
         "page": "Страница:",
-        "itemsPerPage": "Слов на странице"
+        "itemsPerPage": "Слов на странице",
+        "totalFound": "Всего найдено: {{count}}"
     },
     "table": {
         "origin": "Исходное",
         "translation": "Перевод",
         "vocabulary": "Словарь",
-        "memoryScore": "Очки Памяти",
+        "memoryScore": "Очки памяти",
         "learned": "Выучено",
         "repeat": "Повторить",
         "addedToVocab": "Добавлено"
+    },
+    "wordActionMenu": {
+        "clearSelection": "Отмена",
+        "delete": "Удалить",
+        "createFlashcards": "Создать карточки",
+        "selectedCount": "Выбрано: {{count}}",
+        "deleteConfirm": "Вы уверены, что хотите удалить {{count}} элемент(ов)?",
+        "deleteSuccess": "Успешно удалено элемент: {{count}}!"
     }
 }

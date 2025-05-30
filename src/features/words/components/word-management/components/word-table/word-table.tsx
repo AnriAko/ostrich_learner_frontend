@@ -1,19 +1,22 @@
-import "./word-table.style.css";
-import { WordDto } from "../../../dto/word.dto";
-import { WordFilterDto } from "../dto/word-filter.dto";
+// word-table.tsx
+import "./components/word-table.style.css";
+import { WordDto } from "../../../../dto/word.dto";
+import { WordFilterDto } from "../../dto/word-filter.dto";
 import { useTranslation } from "react-i18next";
-import { Theme } from "../../../../user-config/types/theme";
-import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
-import { WordTableHeader } from "./word-table-header";
-import { WordTableBody } from "./word-table-body";
-import { getWordTableHeaders } from "./word-table-header.config";
-import { useEffect, useState } from "react";
+import { Theme } from "../../../../../user-config/types/theme";
+import { useTheme } from "../../../../../../shared/context/theme-context/use-theme";
+import { WordTableHeader } from "./components/word-table-header";
+import { WordTableBody } from "./components/word-table-body";
+import { getWordTableHeaders } from "./components/word-table-header.config";
+import { useEffect } from "react";
 
 interface Props {
     words: WordDto[];
     sortBy?: WordFilterDto["sortBy"];
     sortOrder?: WordFilterDto["sortOrder"];
     onSortChange: (field: WordFilterDto["sortBy"]) => void;
+    selectedIds: string[];
+    onSelectionChange: (ids: string[]) => void;
 }
 
 export const WordTable = ({
@@ -21,34 +24,34 @@ export const WordTable = ({
     sortBy,
     sortOrder,
     onSortChange,
+    selectedIds,
+    onSelectionChange,
 }: Props) => {
     const { t } = useTranslation();
     const { theme } = useTheme();
     const headers = getWordTableHeaders(t);
 
-    const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
     useEffect(() => {
-        setSelectedIds([]);
-    }, [words]);
+        onSelectionChange([]);
+    }, [words, onSelectionChange]);
 
     const allSelected =
         words.length > 0 &&
         words.every((w) => selectedIds.includes(String(w.id)));
 
     const toggleSelectAll = () => {
-        if (allSelected) {
-            setSelectedIds([]);
-        } else {
-            setSelectedIds(words.map((w) => String(w.id)));
-        }
+        if (allSelected) onSelectionChange([]);
+        else onSelectionChange(words.map((w) => String(w.id)));
     };
 
     const toggleWordSelection = (id: string) => {
-        setSelectedIds((prev) =>
-            prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
-        );
+        if (selectedIds.includes(id)) {
+            onSelectionChange(selectedIds.filter((i) => i !== id));
+        } else {
+            onSelectionChange([...selectedIds, id]);
+        }
     };
+
     const tableClass =
         "text-xs border-collapse whitespace-nowrap " +
         (theme === Theme.dark
