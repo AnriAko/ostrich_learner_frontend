@@ -9,6 +9,7 @@ import { useTheme } from "../../context/theme-context/use-theme";
 import ToggleThemeIconButton from "./user-profile-menu/toggle-theme-icon-button";
 import { useTranslation } from "react-i18next";
 import { Menu } from "lucide-react";
+import Logo from "../../../assets/icons/Logo 256x256.svg";
 
 const Header = ({
     toggleSidebar,
@@ -51,8 +52,16 @@ const Header = ({
                         to={user ? "/dashboard" : ""}
                         className={`font-[900] text-[22px] flex flex-col leading-tight ml-3 ${textColor}`}
                     >
-                        <span className="whitespace-nowrap">
-                            {user ? "OL" : "Ostrich Learner"}
+                        <span className="whitespace-nowrap flex items-center">
+                            {user ? (
+                                <img
+                                    src={Logo}
+                                    alt="Logo"
+                                    className="w-10 h-9"
+                                />
+                            ) : (
+                                "Ostrich Learner"
+                            )}
                         </span>
                     </Link>
                 </div>

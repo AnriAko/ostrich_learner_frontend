@@ -1,3 +1,4 @@
+// word-action-menu.config.ts
 import { TFunction } from "i18next";
 import { Ban, PencilLine, Trash2, Layers } from "lucide-react";
 
@@ -7,7 +8,7 @@ interface WordActionButtonsParams {
     onClearSelection: () => void;
     onDeleteSelected?: (ids: string[]) => void;
     onEditSelected?: (ids: string[]) => void;
-    onCreateFlashcards?: (ids: string[]) => void;
+    onStartFlashcards?: (ids: string[]) => void;
 }
 
 interface WordActionButton {
@@ -23,16 +24,18 @@ export const getWordActionButtons = ({
     onClearSelection,
     onDeleteSelected,
     onEditSelected,
-    onCreateFlashcards,
+    onStartFlashcards,
 }: WordActionButtonsParams): WordActionButton[] => {
-    const buttons: WordActionButton[] = [
-        {
-            label: t("wordActionMenu.clearSelection"),
-            className: "btn btn-secondary",
-            onClick: onClearSelection,
-            icon: Ban,
-        },
-    ];
+    const buttons: WordActionButton[] = [];
+
+    if (onStartFlashcards) {
+        buttons.push({
+            label: t("wordActionMenu.createFlashcards"),
+            className: "btn btn-success",
+            onClick: () => onStartFlashcards(selectedIds),
+            icon: Layers,
+        });
+    }
 
     if (onEditSelected) {
         buttons.push({
@@ -42,6 +45,12 @@ export const getWordActionButtons = ({
             icon: PencilLine,
         });
     }
+    buttons.push({
+        label: t("wordActionMenu.clearSelection"),
+        className: "btn btn-secondary",
+        onClick: onClearSelection,
+        icon: Ban,
+    });
 
     if (onDeleteSelected) {
         buttons.push({
@@ -49,15 +58,6 @@ export const getWordActionButtons = ({
             className: "btn btn-danger",
             onClick: () => onDeleteSelected(selectedIds),
             icon: Trash2,
-        });
-    }
-
-    if (onCreateFlashcards) {
-        buttons.push({
-            label: t("wordActionMenu.createFlashcards"),
-            className: "btn btn-success",
-            onClick: () => onCreateFlashcards(selectedIds),
-            icon: Layers,
         });
     }
 

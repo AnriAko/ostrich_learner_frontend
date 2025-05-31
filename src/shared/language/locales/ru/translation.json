@@ -77,9 +77,26 @@
     "wordActionMenu": {
         "clearSelection": "Отмена",
         "delete": "Удалить",
-        "createFlashcards": "Создать карточки",
+        "createFlashcards": "Создать Flashcards",
         "selectedCount": "Выбрано: {{count}}",
         "deleteConfirm": "Вы уверены, что хотите удалить {{count}} элемент(ов)?",
         "deleteSuccess": "Успешно удалено элемент: {{count}}!"
+    },
+    "flashcards": {
+        "counterWithLearned": "Выучено {{learned}} из {{total}}",
+        "allLearned": "Все слова выучены!",
+        "close": "Закрыть",
+        "remembered": "Выучено",
+        "skip": "Пропустить",
+        "shuffle": "Перемешать",
+        "previous": "Предыдущее",
+        "next": "Следующее",
+        "studyWords": "Изучение слов",
+        "noWordsPassed": "Слова не были переданы для тренировки карточками.",
+        "chooseWords": "Выбрать слова для обучения",
+        "studyNewWords": "Выучить новые",
+        "repeatOldWords": "Повторить старые",
+        "loading": "Загрузка...",
+        "selectNumberOfWords": "Выберите количество слов"
     }
 }

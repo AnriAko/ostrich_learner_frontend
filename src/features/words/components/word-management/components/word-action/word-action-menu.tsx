@@ -8,7 +8,7 @@ interface WordActionMenuProps {
     selectedIds: string[];
     onClearSelection: () => void;
     onEditSelected?: (ids: string[]) => void;
-    onCreateFlashcards?: (ids: string[]) => void;
+    onStartFlashcards?: () => void; // ✅ Новый пропс
     refetch?: () => void;
 }
 
@@ -16,7 +16,7 @@ export const WordActionMenu: React.FC<WordActionMenuProps> = ({
     selectedIds,
     onClearSelection,
     onEditSelected,
-    onCreateFlashcards,
+    onStartFlashcards, // ✅ Принимаем
     refetch,
 }) => {
     const { t } = useTranslation();
@@ -36,7 +36,7 @@ export const WordActionMenu: React.FC<WordActionMenuProps> = ({
         onClearSelection,
         onDeleteSelected: deleteWords,
         onEditSelected,
-        onCreateFlashcards,
+        onStartFlashcards,
     });
 
     const themeClasses = isDark
@@ -60,7 +60,7 @@ export const WordActionMenu: React.FC<WordActionMenuProps> = ({
                     <button
                         key={idx}
                         onClick={onClick}
-                        className={`h-5 px-2 text-xs rounded font-medium transition leading-none flex items-center gap-1 ${themeClasses.button}`}
+                        className={`h-5 px-2 text-xs rounded font-medium transition leading-none flex items-center gap-1 cursor-pointer ${themeClasses.button}`}
                     >
                         <Icon size={14} />
                         {label}

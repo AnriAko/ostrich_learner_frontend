@@ -82,5 +82,22 @@
         "selectedCount": "Selected: {{count}} ",
         "deleteConfirm": "Are you sure you wanna delete {{count}} element(s)?",
         "deleteSuccess": "{{count}} word(s) deleted successfully!"
+    },
+    "flashcards": {
+        "counterWithLearned": "Learned {{learned}} of {{total}}",
+        "allLearned": "All words learned!",
+        "close": "Close",
+        "remembered": "Remembered",
+        "skip": "Skip",
+        "shuffle": "Shuffle",
+        "previous": "Previous",
+        "next": "Next",
+        "studyWords": "Study Words",
+        "noWordsPassed": "No words were passed to start the flashcard training.",
+        "chooseWords": "Choose words for training",
+        "studyNewWords": "Study new words",
+        "repeatOldWords": "Repeat old words",
+        "loading": "Loading...",
+        "selectNumberOfWords": "Select number of words"
     }
 }

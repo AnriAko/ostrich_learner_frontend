@@ -78,9 +78,26 @@
     "wordActionMenu": {
         "clearSelection": "გაუქმება",
         "delete": "წაშლა",
-        "createFlashcards": "Create flashcards",
+        "createFlashcards": "Flashcards-ის შექმნა",
         "selectedCount": "ამორჩეულია: {{count}} ",
         "deleteConfirm": "დარწმუნებული ხართ, რომ გსურთ წაშალოთ {{count}} ელემენტი(ები)?",
         "deleteSuccess": "{{count}} ელემენტი წარმატებით წაიშალა!"
+    },
+    "flashcards": {
+        "counterWithLearned": "{{learned}} იცი {{total}} -დან",
+        "allLearned": "ყველა flashcard იცი!",
+        "close": "დახურვა",
+        "remembered": "ვიცი",
+        "skip": "გამოტოვება",
+        "shuffle": "შერევა",
+        "previous": "წინა",
+        "next": "შემდეგი",
+        "studyWords": "სიტყვების სწავლა",
+        "noWordsPassed": "სიტყვები არ იყო გადაცემული ბარათების ვარჯიშისთვის.",
+        "chooseWords": "აირჩიე სიტყვები სწავლისთვის",
+        "studyNewWords": "ახალი სიტყვების სწავლა",
+        "repeatOldWords": "ძველი სიტყვების გამეორება",
+        "loading": "ჩატვირთვა...",
+        "selectNumberOfWords": "აირჩიეთ სიტყვების რაოდენობა"
     }
 }

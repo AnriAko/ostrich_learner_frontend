@@ -1,4 +1,4 @@
-import { WordFilterDto } from "../dto/word-filter.dto";
+import { WordFilterDto } from "../../../dto/word-filter.dto";
 
 export interface TableHeader {
     field: WordFilterDto["sortBy"];

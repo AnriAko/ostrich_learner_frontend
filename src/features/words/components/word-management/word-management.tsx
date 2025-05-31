@@ -6,6 +6,7 @@ import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../user-config/types/theme";
 import { useWordFilters } from "./hooks/useWordFilters";
 import { WordManagementHeader } from "./components/word-management-header";
+import { useStartFlashcards } from "../study-words/use-flashcards-start";
 
 const WordManagement: React.FC = () => {
     const { t } = useTranslation();
@@ -20,15 +21,15 @@ const WordManagement: React.FC = () => {
         refetch();
     }, [filters, refetch]);
 
-    const [cachedData, setCachedData] = React.useState<typeof data | null>(
-        null
-    );
+    const [cachedData, setCachedData] = useState<typeof data | null>(null);
     useEffect(() => {
         if (data) setCachedData(data);
     }, [data]);
 
     const isInitialLoad = isLoading && !cachedData;
     const containerBg = theme === Theme.dark ? "bg-gray-900" : "bg-gray-200";
+
+    const startFlashcards = useStartFlashcards(cachedData!, selectedIds);
 
     return (
         <div className={`p-4 ${containerBg} h-[80vh] flex flex-col`}>
@@ -42,6 +43,7 @@ const WordManagement: React.FC = () => {
                 onClearSelection={() => setSelectedIds([])}
                 onPageChange={(val) => updateFilterField("page", val)}
                 onPageSizeChange={(val) => updateFilterField("pageSize", val)}
+                onStartFlashcards={startFlashcards}
             />
 
             <div className="flex-1 overflow-y-auto min-h-0 word-table-scroll">

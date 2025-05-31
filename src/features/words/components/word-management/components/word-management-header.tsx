@@ -1,4 +1,3 @@
-// WordManagementHeader.tsx
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { PaginationControls } from "./pagination-control";
@@ -15,6 +14,7 @@ interface Props {
     onClearSelection: () => void;
     onPageChange: (val: number) => void;
     onPageSizeChange: (val: number) => void;
+    onStartFlashcards: () => void;
 }
 
 export const WordManagementHeader: React.FC<Props> = ({
@@ -27,6 +27,7 @@ export const WordManagementHeader: React.FC<Props> = ({
     onClearSelection,
     onPageChange,
     onPageSizeChange,
+    onStartFlashcards,
 }) => {
     const { t } = useTranslation();
     const titleColor =
@@ -49,6 +50,7 @@ export const WordManagementHeader: React.FC<Props> = ({
                 <WordActionMenu
                     selectedIds={selectedIds}
                     onClearSelection={onClearSelection}
+                    onStartFlashcards={onStartFlashcards}
                 />
             </div>
         </>

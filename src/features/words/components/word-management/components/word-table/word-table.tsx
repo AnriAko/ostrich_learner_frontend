@@ -1,4 +1,3 @@
-// word-table.tsx
 import "./components/word-table.style.css";
 import { WordDto } from "../../../../dto/word.dto";
 import { WordFilterDto } from "../../dto/word-filter.dto";
@@ -9,6 +8,9 @@ import { WordTableHeader } from "./components/word-table-header";
 import { WordTableBody } from "./components/word-table-body";
 import { getWordTableHeaders } from "./components/word-table-header.config";
 import { useEffect } from "react";
+
+import { format } from "date-fns";
+import { enUS, ru, ka } from "date-fns/locale";
 
 interface Props {
     words: WordDto[];
@@ -27,7 +29,7 @@ export const WordTable = ({
     selectedIds,
     onSelectionChange,
 }: Props) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { theme } = useTheme();
     const headers = getWordTableHeaders(t);
 
@@ -58,29 +60,46 @@ export const WordTable = ({
             ? "bg-gray-900 text-gray-200 border border-gray-600"
             : "bg-white text-gray-900 border border-gray-300");
 
+    // Выбор локали для date-fns
+    const getLocale = () => {
+        switch (i18n.language) {
+            case "ru":
+                return ru;
+            case "ka":
+                return ka;
+            case "en":
+            default:
+                return enUS;
+        }
+    };
+
+    const locale = getLocale();
+    const capitalizeMonthName = (str: string): string => {
+        const parts = str.split(" ");
+        if (parts.length >= 2) {
+            parts[1] = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
+        }
+        return parts.join(" ");
+    };
+
     const formatDate = (dateStr: string) => {
         const date = new Date(dateStr);
         const now = new Date();
-        const options: Intl.DateTimeFormatOptions = {
-            day: "2-digit",
-            month: "short",
-        };
-        if (date.getFullYear() !== now.getFullYear()) options.year = "numeric";
-        return date.toLocaleDateString(undefined, options);
+        const formatStr =
+            date.getFullYear() === now.getFullYear() ? "dd MMM" : "dd MMM yyyy";
+        const result = format(date, formatStr, { locale });
+        return capitalizeMonthName(result);
     };
 
     const formatDateTime = (dateStr: string) => {
         const date = new Date(dateStr);
         const now = new Date();
-        const options: Intl.DateTimeFormatOptions = {
-            day: "2-digit",
-            month: "short",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-        };
-        if (date.getFullYear() !== now.getFullYear()) options.year = "numeric";
-        return date.toLocaleString(undefined, options);
+        const formatStr =
+            date.getFullYear() === now.getFullYear()
+                ? "dd MMM HH:mm"
+                : "dd MMM yyyy HH:mm";
+        const result = format(date, formatStr, { locale });
+        return capitalizeMonthName(result);
     };
 
     return (
