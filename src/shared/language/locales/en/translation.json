@@ -1,7 +1,8 @@
 {
     "common": {
         "please_log_in": "Please log in",
-        "welcome_user": "Welcome, {{nickname}}!"
+        "welcome_user": "Welcome, {{nickname}}!",
+        "or": "Or"
     },
     "auth": {
         "title": "Log in",
@@ -98,6 +99,8 @@
         "studyNewWords": "Study new words",
         "repeatOldWords": "Repeat old words",
         "loading": "Loading...",
-        "selectNumberOfWords": "Select number of words"
+        "selectNumberOfWords": "Select number of words",
+        "all": "All",
+        "continue": "Continue studying"
     }
 }

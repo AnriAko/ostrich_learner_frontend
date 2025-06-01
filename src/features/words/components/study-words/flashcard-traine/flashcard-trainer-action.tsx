@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Check, X, Shuffle } from "lucide-react";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
-import { Theme } from "../../../user-config/types/theme";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { Theme } from "../../../../user-config/types/theme";
 import { useTranslation } from "react-i18next";
 
 interface FlashcardButtonsProps {

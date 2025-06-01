@@ -1,7 +1,8 @@
 {
     "common": {
         "please_log_in": "Пожалуйста, войдите",
-        "welcome_user": "Добро пожаловать, {{nickname}}!"
+        "welcome_user": "Добро пожаловать, {{nickname}}!",
+        "or": "или"
     },
     "auth": {
         "title": "Вход",
@@ -93,10 +94,12 @@
         "next": "Следующее",
         "studyWords": "Изучение слов",
         "noWordsPassed": "Слова не были переданы для тренировки карточками.",
-        "chooseWords": "Выбрать слова для обучения",
+        "chooseWords": "Выбрать вручную",
         "studyNewWords": "Выучить новые",
         "repeatOldWords": "Повторить старые",
         "loading": "Загрузка...",
-        "selectNumberOfWords": "Выберите количество слов"
+        "selectNumberOfWords": "Выберите количество слов",
+        "all": "Всё",
+        "continue": "Продолжить обучение"
     }
 }
