@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
-import { WordDto } from "../../../dto/word.dto";
+import { WordDto } from "../../../../dto/word.dto";
 import { useNavigate } from "react-router-dom";
 
 export interface CardState {
@@ -127,10 +127,7 @@ export function fromSnapshotToProgress(
     };
 }
 
-export const useFlashcardsButtons = (
-    words: WordDto[], // ← теперь используем WordDto напрямую
-    limit: number = 50
-) => {
+export const useFlashcardsButtons = (words: WordDto[], limit: number = 50) => {
     const initialCards: CardState[] = useMemo(() => {
         const limitedWords = words.slice(0, limit);
         return limitedWords.map((w) => ({

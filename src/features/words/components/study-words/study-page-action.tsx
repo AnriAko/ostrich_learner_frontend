@@ -12,6 +12,7 @@ interface FlashcardActionsProps {
     onRepeatOld: (limit?: number) => void;
     onChooseWords: () => void;
     onContinue?: () => void;
+    onTest: (words: WordDto[]) => void;
 }
 
 export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
@@ -22,6 +23,7 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
     onRepeatOld,
     onChooseWords,
     onContinue,
+    onTest,
 }) => {
     const { t } = useTranslation();
     const [limit, setLimit] = useState(-1);
@@ -50,32 +52,74 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
                 )}
 
                 {availableWords.length > 0 && (
-                    <ActionButton
-                        count={availableWords.length}
-                        onClick={() =>
-                            onStudyNew(getLimitedAmount(availableWords))
-                        }
-                        label={t("flashcards.studyNewWords")}
-                        bgClass={
-                            isDark
-                                ? "bg-green-700 hover:bg-green-800"
-                                : "bg-green-500 hover:bg-green-600"
-                        }
-                    />
+                    <>
+                        <ActionButton
+                            count={availableWords.length}
+                            onClick={() => {
+                                localStorage.removeItem("flashcardsSession");
+                                onStudyNew(getLimitedAmount(availableWords));
+                            }}
+                            label={t("flashcards.studyNewWords")}
+                            bgClass={
+                                isDark
+                                    ? "bg-green-700 hover:bg-green-800"
+                                    : "bg-green-500 hover:bg-green-600"
+                            }
+                        />
+                        <ActionButton
+                            count={availableWords.length}
+                            onClick={() => {
+                                localStorage.removeItem("flashcardsSession");
+
+                                onTest(
+                                    availableWords.slice(
+                                        0,
+                                        getLimitedAmount(availableWords)
+                                    )
+                                );
+                            }}
+                            label={t("flashcards.testNewWords")}
+                            bgClass={
+                                isDark
+                                    ? "bg-purple-700 hover:bg-purple-800"
+                                    : "bg-purple-500 hover:bg-purple-600"
+                            }
+                        />
+                    </>
                 )}
+
                 {repetitionWords.length > 0 && (
-                    <ActionButton
-                        count={repetitionWords.length}
-                        onClick={() =>
-                            onRepeatOld(getLimitedAmount(repetitionWords))
-                        }
-                        label={t("flashcards.repeatOldWords")}
-                        bgClass={
-                            isDark
-                                ? "bg-yellow-700 hover:bg-yellow-700"
-                                : "bg-yellow-300 hover:bg-yellow-600"
-                        }
-                    />
+                    <>
+                        <ActionButton
+                            count={repetitionWords.length}
+                            onClick={() =>
+                                onRepeatOld(getLimitedAmount(repetitionWords))
+                            }
+                            label={t("flashcards.repeatOldWords")}
+                            bgClass={
+                                isDark
+                                    ? "bg-yellow-700 hover:bg-yellow-700"
+                                    : "bg-yellow-300 hover:bg-yellow-600"
+                            }
+                        />
+                        <ActionButton
+                            count={repetitionWords.length}
+                            onClick={() =>
+                                onTest(
+                                    repetitionWords.slice(
+                                        0,
+                                        getLimitedAmount(repetitionWords)
+                                    )
+                                )
+                            }
+                            label={t("flashcards.testRepeatWords")}
+                            bgClass={
+                                isDark
+                                    ? "bg-indigo-700 hover:bg-indigo-800"
+                                    : "bg-indigo-500 hover:bg-indigo-600"
+                            }
+                        />
+                    </>
                 )}
 
                 <span

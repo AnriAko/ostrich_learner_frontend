@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
-import { FlashcardButtons } from "./flashcard-trainer-action";
+import { FlashcardButtons } from "./flashcard-action";
 import {
     useFlashcardsButtons,
     FlashcardStateSnapshot,
     fromProgressToSnapshot,
     fromSnapshotToProgress,
-} from "../hooks/use-flashcards";
-import { FlashcardCounter } from "./flashcard-trainer-counter";
+} from "./hooks/use-flashcards";
+import { FlashcardCounter } from "./flashcard-counter";
 
 import {
     loadFlashcardProgress,
     saveFlashcardProgress,
     clearFlashcardProgress,
-} from "../localStorage/local-storage-flashcards";
+} from "./localStorage/local-storage-flashcards";
 import { WordDto } from "../../../dto/word.dto";
 
 interface FlashcardTrainerProps {
@@ -90,6 +90,12 @@ export const FlashcardTrainer: React.FC<FlashcardTrainerProps> = ({
         ? "bg-gray-900 text-gray-200"
         : "bg-gray-200 text-gray-800";
 
+    useEffect(() => {
+        if (allLearned) {
+            clearFlashcardProgress();
+        }
+    }, [allLearned]);
+
     if (allLearned) {
         return (
             <div className="p-6 text-center">
@@ -98,7 +104,6 @@ export const FlashcardTrainer: React.FC<FlashcardTrainerProps> = ({
                 </h2>
                 <button
                     onClick={() => {
-                        clearFlashcardProgress();
                         onClose();
                     }}
                     className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
@@ -116,6 +121,18 @@ export const FlashcardTrainer: React.FC<FlashcardTrainerProps> = ({
             }`}
             style={{ alignSelf: "flex-start" }}
         >
+            <button
+                onClick={() => {
+                    const snapshot = getStateSnapshot();
+                    const progress = fromSnapshotToProgress(snapshot);
+                    saveFlashcardProgress(progress);
+                    onClose();
+                }}
+                className="mb-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
+            >
+                ←
+            </button>
+
             <FlashcardCounter learned={learnedCount} total={totalCount} />
 
             <div className="perspective w-full h-52 mb-4">

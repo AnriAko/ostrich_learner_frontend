@@ -6,7 +6,7 @@ import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../user-config/types/theme";
 import { useWordFilters } from "./hooks/useWordFilters";
 import { WordManagementHeader } from "./components/word-management-header";
-import { useStartFlashcards } from "../study-words/hooks/use-flashcards";
+import { useStartFlashcards } from "../study-words/flashcards/hooks/use-flashcards";
 
 const WordManagement: React.FC = () => {
     const { t } = useTranslation();

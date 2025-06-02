@@ -101,6 +101,7 @@
         "loading": "Loading...",
         "selectNumberOfWords": "Select number of words",
         "all": "All",
-        "continue": "Continue studying"
+        "continue": "Continue studying",
+        "testNewWords": "Start new words test"
     }
 }

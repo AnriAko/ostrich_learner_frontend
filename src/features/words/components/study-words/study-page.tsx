@@ -1,6 +1,8 @@
+// src/features/words/components/study-words/study-page.tsx
+
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FlashcardTrainer } from "./flashcard-traine/flashcard-trainer";
+import { FlashcardTrainer } from "./flashcards/flashcard-page";
 import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../user-config/types/theme";
 import { useTranslation } from "react-i18next";
@@ -10,11 +12,19 @@ import {
     useGetWordsForRepetition,
 } from "../../hooks/use-word";
 import { WordDto } from "../../dto/word.dto";
-import { FlashcardActions } from "./flashcard-page-action";
-import { loadFlashcardProgress } from "./localStorage/local-storage-flashcards";
-import { useStartFlashcards } from "./hooks/use-flashcards";
+import { FlashcardActions } from "./study-page-action";
+import { loadFlashcardProgress } from "./flashcards/localStorage/local-storage-flashcards";
+import "./flashcard-style.css";
+import TestWordsPage from "./test-words/test-words-page";
 
-export const FlashcardPage: React.FC = () => {
+type StudyMode = "flashcard" | "test";
+
+interface StudyState {
+    words: WordDto[];
+    mode: StudyMode;
+}
+
+export const StudyPage: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { theme } = useTheme();
@@ -22,7 +32,9 @@ export const FlashcardPage: React.FC = () => {
     const { user } = useUser();
     const isDark = theme === Theme.dark;
 
-    const wordsFromLocation = location.state?.words as WordDto[] | undefined;
+    const state = location.state as StudyState | undefined;
+    const mode = state?.mode;
+    const wordsFromLocation = state?.words;
 
     const [continueWords, setContinueWords] = useState<WordDto[] | null>(null);
 
@@ -33,14 +45,11 @@ export const FlashcardPage: React.FC = () => {
 
     const isInitialLoading = isLoadingAvailable || isLoadingRepetition;
 
-    const startWithAvailable = useStartFlashcards(
-        { data: availableWords },
-        availableWords.map((w) => w.id.toString())
-    );
-    const startWithRepetition = useStartFlashcards(
-        { data: repetitionWords },
-        repetitionWords.map((w) => w.id.toString())
-    );
+    const navigateWithWords = (words: WordDto[], mode: StudyMode) => {
+        navigate("/dashboard/study", {
+            state: { words, mode },
+        });
+    };
 
     useEffect(() => {
         const saved = loadFlashcardProgress();
@@ -54,16 +63,10 @@ export const FlashcardPage: React.FC = () => {
                 vocabularyName: "",
             }));
             setContinueWords(filled);
+        } else {
+            setContinueWords(null);
         }
-    }, []);
-
-    const handleContinue = () => {
-        if (continueWords) {
-            navigate("/dashboard/study", {
-                state: { words: continueWords },
-            });
-        }
-    };
+    }, [location]);
 
     return (
         <div
@@ -80,10 +83,19 @@ export const FlashcardPage: React.FC = () => {
             </h1>
 
             {wordsFromLocation?.length ? (
-                <FlashcardTrainer
-                    words={wordsFromLocation}
-                    onClose={() => navigate("/dashboard/manage")}
-                />
+                mode === "flashcard" ? (
+                    <FlashcardTrainer
+                        words={wordsFromLocation}
+                        onClose={() => navigate(-1)}
+                    />
+                ) : mode === "test" ? (
+                    <TestWordsPage
+                        words={wordsFromLocation}
+                        onClose={() => navigate(-1)}
+                    />
+                ) : (
+                    <p className="text-red-500">Unknown mode</p>
+                )
             ) : isInitialLoading ? (
                 <p className="text-gray-800 dark:text-gray-200">
                     {t("flashcards.loading")}
@@ -93,18 +105,24 @@ export const FlashcardPage: React.FC = () => {
                     isDark={isDark}
                     availableWords={availableWords}
                     repetitionWords={repetitionWords}
-                    onStudyNew={startWithAvailable}
-                    onRepeatOld={startWithRepetition}
+                    onStudyNew={() =>
+                        navigateWithWords(availableWords, "flashcard")
+                    }
+                    onRepeatOld={() =>
+                        navigateWithWords(repetitionWords, "flashcard")
+                    }
                     onChooseWords={() => navigate("/dashboard/manage")}
                     onContinue={
-                        continueWords && !wordsFromLocation
-                            ? handleContinue
+                        continueWords
+                            ? () =>
+                                  navigateWithWords(continueWords, "flashcard")
                             : undefined
                     }
+                    onTest={(words) => navigateWithWords(words, "test")}
                 />
             )}
         </div>
     );
 };
 
-export default FlashcardPage;
+export default StudyPage;
