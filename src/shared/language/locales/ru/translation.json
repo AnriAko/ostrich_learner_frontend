@@ -79,9 +79,11 @@
         "clearSelection": "Отмена",
         "delete": "Удалить",
         "createFlashcards": "Создать Flashcards",
+        "createTests": "Создать тесты",
+
         "selectedCount": "Выбрано: {{count}}",
         "deleteConfirm": "Вы уверены, что хотите удалить {{count}} элемент(ов)?",
-        "deleteSuccess": "Успешно удалено элемент: {{count}}!"
+        "deleteSuccess": "Успешно удалено элементов: {{count}}!"
     },
     "flashcards": {
         "counterWithLearned": "Выучено {{learned}} из {{total}}",
@@ -102,5 +104,19 @@
         "all": "Всё",
         "continue": "Продолжить обучение",
         "testNewWords": "Начать тест новых слов"
+    },
+    "tests": {
+        "Type your answer": "Введите ваш ответ",
+        "Progress": "Прогресс",
+        "Correct": "Правильно",
+        "Correct!": "Верно!",
+        "Incorrect!": "Неверно!",
+        "Correct answer": "Правильный ответ",
+        "All words completed!": "Все слова пройдены!",
+        "Finish Test": "Завершить тест",
+        "Testing": "Тестирование",
+        "Continue": "Продолжить",
+        "Check": "Проверить",
+        "Word": "Слово"
     }
 }

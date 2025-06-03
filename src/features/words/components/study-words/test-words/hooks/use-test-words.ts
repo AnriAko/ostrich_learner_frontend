@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { WordDto } from "../../../../dto/word.dto";
+import { useNavigate } from "react-router-dom";
 
 export interface TestCard {
     id: number;
@@ -16,6 +17,27 @@ export enum TestPhase {
     Completed = "Completed",
 }
 
+export const useStartTests = (
+    cachedData: { data: WordDto[] } | null,
+    selectedIds: string[]
+) => {
+    const navigate = useNavigate();
+
+    const start = useCallback(() => {
+        if (!cachedData) return;
+
+        const selectedWords = cachedData.data.filter((word) =>
+            selectedIds.includes(word.id.toString())
+        );
+
+        navigate("/dashboard/study", {
+            state: { words: selectedWords, mode: "test" },
+        });
+    }, [cachedData, selectedIds, navigate]);
+
+    return start;
+};
+
 export const useWordTest = (words: WordDto[], limit: number = 20) => {
     const [phase, setPhase] = useState<TestPhase>(
         TestPhase.OriginToTranslation
@@ -28,7 +50,6 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
     const [cardsPhase2, setCardsPhase2] = useState<TestCard[]>([]);
     const [errors, setErrors] = useState<TestCard[]>([]);
 
-    // 💡 Новый стейт для фиксированного общего количества карточек
     const [totalCards, setTotalCards] = useState(0);
 
     const shuffleArray = useCallback((arr: TestCard[]) => {
@@ -56,6 +77,7 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
             translation: w.origin,
             vocabularyName: w.vocabularyName ?? "unknown",
         }));
+        console.log(words);
 
         setCardsPhase1(shuffleArray(phase1Cards));
         setCardsPhase2(shuffleArray(phase2Cards));
@@ -65,8 +87,7 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
         setCorrectAnswers(0);
         setErrors([]);
 
-        // 💡 Устанавливаем фиксированное общее количество карточек
-        setTotalCards(limitedWords.length * 2); // так как фазы две
+        setTotalCards(limitedWords.length * 2);
     }, [words, limit, shuffleArray]);
 
     useEffect(() => {
@@ -75,11 +96,37 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
 
     const currentCards =
         phase === TestPhase.OriginToTranslation ? cardsPhase1 : cardsPhase2;
-
     const currentCard = currentCards[currentIndex];
+
+    let originLang = "";
+    let targetLang = "";
+
+    if (currentCard?.vocabularyName) {
+        const parts = currentCard.vocabularyName.split("-");
+        if (phase === TestPhase.OriginToTranslation) {
+            originLang = parts[0] ?? "";
+            targetLang = parts[1] ?? "";
+        } else {
+            originLang = parts[1] ?? "";
+            targetLang = parts[0] ?? "";
+        }
+    }
+
+    const addErrorCard = useCallback((card: TestCard) => {
+        setErrors((prev) => {
+            if (prev.find((c) => c.id === card.id)) return prev;
+            return [...prev, { ...card }];
+        });
+    }, []);
+
+    const removeErrorCard = useCallback((card: TestCard) => {
+        setErrors((prev) => prev.filter((c) => c.id !== card.id));
+    }, []);
 
     const checkAnswer = useCallback(
         (answer: string) => {
+            if (!currentCard) return;
+
             const correctAnswer = currentCard.translation.trim().toLowerCase();
             const isCorrect = correctAnswer === answer.trim().toLowerCase();
 
@@ -98,13 +145,21 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
 
             if (isCorrect) {
                 setCorrectAnswers((prev) => prev + 1);
+                removeErrorCard(currentCard);
             } else {
-                setErrors((prev) => [...prev, currentCard]);
+                addErrorCard(currentCard);
             }
 
             setShowResult(true);
         },
-        [currentCard, currentIndex, currentCards, phase]
+        [
+            currentCard,
+            currentIndex,
+            currentCards,
+            phase,
+            addErrorCard,
+            removeErrorCard,
+        ]
     );
 
     const continueTest = useCallback(() => {
@@ -114,17 +169,14 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
             setCurrentIndex((prev) => prev + 1);
         } else {
             if (errors.length > 0) {
-                // Повторяем только ошибки
                 const shuffledErrors = shuffleArray(errors);
                 if (phase === TestPhase.OriginToTranslation) {
                     setCardsPhase1(shuffledErrors);
                 } else {
                     setCardsPhase2(shuffledErrors);
                 }
-                setErrors([]);
                 setCurrentIndex(0);
             } else {
-                // Переходим на следующую фазу или завершаем
                 if (phase === TestPhase.OriginToTranslation) {
                     setPhase(TestPhase.TranslationToOrigin);
                     setCurrentIndex(0);
@@ -142,6 +194,9 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
         checkAnswer,
         continueTest,
         correctAnswers,
-        total: totalCards, // ✅ возвращаем общее фиксированное количество слов
+        total: totalCards,
+        errors,
+        originLang,
+        targetLang,
     };
 };

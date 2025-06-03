@@ -80,6 +80,8 @@
         "clearSelection": "გაუქმება",
         "delete": "წაშლა",
         "createFlashcards": "Flashcards-ის შექმნა",
+        "createTests": "ტესტების შექმნა",
+
         "selectedCount": "ამორჩეულია: {{count}} ",
         "deleteConfirm": "დარწმუნებული ხართ, რომ გსურთ წაშალოთ {{count}} ელემენტი(ები)?",
         "deleteSuccess": "{{count}} ელემენტი წარმატებით წაიშალა!"
@@ -96,12 +98,27 @@
         "studyWords": "სიტყვების სწავლა",
         "noWordsPassed": "სიტყვები არ იყო გადაცემული ბარათების ვარჯიშისთვის.",
         "chooseWords": "სიტყვების არჩევა",
-        "studyNewWords": "ახალი სიტყვების სწავლა",
-        "repeatOldWords": "სიტყვების გამეორება",
+        "studyNewWords": "Flashcard-ით სწავლა",
+        "testRepeatWords": "გამეორებითი ტესტის დაწყვება",
+        "repeatOldWords": "ძველი სიტყვების გამეორება",
         "loading": "ჩატვირთვა...",
         "selectNumberOfWords": "აირჩიეთ სიტყვების რაოდენობა",
         "all": "ყველა",
         "continue": "სწავლის გაგრძელება",
-        "testNewWords": "ახალი სიტყვების ტესტის დაწყება"
+        "testNewWords": "ტესტის დაწყება"
+    },
+    "tests": {
+        "Type your answer": "შეიყვანეთ თქვენი პასუხი",
+        "Progress": "მიმდინარე პროგრესი",
+        "Correct": "სწორია",
+        "Correct!": "სწორია!",
+        "Incorrect!": "არასწორია!",
+        "Correct answer": "სწორი პასუხი",
+        "All words completed!": "ყველა სიტყვა დასრულდა!",
+        "Finish Test": "ტესტის დასრულება",
+        "Testing": "ტესტირება",
+        "Continue": "გაგრძელება",
+        "Check": "შემოწმება",
+        "Word": "სიტყვა"
     }
 }

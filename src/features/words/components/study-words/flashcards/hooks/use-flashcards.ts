@@ -54,7 +54,9 @@ export const useStartFlashcards = (
                 translation: word.translation,
             }));
 
-            navigate("/dashboard/study", { state: { words: formatted } });
+            navigate("/dashboard/study", {
+                state: { words: formatted, mode: "flashcard" },
+            });
         },
         [cachedData, selectedIds, navigate]
     );

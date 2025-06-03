@@ -43,6 +43,8 @@ export const StudyPage: React.FC = () => {
     const { data: repetitionWords = [], isLoading: isLoadingRepetition } =
         useGetWordsForRepetition(user?.userId ?? "");
 
+    console.log(availableWords);
+
     const isInitialLoading = isLoadingAvailable || isLoadingRepetition;
 
     const navigateWithWords = (words: WordDto[], mode: StudyMode) => {
@@ -69,11 +71,7 @@ export const StudyPage: React.FC = () => {
     }, [location]);
 
     return (
-        <div
-            className={`p-6 ${
-                isDark ? "bg-gray-900" : "bg-gray-200"
-            } min-h-100`}
-        >
+        <div className={`p-6 h-full ${isDark ? "bg-gray-900" : "bg-gray-200"}`}>
             <h1
                 className={`text-xl font-bold mb-6 ${
                     isDark ? "text-yellow-300" : "text-blue-600"

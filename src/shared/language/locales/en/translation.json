@@ -32,7 +32,7 @@
         "theme.dark": "Dark"
     },
     "sidebar": {
-        "study": "Study Words ",
+        "study": "Learn Words ",
         "addWords": "Add Words",
         "repeat": "Remind Words",
         "wordList": "Vocabulary",
@@ -80,6 +80,7 @@
         "delete": "Delete",
         "export": "Export",
         "createFlashcards": "Create flashcards",
+        "createTests": "Create tests",
         "selectedCount": "Selected: {{count}} ",
         "deleteConfirm": "Are you sure you wanna delete {{count}} element(s)?",
         "deleteSuccess": "{{count}} word(s) deleted successfully!"
@@ -93,15 +94,30 @@
         "shuffle": "Shuffle",
         "previous": "Previous",
         "next": "Next",
-        "studyWords": "Study Words",
+        "studyWords": "Learn words",
         "noWordsPassed": "No words were passed to start the flashcard training.",
-        "chooseWords": "Choose words for training",
-        "studyNewWords": "Study new words",
-        "repeatOldWords": "Repeat old words",
+        "chooseWords": "Choose for training manually",
+        "studyNewWords": "Study with flashcards",
+        "testRepeatWords": "Start repetition test",
+        "repeatOldWords": "Repeat old",
         "loading": "Loading...",
-        "selectNumberOfWords": "Select number of words",
+        "selectNumberOfWords": "Select the number of words",
         "all": "All",
         "continue": "Continue studying",
-        "testNewWords": "Start new words test"
+        "testNewWords": "Start test"
+    },
+    "tests": {
+        "Type your answer": "Type your answer",
+        "Progress": "Progress",
+        "Correct": "Correct",
+        "Correct!": "Correct!",
+        "Incorrect!": "Incorrect!",
+        "Correct answer": "Correct answer",
+        "All words completed!": "All words completed!",
+        "Finish Test": "Finish Test",
+        "Testing": "Testing",
+        "Continue": "Continue",
+        "Check": "Check",
+        "Word": "Word"
     }
 }

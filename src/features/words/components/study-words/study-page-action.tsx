@@ -8,8 +8,8 @@ interface FlashcardActionsProps {
     isDark: boolean;
     availableWords: WordDto[];
     repetitionWords: WordDto[];
-    onStudyNew: (limit?: number) => void;
-    onRepeatOld: (limit?: number) => void;
+    onStudyNew: (words: WordDto[]) => void;
+    onRepeatOld: (words: WordDto[]) => void;
     onChooseWords: () => void;
     onContinue?: () => void;
     onTest: (words: WordDto[]) => void;
@@ -28,8 +28,12 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
     const { t } = useTranslation();
     const [limit, setLimit] = useState(-1);
 
-    const getLimitedAmount = (words: WordDto[]) => {
-        return limit === -1 ? words.length : Math.min(limit, words.length);
+    const getLimitedAmount = (words: WordDto[]): WordDto[] => {
+        if (limit === -1 || words.length <= limit) {
+            return words;
+        }
+        const shuffled = [...words].sort(() => Math.random() - 0.5);
+        return shuffled.slice(0, limit);
     };
 
     return (
@@ -66,23 +70,44 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
                                     : "bg-green-500 hover:bg-green-600"
                             }
                         />
+
                         <ActionButton
                             count={availableWords.length}
                             onClick={() => {
                                 localStorage.removeItem("flashcardsSession");
-
-                                onTest(
-                                    availableWords.slice(
-                                        0,
-                                        getLimitedAmount(availableWords)
-                                    )
-                                );
+                                onTest(getLimitedAmount(availableWords));
                             }}
                             label={t("flashcards.testNewWords")}
                             bgClass={
                                 isDark
                                     ? "bg-purple-700 hover:bg-purple-800"
                                     : "bg-purple-500 hover:bg-purple-600"
+                            }
+                        />
+
+                        <ActionButton
+                            count={repetitionWords.length}
+                            onClick={() =>
+                                onRepeatOld(getLimitedAmount(repetitionWords))
+                            }
+                            label={t("flashcards.repeatOldWords")}
+                            bgClass={
+                                isDark
+                                    ? "bg-yellow-700 hover:bg-yellow-700"
+                                    : "bg-yellow-300 hover:bg-yellow-600"
+                            }
+                        />
+
+                        <ActionButton
+                            count={repetitionWords.length}
+                            onClick={() =>
+                                onTest(getLimitedAmount(repetitionWords))
+                            }
+                            label={t("flashcards.testRepeatWords")}
+                            bgClass={
+                                isDark
+                                    ? "bg-indigo-700 hover:bg-indigo-800"
+                                    : "bg-indigo-500 hover:bg-indigo-600"
                             }
                         />
                     </>
@@ -105,12 +130,7 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
                         <ActionButton
                             count={repetitionWords.length}
                             onClick={() =>
-                                onTest(
-                                    repetitionWords.slice(
-                                        0,
-                                        getLimitedAmount(repetitionWords)
-                                    )
-                                )
+                                onTest(getLimitedAmount(repetitionWords))
                             }
                             label={t("flashcards.testRepeatWords")}
                             bgClass={

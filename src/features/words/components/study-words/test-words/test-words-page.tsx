@@ -1,8 +1,13 @@
-// TestWordsPage.tsx
 import { useTranslation } from "react-i18next";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { WordDto } from "../../../dto/word.dto";
 import { TestPhase, useWordTest } from "./hooks/use-test-words";
+import ProgressBar from "./progress-bar";
+import WordCard from "./word-card";
+import AnswerInput from "./answer-input";
+import ResultMessage from "./result-message";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { Theme } from "../../../../user-config/types/theme";
 
 interface TestWordsPageProps {
     words: WordDto[];
@@ -11,6 +16,9 @@ interface TestWordsPageProps {
 
 export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
     const { t } = useTranslation();
+    const { theme } = useTheme();
+    const isDark = theme === Theme.dark;
+
     const {
         phase,
         currentCard,
@@ -19,29 +27,16 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
         continueTest,
         correctAnswers,
         total,
+        errors,
+        originLang,
+        targetLang,
     } = useWordTest(words);
 
     const [userAnswer, setUserAnswer] = useState("");
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    // Фокус при загрузке и после continue
-    useEffect(() => {
-        inputRef.current?.focus();
-    }, [currentCard]);
 
     const handleCheckAnswer = () => {
         if (!userAnswer.trim()) return;
         checkAnswer(userAnswer);
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            if (showResult) {
-                handleContinue();
-            } else {
-                handleCheckAnswer();
-            }
-        }
     };
 
     const handleContinue = () => {
@@ -49,91 +44,91 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
         setUserAnswer("");
     };
 
-    if (phase === TestPhase.Completed || !currentCard) {
+    if (!currentCard && phase === TestPhase.Completed) {
         return (
             <div className="p-6 text-center">
-                <h2 className="text-2xl font-bold text-green-600 mb-4">
-                    🎉 {t("All words completed!")}
+                <h2
+                    className={`text-2xl font-bold mb-4 ${
+                        isDark ? "text-green-400" : "text-green-600"
+                    }`}
+                >
+                    🎉 {t("tests.All words completed!")}
                 </h2>
                 <button
                     onClick={onClose}
                     className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
-                    {t("Close")}
+                    {t("tests.Finish Test")}
                 </button>
             </div>
         );
     }
 
-    const progressWidth = (correctAnswers / total) * 100;
-
     return (
-        <div className="p-4 max-w-lg mx-auto">
-            <h2 className="text-xl font-bold mb-4">
-                {t("Test phase")}: {t("Testing")}
-            </h2>
-
-            <div className="mb-4">
-                <div className="flex justify-between text-sm font-medium mb-1">
-                    <span>{t("Progress")}</span>
-                    <span>
-                        {correctAnswers}/{total}
-                    </span>
-                </div>
-                <div className="w-full bg-gray-300 rounded h-3 overflow-hidden">
-                    <div
-                        className="bg-green-500 h-full transition-all"
-                        style={{ width: `${progressWidth}%` }}
-                    ></div>
-                </div>
+        <div
+            className={`p-4 max-w-sm mx-auto transition-colors duration-300 ${
+                isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
+            }`}
+        >
+            <div className="relative mb-4 h-10 flex items-center">
+                <button
+                    onClick={onClose}
+                    className={`px-4 py-2 rounded  transition ${
+                        isDark
+                            ? "bg-gray-700 text-gray-100 hover:bg-gray-600"
+                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    } `}
+                    style={{ flexShrink: 0 }}
+                >
+                    ←
+                </button>
+                <h2
+                    className="absolute left-1/2 transform -translate-x-1/2 text-xl font-bold"
+                    style={{ pointerEvents: "none" }}
+                >
+                    {t("tests.Testing")}
+                </h2>
             </div>
 
-            <div className="border p-4 rounded mb-4 bg-gray-100">
-                <p className="text-lg font-semibold">{currentCard.origin}</p>
-            </div>
+            <ProgressBar
+                correct={correctAnswers}
+                errors={errors.length}
+                total={total}
+            />
 
-            <div className="flex gap-2 mb-2">
-                <input
-                    type="text"
-                    ref={inputRef}
-                    className={`flex-1 border px-2 py-1 rounded ${
-                        showResult ? "bg-gray-200" : ""
-                    }`}
-                    value={userAnswer}
-                    onChange={(e) => setUserAnswer(e.target.value)}
-                    placeholder={t("Type your answer...")}
-                    onKeyDown={handleKeyDown}
-                    disabled={showResult}
-                />
-            </div>
+            {currentCard && (
+                <>
+                    <WordCard
+                        word={currentCard.origin}
+                        originLang={originLang}
+                    />
 
-            <div className="h-6 mb-4 text-sm font-semibold">
-                {showResult && (
-                    <span
-                        className={
-                            currentCard.isCorrect
-                                ? "text-green-600"
-                                : "text-red-600"
-                        }
-                    >
-                        {currentCard.isCorrect
-                            ? t("Correct!")
-                            : `${t("Incorrect!")} (${t("Correct answer")}: ${
-                                  currentCard.translation
-                              })`}
-                    </span>
-                )}
-            </div>
+                    <AnswerInput
+                        userAnswer={userAnswer}
+                        setUserAnswer={setUserAnswer}
+                        onCheck={handleCheckAnswer}
+                        onContinue={handleContinue}
+                        showResult={showResult}
+                        targetLang={targetLang}
+                    />
+
+                    <ResultMessage
+                        showResult={showResult}
+                        isCorrect={currentCard.isCorrect}
+                        correctAnswer={currentCard.translation}
+                    />
+                </>
+            )}
 
             <button
                 onClick={showResult ? handleContinue : handleCheckAnswer}
-                className={`w-full px-4 py-2 rounded ${
+                className={`w-full px-4 py-2 rounded transition-colors duration-300 ${
                     showResult
                         ? "bg-blue-600 hover:bg-blue-700"
                         : "bg-green-600 hover:bg-green-700"
                 } text-white`}
             >
-                {showResult ? t("Continue") : t("Check")}
+                {showResult ? t("tests.Continue") : t("tests.Check")}
             </button>
         </div>
     );

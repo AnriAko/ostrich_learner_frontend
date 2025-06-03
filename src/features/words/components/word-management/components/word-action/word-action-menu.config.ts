@@ -1,6 +1,5 @@
-// word-action-menu.config.ts
 import { TFunction } from "i18next";
-import { Ban, PencilLine, Trash2, Layers } from "lucide-react";
+import { Ban, Trash2, Layers, ClipboardList } from "lucide-react"; // ClipboardList – иконка для теста
 
 interface WordActionButtonsParams {
     t: TFunction;
@@ -9,6 +8,7 @@ interface WordActionButtonsParams {
     onDeleteSelected?: (ids: string[]) => void;
     onEditSelected?: (ids: string[]) => void;
     onStartFlashcards?: (ids: string[]) => void;
+    onStartTests?: (ids: string[]) => void; // ✅ Добавляем
 }
 
 interface WordActionButton {
@@ -23,8 +23,8 @@ export const getWordActionButtons = ({
     selectedIds,
     onClearSelection,
     onDeleteSelected,
-    onEditSelected,
     onStartFlashcards,
+    onStartTests, // ✅ Добавляем
 }: WordActionButtonsParams): WordActionButton[] => {
     const buttons: WordActionButton[] = [];
 
@@ -37,14 +37,15 @@ export const getWordActionButtons = ({
         });
     }
 
-    if (onEditSelected) {
+    if (onStartTests) {
         buttons.push({
-            label: t("wordActionMenu.edit"),
-            className: "btn btn-warning",
-            onClick: () => onEditSelected(selectedIds),
-            icon: PencilLine,
+            label: t("wordActionMenu.createTests"),
+            className: "btn btn-primary",
+            onClick: () => onStartTests(selectedIds),
+            icon: ClipboardList,
         });
     }
+
     buttons.push({
         label: t("wordActionMenu.clearSelection"),
         className: "btn btn-secondary",

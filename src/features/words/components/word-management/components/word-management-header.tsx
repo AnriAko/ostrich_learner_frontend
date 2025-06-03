@@ -15,6 +15,7 @@ interface Props {
     onPageChange: (val: number) => void;
     onPageSizeChange: (val: number) => void;
     onStartFlashcards: () => void;
+    onStartTests: () => void;
 }
 
 export const WordManagementHeader: React.FC<Props> = ({
@@ -28,6 +29,7 @@ export const WordManagementHeader: React.FC<Props> = ({
     onPageChange,
     onPageSizeChange,
     onStartFlashcards,
+    onStartTests,
 }) => {
     const { t } = useTranslation();
     const titleColor =
@@ -51,6 +53,7 @@ export const WordManagementHeader: React.FC<Props> = ({
                     selectedIds={selectedIds}
                     onClearSelection={onClearSelection}
                     onStartFlashcards={onStartFlashcards}
+                    onStartTests={onStartTests}
                 />
             </div>
         </>

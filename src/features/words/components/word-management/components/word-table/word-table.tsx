@@ -60,7 +60,6 @@ export const WordTable = ({
             ? "bg-gray-900 text-gray-200 border border-gray-600"
             : "bg-white text-gray-900 border border-gray-300");
 
-    // Выбор локали для date-fns
     const getLocale = () => {
         switch (i18n.language) {
             case "ru":
