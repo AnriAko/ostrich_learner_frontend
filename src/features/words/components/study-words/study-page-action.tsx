@@ -2,27 +2,24 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { WordDto } from "../../dto/word.dto";
 import { LimitSelector } from "./limit-selector";
-import { CirclePlay } from "lucide-react";
 
-interface FlashcardActionsProps {
+interface StudyPageActionsProps {
     isDark: boolean;
     availableWords: WordDto[];
     repetitionWords: WordDto[];
     onStudyNew: (words: WordDto[]) => void;
     onRepeatOld: (words: WordDto[]) => void;
     onChooseWords: () => void;
-    onContinue?: () => void;
     onTest: (words: WordDto[]) => void;
 }
 
-export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
+export const StudyPageActions: React.FC<StudyPageActionsProps> = ({
     isDark,
     availableWords,
     repetitionWords,
     onStudyNew,
     onRepeatOld,
     onChooseWords,
-    onContinue,
     onTest,
 }) => {
     const { t } = useTranslation();
@@ -41,20 +38,6 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
             <LimitSelector limit={limit} setLimit={setLimit} isDark={isDark} />
 
             <div className="flex flex-col md:flex-row items-center gap-2 mt-2">
-                {onContinue && (
-                    <button
-                        onClick={onContinue}
-                        className={`flex items-center gap-1 px-2 py-1.5 text-sm rounded hover:brightness-110 transition ${
-                            isDark
-                                ? "bg-green-600 text-white"
-                                : "bg-green-500 text-white"
-                        }`}
-                    >
-                        <CirclePlay size={16} />
-                        {t("flashcards.continue")}
-                    </button>
-                )}
-
                 {availableWords.length > 0 && (
                     <>
                         <ActionButton
@@ -84,32 +67,6 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
                                     : "bg-purple-500 hover:bg-purple-600"
                             }
                         />
-
-                        <ActionButton
-                            count={repetitionWords.length}
-                            onClick={() =>
-                                onRepeatOld(getLimitedAmount(repetitionWords))
-                            }
-                            label={t("flashcards.repeatOldWords")}
-                            bgClass={
-                                isDark
-                                    ? "bg-yellow-700 hover:bg-yellow-700"
-                                    : "bg-yellow-300 hover:bg-yellow-600"
-                            }
-                        />
-
-                        <ActionButton
-                            count={repetitionWords.length}
-                            onClick={() =>
-                                onTest(getLimitedAmount(repetitionWords))
-                            }
-                            label={t("flashcards.testRepeatWords")}
-                            bgClass={
-                                isDark
-                                    ? "bg-indigo-700 hover:bg-indigo-800"
-                                    : "bg-indigo-500 hover:bg-indigo-600"
-                            }
-                        />
                     </>
                 )}
 
@@ -127,6 +84,7 @@ export const FlashcardActions: React.FC<FlashcardActionsProps> = ({
                                     : "bg-yellow-300 hover:bg-yellow-600"
                             }
                         />
+
                         <ActionButton
                             count={repetitionWords.length}
                             onClick={() =>

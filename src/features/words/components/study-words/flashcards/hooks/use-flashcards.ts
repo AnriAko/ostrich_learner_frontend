@@ -16,20 +16,6 @@ export interface FlashcardStateSnapshot {
     isShuffled: boolean;
 }
 
-export interface FlashcardProgress {
-    currentIndex: number;
-    learnedIds: number[];
-    flipped: boolean;
-    shuffledOrder: number[] | null;
-    words: {
-        id: number;
-        origin: string;
-        translation: string;
-    }[];
-}
-
-const STORAGE_KEY = "study-words";
-
 export const useStartFlashcards = (
     cachedData: { data: WordDto[] } | null,
     selectedIds: string[]
@@ -63,71 +49,6 @@ export const useStartFlashcards = (
 
     return start;
 };
-
-export const saveFlashcardProgress = (progress: FlashcardProgress): void => {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-    } catch (e) {
-        console.warn("Failed to save flashcard progress", e);
-    }
-};
-
-export const loadFlashcardProgress = (): FlashcardProgress | null => {
-    try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return null;
-        return JSON.parse(raw) as FlashcardProgress;
-    } catch (e) {
-        console.warn("Failed to load flashcard progress", e);
-        return null;
-    }
-};
-
-export const clearFlashcardProgress = (): void => {
-    try {
-        localStorage.removeItem(STORAGE_KEY);
-    } catch (e) {
-        console.warn("Failed to clear flashcard progress", e);
-    }
-};
-
-export function fromProgressToSnapshot(
-    progress: FlashcardProgress
-): FlashcardStateSnapshot {
-    const cards: CardState[] = progress.words.map((w) => ({
-        id: w.id,
-        origin: w.origin,
-        translation: w.translation,
-        learned: progress.learnedIds.includes(w.id),
-    }));
-
-    return {
-        cards,
-        currentIndex: progress.currentIndex,
-        flipped: progress.flipped,
-        isShuffled: progress.shuffledOrder !== null,
-    };
-}
-
-export function fromSnapshotToProgress(
-    snapshot: FlashcardStateSnapshot
-): FlashcardProgress {
-    const learnedIds = snapshot.cards.filter((c) => c.learned).map((c) => c.id);
-
-    return {
-        currentIndex: snapshot.currentIndex,
-        learnedIds,
-        flipped: snapshot.flipped,
-        shuffledOrder: snapshot.isShuffled
-            ? snapshot.cards.map((c) => c.id)
-            : null,
-        words: snapshot.cards.map((c) => ({
-            id: c.id,
-            origin: c.origin,
-            translation: c.translation,
-        })),
-    };
-}
 
 export const useFlashcardsButtons = (words: WordDto[], limit: number = 50) => {
     const initialCards: CardState[] = useMemo(() => {

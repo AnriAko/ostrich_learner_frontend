@@ -1,21 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
 import { FlashcardButtons } from "./flashcard-action";
-import {
-    useFlashcardsButtons,
-    FlashcardStateSnapshot,
-    fromProgressToSnapshot,
-    fromSnapshotToProgress,
-} from "./hooks/use-flashcards";
+import { useFlashcardsButtons } from "./hooks/use-flashcards";
 import { FlashcardCounter } from "./flashcard-counter";
-
-import {
-    loadFlashcardProgress,
-    saveFlashcardProgress,
-    clearFlashcardProgress,
-} from "./localStorage/local-storage-flashcards";
 import { WordDto } from "../../../dto/word.dto";
 
 interface FlashcardTrainerProps {
@@ -23,15 +12,13 @@ interface FlashcardTrainerProps {
     onClose: () => void;
 }
 
-export const FlashcardTrainer: React.FC<FlashcardTrainerProps> = ({
+export const FlashcardPage: React.FC<FlashcardTrainerProps> = ({
     words,
     onClose,
 }) => {
     const { t } = useTranslation();
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
-
-    const [initialStateLoaded, setInitialStateLoaded] = useState(false);
 
     const {
         current,
@@ -46,55 +33,11 @@ export const FlashcardTrainer: React.FC<FlashcardTrainerProps> = ({
         goToPrev,
         setFlipped,
         isShuffled,
-        setStateFromExternal,
-        getStateSnapshot,
     } = useFlashcardsButtons(words);
-
-    useEffect(() => {
-        if (initialStateLoaded) return;
-
-        const saved = loadFlashcardProgress();
-
-        if (
-            saved &&
-            saved.words &&
-            saved.words.length === words.length &&
-            saved.words.every((w, i) => w.id === words[i].id)
-        ) {
-            const snapshot = fromProgressToSnapshot(
-                saved
-            ) as FlashcardStateSnapshot;
-            setStateFromExternal(snapshot);
-        } else {
-            clearFlashcardProgress();
-        }
-        setInitialStateLoaded(true);
-    }, [words, initialStateLoaded, setStateFromExternal]);
-
-    useEffect(() => {
-        if (!initialStateLoaded) return;
-        const snapshot = getStateSnapshot();
-        const progress = fromSnapshotToProgress(snapshot);
-        saveFlashcardProgress(progress);
-    }, [
-        current,
-        flipped,
-        learnedCount,
-        allLearned,
-        isShuffled,
-        getStateSnapshot,
-        initialStateLoaded,
-    ]);
 
     const cardFrontBack = isDark
         ? "bg-gray-900 text-gray-200"
         : "bg-gray-200 text-gray-800";
-
-    useEffect(() => {
-        if (allLearned) {
-            clearFlashcardProgress();
-        }
-    }, [allLearned]);
 
     if (allLearned) {
         return (
@@ -122,12 +65,7 @@ export const FlashcardTrainer: React.FC<FlashcardTrainerProps> = ({
             style={{ alignSelf: "flex-start" }}
         >
             <button
-                onClick={() => {
-                    const snapshot = getStateSnapshot();
-                    const progress = fromSnapshotToProgress(snapshot);
-                    saveFlashcardProgress(progress);
-                    onClose();
-                }}
+                onClick={onClose}
                 className="mb-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
             >
                 ←

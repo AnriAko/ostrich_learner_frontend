@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const LIMIT_STORAGE_KEY = "flashcard-limit";
@@ -10,23 +10,27 @@ interface LimitSelectorProps {
 }
 
 export const LimitSelector: React.FC<LimitSelectorProps> = ({
-    limit,
     setLimit,
     isDark,
 }) => {
     const { t } = useTranslation();
-    const [internalLimit, setInternalLimit] = useState<number>(limit);
 
-    useEffect(() => {
+    const getInitialLimit = () => {
         const storedLimit = localStorage.getItem(LIMIT_STORAGE_KEY);
         if (storedLimit !== null) {
             const parsed = Number(storedLimit);
             if (!isNaN(parsed)) {
-                setInternalLimit(parsed);
-                setLimit(parsed);
+                return parsed;
             }
         }
-    }, [setLimit]);
+        return -1;
+    };
+
+    const [internalLimit, setInternalLimit] = useState<number>(getInitialLimit);
+
+    React.useEffect(() => {
+        setLimit(internalLimit);
+    }, [internalLimit, setLimit]);
 
     const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = Number(e.target.value);
