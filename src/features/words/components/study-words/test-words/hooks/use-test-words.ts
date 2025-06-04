@@ -77,7 +77,6 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
             translation: w.origin,
             vocabularyName: w.vocabularyName ?? "unknown",
         }));
-        console.log(words);
 
         setCardsPhase1(shuffleArray(phase1Cards));
         setCardsPhase2(shuffleArray(phase2Cards));
@@ -86,7 +85,6 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
         setCurrentIndex(0);
         setCorrectAnswers(0);
         setErrors([]);
-
         setTotalCards(limitedWords.length * 2);
     }, [words, limit, shuffleArray]);
 
@@ -187,6 +185,15 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
         }
     }, [currentIndex, currentCards.length, errors, phase, shuffleArray]);
 
+    const isLastCardOfPhase = currentIndex === currentCards.length - 1;
+    const isFinalCard =
+        phase === TestPhase.TranslationToOrigin &&
+        isLastCardOfPhase &&
+        errors.length === 0;
+
+    const isLastCardCorrect =
+        isFinalCard && currentCards[currentIndex]?.isCorrect;
+
     return {
         phase,
         currentCard,
@@ -198,5 +205,7 @@ export const useWordTest = (words: WordDto[], limit: number = 20) => {
         errors,
         originLang,
         targetLang,
+        isFinalCard,
+        isLastCardCorrect,
     };
 };

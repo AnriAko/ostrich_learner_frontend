@@ -30,6 +30,7 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
         errors,
         originLang,
         targetLang,
+        isLastCardCorrect,
     } = useWordTest(words);
 
     const [userAnswer, setUserAnswer] = useState("");
@@ -77,7 +78,7 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
                         isDark
                             ? "bg-gray-700 text-gray-100 hover:bg-gray-600"
                             : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                    } `}
+                    }`}
                     style={{ flexShrink: 0 }}
                 >
                     ←
@@ -121,14 +122,26 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
             )}
 
             <button
-                onClick={showResult ? handleContinue : handleCheckAnswer}
+                onClick={
+                    showResult
+                        ? isLastCardCorrect
+                            ? onClose
+                            : handleContinue
+                        : handleCheckAnswer
+                }
                 className={`w-full px-4 py-2 rounded transition-colors duration-300 ${
                     showResult
-                        ? "bg-blue-600 hover:bg-blue-700"
+                        ? isLastCardCorrect
+                            ? "bg-green-700 hover:bg-green-800"
+                            : "bg-blue-600 hover:bg-blue-700"
                         : "bg-green-600 hover:bg-green-700"
                 } text-white`}
             >
-                {showResult ? t("tests.Continue") : t("tests.Check")}
+                {showResult
+                    ? isLastCardCorrect
+                        ? t("tests.Finish")
+                        : t("tests.Continue")
+                    : t("tests.Check")}
             </button>
         </div>
     );
