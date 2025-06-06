@@ -7,7 +7,7 @@ import { Theme } from "../../../user-config/types/theme";
 import { useWordFilters } from "./hooks/useWordFilters";
 import { WordManagementHeader } from "./components/word-management-header";
 import { useStartFlashcards } from "../study-words/flashcards/hooks/use-flashcards";
-import { useStartTests } from "../study-words/test-words/hooks/use-test-words";
+import { useStartTests } from "../study-words/test-words/hooks/test-hooks/use-start-test";
 
 const WordManagement: React.FC = () => {
     const { t } = useTranslation();
@@ -31,7 +31,7 @@ const WordManagement: React.FC = () => {
     const containerBg = theme === Theme.dark ? "bg-gray-900" : "bg-gray-200";
 
     const startFlashcards = useStartFlashcards(cachedData!, selectedIds);
-    const startTests = useStartTests(cachedData!, selectedIds); // ✅
+    const startTests = useStartTests(cachedData!, selectedIds);
 
     return (
         <div className={`p-6 ${containerBg} h-[80vh] flex flex-col`}>

@@ -30,7 +30,6 @@ export const useAddWordLogic = () => {
             sourceLang,
             targetLang,
         };
-        console.log(targetLang);
 
         mutate(dto, {
             onSuccess: () => {

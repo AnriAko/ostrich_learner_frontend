@@ -1,6 +1,6 @@
 // src/features/words/components/study-words/study-page.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlashcardPage } from "./flashcards/flashcard-page";
 import { useTheme } from "../../../../shared/context/theme-context/use-theme";
@@ -29,6 +29,8 @@ export const StudyPage: React.FC = () => {
     const { theme } = useTheme();
     const { t } = useTranslation();
     const { user } = useUser();
+    const [limit, setLimit] = useState<number>(-1); // ✅ добавлено
+
     const isDark = theme === Theme.dark;
 
     const state = location.state as StudyState | undefined;
@@ -65,10 +67,7 @@ export const StudyPage: React.FC = () => {
                         onClose={() => navigate(-1)}
                     />
                 ) : mode === "test" ? (
-                    <TestWordsPage
-                        words={wordsFromLocation}
-                        onClose={() => navigate(-1)}
-                    />
+                    <TestWordsPage words={wordsFromLocation} limit={limit} /> // ✅ limit передаётся
                 ) : (
                     <p className="text-red-500">Unknown mode</p>
                 )
@@ -89,6 +88,8 @@ export const StudyPage: React.FC = () => {
                     }
                     onChooseWords={() => navigate("/dashboard/manage")}
                     onTest={(words) => navigateWithWords(words, "test")}
+                    limit={limit} // ✅ передаём limit и setLimit
+                    setLimit={setLimit}
                 />
             )}
         </div>

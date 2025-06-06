@@ -1,4 +1,3 @@
-// WordTableBody.tsx
 import { WordDto } from "../../../../../dto/word.dto";
 import { WordFilterDto } from "../../../dto/word-filter.dto";
 import { Theme } from "../../../../../../user-config/types/theme";

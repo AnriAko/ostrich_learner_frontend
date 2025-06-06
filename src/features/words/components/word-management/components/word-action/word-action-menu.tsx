@@ -9,7 +9,7 @@ interface WordActionMenuProps {
     onClearSelection: () => void;
     onEditSelected?: (ids: string[]) => void;
     onStartFlashcards?: (ids: string[]) => void;
-    onStartTests?: (ids: string[]) => void; // ✅ Новый пропс
+    onStartTests?: (ids: string[]) => void;
     refetch?: () => void;
 }
 
@@ -17,7 +17,7 @@ export const WordActionMenu: React.FC<WordActionMenuProps> = ({
     selectedIds,
     onClearSelection,
     onEditSelected,
-    onStartFlashcards, // ✅ Принимаем
+    onStartFlashcards,
     refetch,
     onStartTests,
 }) => {

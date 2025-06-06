@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// src/features/words/components/study-words/study-page-action.tsx
+
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { WordDto } from "../../dto/word.dto";
 import { LimitSelector } from "./limit-selector";
@@ -11,6 +13,8 @@ interface StudyPageActionsProps {
     onRepeatOld: (words: WordDto[]) => void;
     onChooseWords: () => void;
     onTest: (words: WordDto[]) => void;
+    limit: number; // ✅ добавлено
+    setLimit: (limit: number) => void; // ✅ добавлено
 }
 
 export const StudyPageActions: React.FC<StudyPageActionsProps> = ({
@@ -21,9 +25,10 @@ export const StudyPageActions: React.FC<StudyPageActionsProps> = ({
     onRepeatOld,
     onChooseWords,
     onTest,
+    limit,
+    setLimit,
 }) => {
     const { t } = useTranslation();
-    const [limit, setLimit] = useState(-1);
 
     const getLimitedAmount = (words: WordDto[]): WordDto[] => {
         if (limit === -1 || words.length <= limit) {

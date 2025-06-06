@@ -1,5 +1,5 @@
 import { TFunction } from "i18next";
-import { Ban, Trash2, Layers, ClipboardList } from "lucide-react"; // ClipboardList – иконка для теста
+import { Ban, Trash2, Layers, ClipboardList } from "lucide-react";
 
 interface WordActionButtonsParams {
     t: TFunction;
@@ -8,7 +8,7 @@ interface WordActionButtonsParams {
     onDeleteSelected?: (ids: string[]) => void;
     onEditSelected?: (ids: string[]) => void;
     onStartFlashcards?: (ids: string[]) => void;
-    onStartTests?: (ids: string[]) => void; // ✅ Добавляем
+    onStartTests?: (ids: string[]) => void;
 }
 
 interface WordActionButton {
@@ -24,7 +24,7 @@ export const getWordActionButtons = ({
     onClearSelection,
     onDeleteSelected,
     onStartFlashcards,
-    onStartTests, // ✅ Добавляем
+    onStartTests,
 }: WordActionButtonsParams): WordActionButton[] => {
     const buttons: WordActionButton[] = [];
 

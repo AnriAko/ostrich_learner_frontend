@@ -1,23 +1,26 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { WordDto } from "../../../dto/word.dto";
-import { TestPhase, useWordTest } from "./hooks/use-test-words";
 import ProgressBar from "./progress-bar";
 import WordCard from "./word-card";
 import AnswerInput from "./answer-input";
 import ResultMessage from "./result-message";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
+import { TestPhase } from "./hooks/test-hooks/types/test";
+import { useNavigate } from "react-router-dom";
+import { useWordTest } from "./hooks/test-hooks/use-test-words";
 
 interface TestWordsPageProps {
     words: WordDto[];
-    onClose: () => void;
+    limit: number;
 }
 
-export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
+export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
     const { t } = useTranslation();
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
+    const navigate = useNavigate();
 
     const {
         phase,
@@ -31,7 +34,10 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
         originLang,
         targetLang,
         isLastCardCorrect,
-    } = useWordTest(words);
+        isTestFinished,
+    } = useWordTest(words, limit);
+
+    const onClose = () => navigate(-1);
 
     const [userAnswer, setUserAnswer] = useState("");
 
@@ -45,25 +51,17 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
         setUserAnswer("");
     };
 
-    if (!currentCard && phase === TestPhase.Completed) {
-        return (
-            <div className="p-6 text-center">
-                <h2
-                    className={`text-2xl font-bold mb-4 ${
-                        isDark ? "text-green-400" : "text-green-600"
-                    }`}
-                >
-                    🎉 {t("tests.All words completed!")}
-                </h2>
-                <button
-                    onClick={onClose}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                >
-                    {t("tests.Finish Test")}
-                </button>
-            </div>
-        );
-    }
+    const isTestOver = isTestFinished || phase === TestPhase.Completed;
+
+    const handleInputEnterPress = () => {
+        if (isTestOver) {
+            onClose();
+        } else if (showResult) {
+            handleContinue();
+        } else {
+            handleCheckAnswer();
+        }
+    };
 
     return (
         <div
@@ -74,7 +72,7 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
             <div className="relative mb-4 h-10 flex items-center">
                 <button
                     onClick={onClose}
-                    className={`px-4 py-2 rounded  transition ${
+                    className={`px-4 py-2 rounded transition ${
                         isDark
                             ? "bg-gray-700 text-gray-100 hover:bg-gray-600"
                             : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -111,6 +109,8 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
                         onContinue={handleContinue}
                         showResult={showResult}
                         targetLang={targetLang}
+                        disabled={isTestOver}
+                        onEnterPress={handleInputEnterPress}
                     />
 
                     <ResultMessage
@@ -122,22 +122,30 @@ export default function TestWordsPage({ words, onClose }: TestWordsPageProps) {
             )}
 
             <button
-                onClick={
-                    showResult
-                        ? isLastCardCorrect
-                            ? onClose
-                            : handleContinue
-                        : handleCheckAnswer
-                }
+                onClick={() => {
+                    if (isTestOver) {
+                        onClose();
+                        return;
+                    }
+                    if (showResult) {
+                        handleContinue();
+                    } else {
+                        handleCheckAnswer();
+                    }
+                }}
                 className={`w-full px-4 py-2 rounded transition-colors duration-300 ${
-                    showResult
+                    isTestOver
+                        ? "bg-green-700 hover:bg-green-800"
+                        : showResult
                         ? isLastCardCorrect
                             ? "bg-green-700 hover:bg-green-800"
                             : "bg-blue-600 hover:bg-blue-700"
                         : "bg-green-600 hover:bg-green-700"
                 } text-white`}
             >
-                {showResult
+                {isTestOver
+                    ? t("tests.Finish")
+                    : showResult
                     ? isLastCardCorrect
                         ? t("tests.Finish")
                         : t("tests.Continue")

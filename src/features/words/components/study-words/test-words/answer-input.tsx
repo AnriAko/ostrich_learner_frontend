@@ -10,6 +10,8 @@ interface AnswerInputProps {
     onContinue: () => void;
     showResult: boolean;
     targetLang: string;
+    disabled?: boolean;
+    onEnterPress?: () => void;
 }
 
 export default function AnswerInput({
@@ -19,6 +21,8 @@ export default function AnswerInput({
     onContinue,
     showResult,
     targetLang,
+    disabled = false,
+    onEnterPress,
 }: AnswerInputProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const { theme } = useTheme();
@@ -31,10 +35,15 @@ export default function AnswerInput({
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            if (showResult) {
-                onContinue();
+            e.preventDefault();
+            if (onEnterPress) {
+                onEnterPress();
             } else {
-                onCheck();
+                if (showResult) {
+                    onContinue();
+                } else {
+                    onCheck();
+                }
             }
         }
     };
@@ -48,14 +57,22 @@ export default function AnswerInput({
                     isDark
                         ? "bg-gray-700 text-white border-gray-600 placeholder-gray-400"
                         : "bg-white text-gray-700 border-gray-300 placeholder-gray-500"
-                } ${showResult ? "opacity-60" : ""}`}
+                } ${
+                    showResult || disabled
+                        ? "opacity-60 cursor-not-allowed"
+                        : ""
+                }`}
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
                 placeholder={`${t("tests.Type your answer")} (${t(
                     `languages.${targetLang}`
                 )})`}
                 onKeyDown={handleKeyDown}
-                readOnly={showResult}
+                readOnly={showResult || disabled}
+                style={{
+                    outline: "none",
+                    boxShadow: "none",
+                }}
             />
         </div>
     );
