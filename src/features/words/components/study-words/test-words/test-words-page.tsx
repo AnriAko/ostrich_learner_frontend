@@ -9,7 +9,8 @@ import { useTheme } from "../../../../../shared/context/theme-context/use-theme"
 import { Theme } from "../../../../user-config/types/theme";
 import { TestPhase } from "./hooks/test-hooks/types/test";
 import { useNavigate } from "react-router-dom";
-import { useWordTest } from "./hooks/test-hooks/use-test-words";
+import { useTestWord } from "./hooks/test-hooks/use-test-words";
+import TestMainButton from "./test-main-button";
 
 interface TestWordsPageProps {
     words: WordDto[];
@@ -35,11 +36,22 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
         targetLang,
         isLastCardCorrect,
         isTestFinished,
-    } = useWordTest(words, limit);
+        resetResult,
+    } = useTestWord(words, limit);
 
     const onClose = () => navigate(-1);
 
     const [userAnswer, setUserAnswer] = useState("");
+
+    const handleUserAnswerChange = (value: string) => {
+        if (showResult) {
+            resetResult();
+        }
+        setUserAnswer(value);
+    };
+
+    const isSoftMatch = currentCard?.isCorrect === "userHasThisTranslation";
+    const isTestOver = isTestFinished || phase === TestPhase.Completed;
 
     const handleCheckAnswer = () => {
         if (!userAnswer.trim()) return;
@@ -51,17 +63,23 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
         setUserAnswer("");
     };
 
-    const isTestOver = isTestFinished || phase === TestPhase.Completed;
-
     const handleInputEnterPress = () => {
         if (isTestOver) {
             onClose();
-        } else if (showResult) {
-            handleContinue();
-        } else {
-            handleCheckAnswer();
+            return;
         }
+
+        if (showResult) {
+            if (!isSoftMatch) {
+                handleContinue();
+            }
+            return;
+        }
+
+        handleCheckAnswer();
     };
+
+    const isInputDisabled = isTestOver || (showResult && !isSoftMatch);
 
     return (
         <div
@@ -104,12 +122,12 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
 
                     <AnswerInput
                         userAnswer={userAnswer}
-                        setUserAnswer={setUserAnswer}
+                        setUserAnswer={handleUserAnswerChange}
                         onCheck={handleCheckAnswer}
                         onContinue={handleContinue}
                         showResult={showResult}
                         targetLang={targetLang}
-                        disabled={isTestOver}
+                        disabled={isInputDisabled}
                         onEnterPress={handleInputEnterPress}
                     />
 
@@ -121,36 +139,15 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
                 </>
             )}
 
-            <button
-                onClick={() => {
-                    if (isTestOver) {
-                        onClose();
-                        return;
-                    }
-                    if (showResult) {
-                        handleContinue();
-                    } else {
-                        handleCheckAnswer();
-                    }
-                }}
-                className={`w-full px-4 py-2 rounded transition-colors duration-300 ${
-                    isTestOver
-                        ? "bg-green-700 hover:bg-green-800"
-                        : showResult
-                        ? isLastCardCorrect
-                            ? "bg-green-700 hover:bg-green-800"
-                            : "bg-blue-600 hover:bg-blue-700"
-                        : "bg-green-600 hover:bg-green-700"
-                } text-white`}
-            >
-                {isTestOver
-                    ? t("tests.Finish")
-                    : showResult
-                    ? isLastCardCorrect
-                        ? t("tests.Finish")
-                        : t("tests.Continue")
-                    : t("tests.Check")}
-            </button>
+            <TestMainButton
+                isTestOver={isTestOver}
+                showResult={showResult}
+                isSoftMatch={isSoftMatch}
+                isLastCardCorrect={isLastCardCorrect}
+                onClose={onClose}
+                onCheckAnswer={handleCheckAnswer}
+                onContinue={handleContinue}
+            />
         </div>
     );
 }

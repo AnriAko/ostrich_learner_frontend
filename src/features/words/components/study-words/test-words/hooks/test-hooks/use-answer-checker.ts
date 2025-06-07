@@ -47,7 +47,6 @@ export const useAnswerChecker = ({
                 phase === TestPhase.OriginToTranslation
                     ? currentCard.origin
                     : answer;
-
             const translation =
                 phase === TestPhase.OriginToTranslation
                     ? answer
@@ -72,28 +71,34 @@ export const useAnswerChecker = ({
                 setCardsPhase2(updatedCards);
             }
 
-            const isCorrect =
-                result === "directMatch" || result === "userHasThisTranslation";
-
-            if (isCorrect) {
+            if (result === "directMatch") {
                 setCorrectAnswers((prev) => prev + 1);
                 removeErrorCard(currentCard);
-            } else {
+            } else if (result === "noMatch") {
                 addErrorCard(currentCard);
                 onMistake(currentCard.id);
+            } else if (result === "userHasThisTranslation") {
+                setShowResult(true);
+                return;
             }
 
             const isLastCard = currentIndex === currentCards.length - 1;
+            const newErrorsLength = errors.filter(
+                (c) => c.id !== currentCard.id
+            ).length;
 
             if (
                 isLastCard &&
-                isCorrect &&
-                errors.length === 0 &&
+                result === "directMatch" &&
+                newErrorsLength === 0 &&
                 phase === TestPhase.TranslationToOrigin
             ) {
                 sendResults(finalResults);
                 setPhase(TestPhase.Completed);
+                return;
             }
+
+            if (phase === TestPhase.Completed) return;
 
             setShowResult(true);
         },

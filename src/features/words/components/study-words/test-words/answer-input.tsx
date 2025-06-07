@@ -51,24 +51,21 @@ export default function AnswerInput({
     return (
         <div className="flex gap-2 mb-2">
             <input
+                id="user-test-input"
                 type="text"
                 ref={inputRef}
                 className={`flex-1 border px-2 py-1 rounded transition-colors duration-300 ${
                     isDark
                         ? "bg-gray-700 text-white border-gray-600 placeholder-gray-400"
                         : "bg-white text-gray-700 border-gray-300 placeholder-gray-500"
-                } ${
-                    showResult || disabled
-                        ? "opacity-60 cursor-not-allowed"
-                        : ""
-                }`}
+                } ${disabled ? "opacity-60 cursor-not-allowed" : ""}`}
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
                 placeholder={`${t("tests.Type your answer")} (${t(
                     `languages.${targetLang}`
                 )})`}
                 onKeyDown={handleKeyDown}
-                readOnly={showResult || disabled}
+                readOnly={disabled}
                 style={{
                     outline: "none",
                     boxShadow: "none",

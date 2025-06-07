@@ -28,9 +28,7 @@ export default function ResultMessage({
                 textColor = isDark ? "text-green-400" : "text-green-600";
                 break;
             case "userHasThisTranslation":
-                message = `${t(
-                    "tests.Has this translation, but expected"
-                )}: ${correctAnswer}`;
+                message = `${t("tests.userHasThisTranslation")}`;
                 textColor = isDark ? "text-yellow-400" : "text-yellow-600";
                 break;
             case "noMatch":

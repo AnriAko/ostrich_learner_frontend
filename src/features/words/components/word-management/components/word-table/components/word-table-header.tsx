@@ -40,6 +40,7 @@ export const WordTableHeader = ({
             <tr>
                 <th className={headerCellClass}>
                     <input
+                        id="select-all"
                         type="checkbox"
                         checked={allSelected}
                         onChange={onToggleSelectAll}

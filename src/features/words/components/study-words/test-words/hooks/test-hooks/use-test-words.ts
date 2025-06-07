@@ -3,15 +3,13 @@ import { WordDto } from "../../../../../dto/word.dto";
 import { TestPhase, TestResult } from "./types/test";
 import { extractLangs } from "./utils/langUtils";
 import { shuffleArray } from "./utils/testUtils";
-
 import { useTestPhaseCards } from "./use-test-phase-cards";
 import { useErrorManager } from "./use-error-manager";
 import { useTestProgress } from "./use-test-progress";
 import { useAnswerChecker } from "./use-answer-checker";
-
 import { useUser } from "../../../../../../../shared/context/user-context/use-user";
 
-export const useWordTest = (words: WordDto[], limit: number) => {
+export const useTestWord = (words: WordDto[], limit: number) => {
     const { user } = useUser();
     const userId = user!.userId;
 
@@ -27,6 +25,7 @@ export const useWordTest = (words: WordDto[], limit: number) => {
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [totalCards, setTotalCards] = useState(0);
     const [finalResults, setFinalResults] = useState<TestResult[]>([]);
+    const resetResult = () => setShowResult(false);
 
     const {
         cardsPhase1,
@@ -90,6 +89,11 @@ export const useWordTest = (words: WordDto[], limit: number) => {
     const continueTest = useCallback(() => {
         setShowResult(false);
 
+        const currentIsSoftMatch =
+            currentCard?.isCorrect === "userHasThisTranslation";
+
+        if (currentIsSoftMatch) return;
+
         if (currentIndex + 1 < currentCards.length) {
             setCurrentIndex((prev) => prev + 1);
         } else {
@@ -105,8 +109,10 @@ export const useWordTest = (words: WordDto[], limit: number) => {
                 if (phase === TestPhase.OriginToTranslation) {
                     setPhase(TestPhase.TranslationToOrigin);
                     setCurrentIndex(0);
+                    setShowResult(false);
                 } else {
                     setPhase(TestPhase.Completed);
+                    setShowResult(false);
                 }
             }
         }
@@ -117,6 +123,7 @@ export const useWordTest = (words: WordDto[], limit: number) => {
         phase,
         setCardsPhase1,
         setCardsPhase2,
+        currentCard,
     ]);
 
     const { isFinalCard, isLastCardCorrect } = useTestProgress(
@@ -141,5 +148,6 @@ export const useWordTest = (words: WordDto[], limit: number) => {
         isFinalCard,
         isLastCardCorrect,
         isTestFinished,
+        resetResult,
     };
 };

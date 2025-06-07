@@ -75,6 +75,7 @@ export const WordTableBody = ({
                         className={`w-2 max-w-2 p-0.5 text-center ${cellBorderClass}`}
                     >
                         <input
+                            id={`checkbox-${word.id}`}
                             type="checkbox"
                             checked={selectedIds.includes(String(word.id))}
                             onChange={() => onToggleWord(String(word.id))}

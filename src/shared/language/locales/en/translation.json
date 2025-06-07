@@ -118,6 +118,7 @@
         "Testing": "Testing",
         "Continue": "Continue",
         "Check": "Check",
-        "Word": "Word"
+        "Word": "Word",
+        "userHasThisTranslation": "Word have such translation, but expected other"
     }
 }

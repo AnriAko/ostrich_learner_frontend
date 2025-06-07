@@ -103,6 +103,7 @@ export function PaginationControls({
                 <div className="flex items-center gap-1">
                     <span>{t("pagination.page")}</span>
                     <input
+                        id="page-input"
                         type="text"
                         value={inputPage}
                         onChange={handleInputChange}

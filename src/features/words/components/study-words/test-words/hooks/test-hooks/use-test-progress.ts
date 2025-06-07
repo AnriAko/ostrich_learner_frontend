@@ -12,8 +12,9 @@ export const useTestProgress = (
         isLastCardOfPhase &&
         errors.length === 0;
 
-    const isLastCardCorrect =
-        isFinalCard && currentCards[currentIndex]?.isCorrect;
+    const isLastCardCorrect = Boolean(
+        isFinalCard && currentCards[currentIndex]?.isCorrect === "directMatch"
+    );
 
     return { isLastCardOfPhase, isFinalCard, isLastCardCorrect };
 };
