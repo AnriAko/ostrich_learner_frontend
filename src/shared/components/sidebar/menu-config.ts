@@ -1,4 +1,3 @@
-// src/shared/components/sidebar/menu-config.ts
 import { TFunction } from "i18next";
 import { Brain, NotebookPen, FolderKanban } from "lucide-react";
 
