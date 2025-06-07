@@ -66,6 +66,10 @@ export default function AnswerInput({
                 )})`}
                 onKeyDown={handleKeyDown}
                 readOnly={disabled}
+                autoComplete="off"
+                spellCheck={false}
+                autoCorrect="off"
+                autoCapitalize="off"
                 style={{
                     outline: "none",
                     boxShadow: "none",

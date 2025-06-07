@@ -119,6 +119,8 @@
         "Continue": "Continue",
         "Check": "Check",
         "Word": "Word",
-        "userHasThisTranslation": "Word have such translation, but expected other"
+        "userHasThisTranslation": "Word have such translation, but expected other",
+        "successSubmit": "Successfully submitted results!",
+        "errorSubmit": "Something went wrong during submit"
     }
 }
