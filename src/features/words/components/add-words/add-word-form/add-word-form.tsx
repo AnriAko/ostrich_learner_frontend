@@ -44,7 +44,7 @@ export const AddWordForm = () => {
     }, [isLoading]);
 
     return (
-        <div className={`p-6 w-xl ${bgClass}`}>
+        <div className={`p-6 w-sm ${bgClass}`}>
             <h1 className={`text-xl font-bold mb-4 ${textClass}`}>
                 {t("addWordsPage.title", "Add a new word")}
             </h1>

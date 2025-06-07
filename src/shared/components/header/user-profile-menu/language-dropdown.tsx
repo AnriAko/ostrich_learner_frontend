@@ -7,7 +7,7 @@ type LanguageDropdownProps = {
 
 const LanguageDropdown = ({ isDark, onSelect }: LanguageDropdownProps) => (
     <div
-        className={`absolute top-full w-28 left-0 mt-2 rounded-lg shadow-lg z-10 border ${
+        className={`absolute top-full w-26 left-[-4px] mt-2 rounded-lg shadow-lg z-10 border ${
             isDark
                 ? "bg-gray-800 border-gray-600 text-white"
                 : "bg-white border-gray-400 text-black"
