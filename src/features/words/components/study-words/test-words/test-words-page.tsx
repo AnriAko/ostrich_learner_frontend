@@ -83,7 +83,7 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
 
     return (
         <div
-            className={`p-4 max-w-sm mx-auto transition-colors duration-300 ${
+            className={`p-4 min-w-sm transition-colors duration-300 ${
                 isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
             }`}
         >

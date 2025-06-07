@@ -1,5 +1,3 @@
-// src/features/words/components/study-words/study-page.tsx
-
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlashcardPage } from "./flashcards/flashcard-page";
@@ -29,7 +27,7 @@ export const StudyPage: React.FC = () => {
     const { theme } = useTheme();
     const { t } = useTranslation();
     const { user } = useUser();
-    const [limit, setLimit] = useState<number>(-1); // ✅ добавлено
+    const [limit, setLimit] = useState<number>(-1);
 
     const isDark = theme === Theme.dark;
 
@@ -51,7 +49,12 @@ export const StudyPage: React.FC = () => {
     };
 
     return (
-        <div className={`p-6 h-full ${isDark ? "bg-gray-900" : "bg-gray-200"}`}>
+        <div
+            className={`p-6 flex flex-col items-start ${
+                isDark ? "bg-gray-900" : "bg-gray-200"
+            }`}
+            style={{ minHeight: "calc(100vh - 144px)" }}
+        >
             <h1
                 className={`text-xl font-bold mb-6 ${
                     isDark ? "text-yellow-300" : "text-blue-600"
@@ -67,7 +70,7 @@ export const StudyPage: React.FC = () => {
                         onClose={() => navigate(-1)}
                     />
                 ) : mode === "test" ? (
-                    <TestWordsPage words={wordsFromLocation} limit={limit} /> // ✅ limit передаётся
+                    <TestWordsPage words={wordsFromLocation} limit={limit} />
                 ) : (
                     <p className="text-red-500">Unknown mode</p>
                 )
@@ -88,7 +91,7 @@ export const StudyPage: React.FC = () => {
                     }
                     onChooseWords={() => navigate("/dashboard/manage")}
                     onTest={(words) => navigateWithWords(words, "test")}
-                    limit={limit} // ✅ передаём limit и setLimit
+                    limit={limit}
                     setLimit={setLimit}
                 />
             )}

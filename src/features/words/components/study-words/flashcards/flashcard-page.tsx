@@ -59,9 +59,7 @@ export const FlashcardPage: React.FC<FlashcardTrainerProps> = ({
 
     return (
         <div
-            className={`p-6 rounded-xl shadow-lg w-96 ${
-                isDark ? "bg-gray-800" : "bg-gray-200"
-            }`}
+            className={`p-6 min-w-sm ${isDark ? "bg-gray-800" : "bg-gray-200"}`}
             style={{ alignSelf: "flex-start" }}
         >
             <button
