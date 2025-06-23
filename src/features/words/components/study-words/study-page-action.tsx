@@ -1,5 +1,3 @@
-// src/features/words/components/study-words/study-page-action.tsx
-
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { WordDto } from "../../dto/word.dto";
@@ -13,8 +11,8 @@ interface StudyPageActionsProps {
     onRepeatOld: (words: WordDto[]) => void;
     onChooseWords: () => void;
     onTest: (words: WordDto[]) => void;
-    limit: number; // ✅ добавлено
-    setLimit: (limit: number) => void; // ✅ добавлено
+    limit: number;
+    setLimit: (limit: number) => void;
 }
 
 export const StudyPageActions: React.FC<StudyPageActionsProps> = ({
@@ -115,7 +113,7 @@ export const StudyPageActions: React.FC<StudyPageActionsProps> = ({
 
                 <button
                     onClick={onChooseWords}
-                    className={`px-2 py-1.5 text-sm rounded transition text-white 
+                    className={`px-2 py-1.5 text-sm rounded transition text-white cursor-pointer
                         ${
                             isDark
                                 ? "bg-blue-700 hover:bg-blue-800"
