@@ -1,5 +1,5 @@
 import { TFunction } from "i18next";
-import { Brain, NotebookPen, FolderKanban } from "lucide-react";
+import { Brain, NotebookPen, FolderKanban, BookOpen } from "lucide-react";
 
 export interface MenuItems {
     to: string;
@@ -22,5 +22,10 @@ export const getMenuItems = (t: TFunction): MenuItems[] => [
         to: "/dashboard/manage",
         label: t("sidebar.manageWords"),
         icon: FolderKanban,
+    },
+    {
+        to: "/dashboard/books",
+        label: t("sidebar.books"),
+        icon: BookOpen,
     },
 ];

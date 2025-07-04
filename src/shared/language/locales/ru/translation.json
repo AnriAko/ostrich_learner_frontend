@@ -36,7 +36,8 @@
         "addWords": "Добавление слов",
         "repeat": "Повторение слов",
         "wordList": "Словарь",
-        "manageWords": "Просмотр слов"
+        "manageWords": "Просмотр слов",
+        "books": "Просмотр книг"
     },
     "addWordsPage": {
         "title": "Добавить новое слово",

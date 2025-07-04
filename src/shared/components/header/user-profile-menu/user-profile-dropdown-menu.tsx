@@ -31,6 +31,9 @@ const UserProfileDropdownMenu: FC<Props> = ({
                 <>
                     <div className="px-4 py-2 font-bold text-sm">
                         {user.nickname}
+                        <div className="text-xs opacity-50 select-text">
+                            ID: {user.userId}
+                        </div>
                     </div>
                     <hr
                         className={

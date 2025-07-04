@@ -36,7 +36,8 @@
         "addWords": "Add Words",
         "repeat": "Remind Words",
         "wordList": "Vocabulary",
-        "manageWords": "View words"
+        "manageWords": "View words",
+        "books": "View Books"
     },
     "manageWords": "View words",
     "addWordsPage": {

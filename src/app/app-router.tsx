@@ -8,11 +8,7 @@ import CreateUserPage from "../features/auth/pages/create-user-page";
 import AddWordsPage from "../features/words/components/add-words/page/add-word-page";
 import WordManagement from "../features/words/components/word-management/word-management";
 import StudyPage from "../features/words/components/study-words/study-page";
-
-// import LearnWords from "../features/dashboard/pages/learn-words";
-// import NewWords from "../features/dashboard/pages/new-words";
-// import RemindOldWords from "../features/dashboard/pages/remind-old-words";
-// import Library from "../features/dashboard/pages/library";
+import { BooksPage } from "../features/books/components/book-page";
 
 const AppRouter = () => {
     return (
@@ -26,13 +22,9 @@ const AppRouter = () => {
                 {/* Private DashboardLayout */}
                 <Route path="/dashboard" element={<DashboardLayout />}>
                     <Route path="add" element={<AddWordsPage />} />
-                    <Route path="study" element={<StudyPage />} />{" "}
-                    <Route path="manage" element={<WordManagement />} />{" "}
-                    {/* Новый путь */}
-                    {/* 
-                    <Route path="new" element={<NewWords />} />
-                    <Route path="remind" element={<RemindOldWords />} />
-                    <Route path="library" element={<Library />} /> */}
+                    <Route path="study" element={<StudyPage />} />
+                    <Route path="manage" element={<WordManagement />} />
+                    <Route path="books" element={<BooksPage />} />
                 </Route>
             </Route>
         </Routes>
