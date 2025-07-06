@@ -27,15 +27,19 @@ export const BookOverviewPanel = () => {
 
     const bgClass = isDark
         ? "bg-gray-900 text-gray-300"
-        : "bg-gray-100 text-gray-900";
+        : "bg-gray-200 text-gray-900";
 
     return (
         <div
             className={`p-6 w-full flex flex-col ${bgClass}`}
             style={{ height: "80.5vh" }}
         >
-            <h1 className="text-xl font-bold mb-4 text-blue-600 dark:text-yellow-300">
-                View Books
+            <h1
+                className={`text-xl font-bold mb-4 ${
+                    isDark ? "text-yellow-300" : "text-blue-600"
+                }`}
+            >
+                {t("bookOverview.viewBooks")}
             </h1>
 
             <PaginationControls

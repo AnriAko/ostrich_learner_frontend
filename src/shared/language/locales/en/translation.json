@@ -2,7 +2,8 @@
     "common": {
         "please_log_in": "Please log in",
         "welcome_user": "Welcome, {{nickname}}!",
-        "or": "Or"
+        "or": "Or",
+        "allRightsReserved": "All rights reserved."
     },
     "auth": {
         "title": "Log in",
@@ -127,5 +128,10 @@
         "userHasThisTranslation": "Word have such translation, but expected other",
         "successSubmit": "Successfully submitted results!",
         "errorSubmit": "Something went wrong during submit"
+    },
+    "bookOverview": {
+        "viewBooks": "View books",
+        "updateTitle": "Update title",
+        "deleteBook": "Delete book"
     }
 }

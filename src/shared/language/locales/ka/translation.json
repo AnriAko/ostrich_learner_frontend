@@ -2,7 +2,8 @@
     "common": {
         "please_log_in": "გთხოვთ, შეხვიდეთ",
         "welcome_user": "კეთილი იყოს თქვენი მობრძანება, {{nickname}}!",
-        "or": "ან"
+        "or": "ან",
+        "allRightsReserved": "ყველა უფლება დაცულია."
     },
     "auth": {
         "title": "შესვლა",
@@ -128,5 +129,10 @@
         "userHasThisTranslation": "არსებობს თარგმანი, მაგრამ მოსალოდნელია სხვა",
         "successSubmit": "შედეგები წარმატებით აიტვირთა!",
         "errorSubmit": "შედეგების გაგზავნის დროს რაღაც შეცდომა მოხდა."
+    },
+    "bookOverview": {
+        "viewBooks": "წიგნების მიმოხილვა",
+        "updateTitle": "სათაურის განახლება",
+        "deleteBook": "წიგნის წაშლა"
     }
 }

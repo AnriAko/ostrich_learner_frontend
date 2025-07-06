@@ -2,7 +2,8 @@
     "common": {
         "please_log_in": "Пожалуйста, войдите",
         "welcome_user": "Добро пожаловать, {{nickname}}!",
-        "or": "или"
+        "or": "или",
+        "allRightsReserved": "Все права защищены."
     },
     "auth": {
         "title": "Вход",
@@ -126,5 +127,10 @@
         "userHasThisTranslation": "Такой перевод существует, но ожидается другое",
         "successSubmit": "Результаты успешно отправлены!",
         "errorSubmit": "Что-то пошло не так во время отправки результатов."
+    },
+    "bookOverview": {
+        "viewBooks": "Просмотр книг",
+        "updateTitle": "Обновить заголовок",
+        "deleteBook": "Удалить книгу"
     }
 }

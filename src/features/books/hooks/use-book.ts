@@ -30,15 +30,16 @@ export const useGetBookPage = (
         enabled: Boolean(bookId && page > 0),
     });
 
-export const useUpdateBook = (): UseMutationResult<
+export const useUpdateBookTitle = (): UseMutationResult<
     BookDto,
     Error,
-    { id: string; data: Partial<BookDto> }
+    { id: string; userId: string; title: string }
 > => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ id, data }) => BookService.updateBook(id, data),
+        mutationFn: ({ id, userId, title }) =>
+            BookService.updateBookTitle(id, { userId, title }),
         onSuccess: (_, { id }) => {
             queryClient.invalidateQueries({ queryKey: ["books", "user"] });
             queryClient.invalidateQueries({ queryKey: ["books", id] });

@@ -29,11 +29,14 @@ export class BookService {
         return data;
     }
 
-    static async updateBook(
+    static async updateBookTitle(
         bookId: string,
-        updateDto: Partial<BookDto>
+        updateDto: { userId: string; title: string }
     ): Promise<BookDto> {
-        const { data } = await api.patch(`${ROUTE_URL}/${bookId}`, updateDto);
+        const { data } = await api.patch(
+            `${ROUTE_URL}/${bookId}/title`,
+            updateDto
+        );
         return data;
     }
 
