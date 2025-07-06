@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { PaginationControls } from "./pagination-control";
+import { PaginationControls } from "../../../../../shared/components/pagination-control";
 import { WordActionMenu } from "./word-action/word-action-menu";
 import { Theme } from "../../../../user-config/types/theme";
 
@@ -48,6 +48,11 @@ export const WordManagementHeader: React.FC<Props> = ({
                     onPageSizeChange={onPageSizeChange}
                     maxPage={maxPage}
                     totalItems={total}
+                    pageSizeOptions={[10, 20, 30, 40, 50]}
+                    itemsPerPageLabel={t("pagination.wordsPerPage")}
+                    totalFoundLabel={(count) =>
+                        t("pagination.totalWordsFound", { count })
+                    }
                 />
                 <WordActionMenu
                     selectedIds={selectedIds}

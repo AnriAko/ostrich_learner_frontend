@@ -64,8 +64,12 @@
         "prev": "Назад",
         "next": "Вперёд",
         "page": "Страница:",
-        "itemsPerPage": "Слов на странице",
-        "totalFound": "Всего найдено: {{count}}"
+        "wordsPerPage": "Слов на странице",
+        "totalWordsFound": "Всего слов найдено: {{count}}",
+        "booksPerPage": "Книг на странице",
+        "totalBooksFound": "Всего книг найдено: {{count}}",
+        "PagesPerPage": "Страниц книги на странице",
+        "totalPagesFound": "Всего страниц книги найдено: {{count}}"
     },
     "table": {
         "origin": "Исходное",

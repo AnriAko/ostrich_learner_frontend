@@ -65,8 +65,12 @@
         "prev": "უკან",
         "next": "წინ",
         "page": "გვერდი:",
-        "itemsPerPage": "სიტყვები გვერდზე",
-        "totalFound": "სულ ნაპოვნია: {{count}}"
+        "wordsPerPage": "სიტყვები გვერდზე",
+        "totalWordsFound": "სულ ნაპოვნია {{count}} სიტყვა",
+        "booksPerPage": "წიგნები გვერდზე",
+        "totalBooksFound": "სულ ნაპოვნია {{count}} წიგნი",
+        "PagesPerPage": "წიგნის გვერდები თითო გვერდზე",
+        "totalPagesFound": "სულ ნაპოვნია წიგნის გვერდი: {{count}}"
     },
     "table": {
         "origin": "საწყისი",

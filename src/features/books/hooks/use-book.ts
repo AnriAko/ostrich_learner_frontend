@@ -7,14 +7,16 @@ import {
 } from "@tanstack/react-query";
 import { BookService } from "../service/book-service";
 import { BookDto, BookPageRawDto } from "../dto/book.dto";
-import { BookOverviewDto } from "../dto/book-overview.dto";
+import { PaginatedBooksDto } from "../dto/paginated-books.dto";
 
 export const useGetBooksByUser = (
-    userId: string
-): UseQueryResult<BookOverviewDto[]> =>
+    userId: string,
+    page: number,
+    pageSize: number
+): UseQueryResult<PaginatedBooksDto> =>
     useQuery({
-        queryKey: ["books", "user", userId],
-        queryFn: () => BookService.getBooksByUser(userId),
+        queryKey: ["books", "user", userId, page, pageSize],
+        queryFn: () => BookService.getBooksByUser(userId, page, pageSize),
         enabled: Boolean(userId),
     });
 

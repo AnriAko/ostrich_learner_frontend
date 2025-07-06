@@ -34,7 +34,7 @@ const WordManagement: React.FC = () => {
     const startTests = useStartTests(cachedData!, selectedIds);
 
     return (
-        <div className={`p-6 ${containerBg} h-[80vh] flex flex-col`}>
+        <div className={`p-6 ${containerBg} h-[80.5vh] flex flex-col`}>
             <WordManagementHeader
                 theme={theme}
                 total={data?.total}

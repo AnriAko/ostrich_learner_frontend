@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
+import { useTheme } from "../context/theme-context/use-theme";
 import { useState, useEffect } from "react";
 
 interface Props {
@@ -9,6 +9,10 @@ interface Props {
     onPageSizeChange: (pageSize: number) => void;
     maxPage?: number;
     totalItems?: number;
+
+    pageSizeOptions?: number[];
+    itemsPerPageLabel?: string;
+    totalFoundLabel?: string | ((count: number) => string);
 }
 
 export function PaginationControls({
@@ -18,6 +22,9 @@ export function PaginationControls({
     onPageSizeChange,
     maxPage,
     totalItems,
+    pageSizeOptions = [10, 20, 30, 40, 50],
+    itemsPerPageLabel,
+    totalFoundLabel,
 }: Props) {
     const { t } = useTranslation();
     const { theme } = useTheme();
@@ -61,8 +68,6 @@ export function PaginationControls({
         }
     };
 
-    const pageSizeOptions = [10, 20, 30, 40, 50];
-
     const themeClasses = isDark
         ? {
               container: "border-gray-700 text-gray-300",
@@ -80,7 +85,7 @@ export function PaginationControls({
           };
 
     const getButtonClass = (disabled: boolean) => {
-        const base = `${themeClasses.button} h-5 px-2 text-xs rounded font-medium transition leading-none`;
+        const base = `${themeClasses.button} h-5 px-2 text-xs rounded font-medium leading-none`;
         const cursorClass = disabled
             ? "cursor-not-allowed opacity-50"
             : "cursor-pointer";
@@ -126,7 +131,7 @@ export function PaginationControls({
 
                 <div className="flex items-center gap-1">
                     <label htmlFor="pageSizeSelect" className="text-xs">
-                        {t("pagination.itemsPerPage")}:
+                        {itemsPerPageLabel ?? t("pagination.itemsPerPage")}:
                     </label>
                     <select
                         id="pageSizeSelect"
@@ -147,7 +152,10 @@ export function PaginationControls({
 
             {typeof totalItems === "number" && (
                 <div className="text-xs text-gray-500">
-                    {t("pagination.totalFound", { count: totalItems })}
+                    {typeof totalFoundLabel === "function"
+                        ? totalFoundLabel(totalItems)
+                        : totalFoundLabel ??
+                          t("pagination.totalFound", { count: totalItems })}
                 </div>
             )}
         </div>

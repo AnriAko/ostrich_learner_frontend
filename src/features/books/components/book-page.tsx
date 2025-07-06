@@ -1,11 +1,6 @@
-import { BookPanel } from "./book-panel";
+import React from "react";
+import { BookOverviewPanel } from "./book-overview-panel";
 
-export const BooksPage = () => {
-    return (
-        <div className="flex gap-4">
-            <div style={{ width: "300px" }}>
-                <BookPanel />
-            </div>
-        </div>
-    );
+export const BooksPage: React.FC = () => {
+    return <BookOverviewPanel />;
 };

@@ -64,8 +64,12 @@
         "prev": "Prev",
         "next": "Next",
         "page": "Page:",
-        "itemsPerPage": "Words per page",
-        "totalFound": "Total words found: {{count}}"
+        "wordsPerPage": "Words per page",
+        "totalWordsFound": "Total words found: {{count}}",
+        "booksPerPage": "Books per page",
+        "totalBooksFound": "Total books found: {{count}}",
+        "PagesPerPage": "Book pages per page",
+        "totalPagesFound": "Total book pages found: {{count}}"
     },
     "table": {
         "origin": "Origin",
