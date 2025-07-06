@@ -6,8 +6,9 @@ import {
     UseMutationResult,
 } from "@tanstack/react-query";
 import { BookService } from "../service/book-service";
-import { BookDto, BookPageRawDto } from "../dto/book.dto";
+import { BookDto } from "../dto/book.dto";
 import { PaginatedBooksDto } from "../dto/paginated-books.dto";
+import { BookPageResponseDto } from "../dto/book-page-response.dto";
 
 export const useGetBooksByUser = (
     userId: string,
@@ -22,11 +23,12 @@ export const useGetBooksByUser = (
 
 export const useGetBookPage = (
     bookId: string,
-    page: number
-): UseQueryResult<BookPageRawDto> =>
+    page: number,
+    pageSize: number
+): UseQueryResult<BookPageResponseDto> =>
     useQuery({
-        queryKey: ["books", "page", bookId, page],
-        queryFn: () => BookService.getBookPage(bookId, page),
+        queryKey: ["books", "page", "pageSize", bookId, page, pageSize],
+        queryFn: () => BookService.getBookPage(bookId, page, pageSize),
         enabled: Boolean(bookId && page > 0),
     });
 

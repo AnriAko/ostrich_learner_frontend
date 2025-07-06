@@ -6,6 +6,7 @@ import { BookTitleBlock } from "./book-title-block";
 import { BookProgressBar } from "./book-progress-bar";
 import { BookActionButton } from "./book-action-button";
 import { BookContextMenuWrapper } from "./book-context-menu-wrapper";
+import { Link } from "react-router-dom";
 
 interface Props {
     book: BookOverviewDto;
@@ -64,6 +65,10 @@ export const BookCard: React.FC<Props> = ({
             ? t("bookOverview.continueReading")
             : t("bookOverview.startReading");
 
+    const linkTarget = `/dashboard/books/${book._id}?page=${
+        book.lastViewedPage ?? 1
+    }&pageSize=${book.lastViewedPageSize ?? 1}`;
+
     return (
         <div
             className={`group border rounded-lg p-4 flex flex-col justify-start cursor-pointer ${bgClass} min-w-[150px] min-h-[120px] h-[25vh] basis-[18%] mb-[2%]`}
@@ -75,19 +80,30 @@ export const BookCard: React.FC<Props> = ({
                 }
             }}
         >
-            <div className="flex flex-col flex-1">
-                <BookTitleBlock
-                    isEditing={isEditing}
-                    title={book.b}
-                    onCancel={onCancelEdit}
-                    onConfirm={onEditConfirm}
-                />
-                {progressPercent > 0 && (
-                    <BookProgressBar percent={progressPercent} />
-                )}
-            </div>
-
-            <BookActionButton label={buttonLabel} />
+            <Link
+                to={linkTarget}
+                className="flex flex-col flex-1 no-underline focus:outline-none"
+                onClick={(e) => {
+                    if (isEditing || isMenuOpen) {
+                        e.preventDefault();
+                    }
+                }}
+            >
+                <div className="flex flex-col flex-1 justify-between">
+                    <div>
+                        <BookTitleBlock
+                            isEditing={isEditing}
+                            title={book.b}
+                            onCancel={onCancelEdit}
+                            onConfirm={onEditConfirm}
+                        />
+                        {progressPercent > 0 && (
+                            <BookProgressBar percent={progressPercent} />
+                        )}
+                    </div>
+                    <BookActionButton label={buttonLabel} />
+                </div>
+            </Link>
 
             {isMenuOpen && menuPos && (
                 <BookContextMenuWrapper

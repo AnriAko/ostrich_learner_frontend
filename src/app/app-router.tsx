@@ -9,6 +9,7 @@ import AddWordsPage from "../features/words/components/add-words/page/add-word-p
 import WordManagement from "../features/words/components/word-management/word-management";
 import StudyPage from "../features/words/components/study-words/study-page";
 import { BooksPage } from "../features/books/components/book-page";
+import { BookReaderPage } from "../features/books/components/book-reader/book-reader-page";
 
 const AppRouter = () => {
     return (
@@ -25,6 +26,7 @@ const AppRouter = () => {
                     <Route path="study" element={<StudyPage />} />
                     <Route path="manage" element={<WordManagement />} />
                     <Route path="books" element={<BooksPage />} />
+                    <Route path="books/:bookId" element={<BookReaderPage />} />
                 </Route>
             </Route>
         </Routes>

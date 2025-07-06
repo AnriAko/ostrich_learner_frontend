@@ -9,9 +9,7 @@ export const BookProgressBar: React.FC<Props> = ({ percent }) => {
     const { theme } = useTheme();
     const isDark = theme === "dark";
 
-    const trackClass = isDark
-        ? "bg-gray-700 group-hover:bg-gray-800"
-        : "bg-gray-400 group-hover:bg-gray-500";
+    const trackClass = isDark ? "bg-gray-700" : "bg-gray-400";
 
     const fillClass = isDark
         ? "bg-yellow-300 group-hover:bg-yellow-400"

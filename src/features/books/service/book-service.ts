@@ -1,5 +1,6 @@
 import api from "../../../shared/api/axios-instance";
-import { BookDto, BookPageRawDto } from "../dto/book.dto";
+import { BookPageResponseDto } from "../dto/book-page-response.dto";
+import { BookDto } from "../dto/book.dto";
 import { PaginatedBooksDto } from "../dto/paginated-books.dto";
 
 const ROUTE_URL = "book";
@@ -19,10 +20,11 @@ export class BookService {
 
     static async getBookPage(
         bookId: string,
-        page: number
-    ): Promise<BookPageRawDto> {
-        const { data } = await api.get(`${ROUTE_URL}/${bookId}/page`, {
-            params: { page },
+        page: number,
+        pageSize: number
+    ): Promise<BookPageResponseDto> {
+        const { data } = await api.get(`${ROUTE_URL}/${bookId}`, {
+            params: { page, pageSize },
         });
         return data;
     }
