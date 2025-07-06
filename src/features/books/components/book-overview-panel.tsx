@@ -1,7 +1,7 @@
 import { useUser } from "../../../shared/context/user-context/use-user";
 import { useGetBooksByUser } from "../hooks/use-book";
 import { useState } from "react";
-import { BookList } from "./book-list";
+import { BookList } from "./book-list/book-list";
 import { PaginationControls } from "../../../shared/components/pagination-control";
 import { useTheme } from "../../../shared/context/theme-context/use-theme";
 import { useTranslation } from "react-i18next";
@@ -49,7 +49,7 @@ export const BookOverviewPanel = () => {
                 totalItems={data.total}
                 onPageChange={setPage}
                 onPageSizeChange={() => {}}
-                pageSizeOptions={[10, 20, 30, 40, 50]}
+                pageSizeOptions={[1, 2, 3, 4, 5, 10]}
                 itemsPerPageLabel={t("pagination.booksPerPage")}
                 totalFoundLabel={(count) =>
                     t("pagination.totalBooksFound", { count })

@@ -133,6 +133,12 @@
     "bookOverview": {
         "viewBooks": "წიგნების მიმოხილვა",
         "updateTitle": "სათაურის განახლება",
-        "deleteBook": "წიგნის წაშლა"
+        "deleteBook": "წიგნის წაშლა",
+        "continueReading": "კითხვის გაგრძელება",
+        "startReading": "კითხვის დაწყება",
+        "renameSuccess": "წარმატებით განახლდა.",
+        "renameFailed": "სათაური ვერ განახლდა.",
+        "deletedSuccess": "წარმატებით წაიშალა.",
+        "deleteFailed": "წაიშალის დროს შეცდომა მოხდა."
     }
 }

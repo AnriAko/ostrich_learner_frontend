@@ -132,6 +132,12 @@
     "bookOverview": {
         "viewBooks": "View books",
         "updateTitle": "Update title",
-        "deleteBook": "Delete book"
+        "deleteBook": "Delete book",
+        "continueReading": "Continue reading",
+        "startReading": "Start reading",
+        "renameSuccess": "Successfully renamed.",
+        "renameFailed": "Renaming failed.",
+        "deletedSuccess": "Successfully deleted.",
+        "deleteFailed": "Error occurred during while deleting."
     }
 }

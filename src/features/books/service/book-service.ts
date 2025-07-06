@@ -10,11 +10,9 @@ export class BookService {
         page = 1,
         pageSize = 15
     ): Promise<PaginatedBooksDto> {
-        console.log(userId, page, pageSize);
         const res = await fetch(
             `/api/book/user/${userId}?page=${page}&pageSize=${pageSize}`
         );
-        console.log(res);
         if (!res.ok) throw new Error("Failed to fetch books");
         return res.json();
     }

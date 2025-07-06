@@ -124,13 +124,19 @@
         "Continue": "Продолжить",
         "Check": "Проверить",
         "Word": "Слово",
-        "userHasThisTranslation": "Такой перевод существует, но ожидается другое",
+        "userHasThisTranslation": "Такой перевод существует, но ожидается другой.",
         "successSubmit": "Результаты успешно отправлены!",
         "errorSubmit": "Что-то пошло не так во время отправки результатов."
     },
     "bookOverview": {
         "viewBooks": "Просмотр книг",
         "updateTitle": "Обновить заголовок",
-        "deleteBook": "Удалить книгу"
+        "deleteBook": "Удалить книгу",
+        "continueReading": "Продолжить чтение",
+        "startReading": "Начать чтение",
+        "renameSuccess": "Заголовок обновлен.",
+        "renameFailed": "Не вышло обновить заголовок.",
+        "deletedSuccess": "Книга успешно удалена",
+        "deleteFailed": "Произошла ошибка во время удаления."
     }
 }
