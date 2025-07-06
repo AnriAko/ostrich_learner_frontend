@@ -7,8 +7,11 @@ import {
 } from "@tanstack/react-query";
 import { BookService } from "../service/book-service";
 import { BookDto, BookPageRawDto } from "../dto/book.dto";
+import { BookOverviewDto } from "../dto/book-overview.dto";
 
-export const useGetBooksByUser = (userId: string): UseQueryResult<BookDto[]> =>
+export const useGetBooksByUser = (
+    userId: string
+): UseQueryResult<BookOverviewDto[]> =>
     useQuery({
         queryKey: ["books", "user", userId],
         queryFn: () => BookService.getBooksByUser(userId),

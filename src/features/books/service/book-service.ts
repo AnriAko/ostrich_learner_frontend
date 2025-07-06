@@ -1,10 +1,11 @@
 import api from "../../../shared/api/axios-instance";
+import { BookOverviewDto } from "../dto/book-overview.dto";
 import { BookDto, BookPageRawDto } from "../dto/book.dto";
 
 const ROUTE_URL = "book";
 
 export class BookService {
-    static async getBooksByUser(userId: string): Promise<BookDto[]> {
+    static async getBooksByUser(userId: string): Promise<BookOverviewDto[]> {
         const { data } = await api.get(`${ROUTE_URL}/user/${userId}`);
         return data;
     }

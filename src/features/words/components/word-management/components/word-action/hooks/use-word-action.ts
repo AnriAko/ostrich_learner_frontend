@@ -1,4 +1,3 @@
-// src/features/word-management/hooks/use-delete-words-with-toast.ts
 import { useDeleteWord } from "../../../../../hooks/use-word";
 import { useTheme } from "../../../../../../../shared/context/theme-context/use-theme";
 import { useTranslation } from "react-i18next";
