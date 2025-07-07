@@ -138,6 +138,7 @@
         "renameSuccess": "Successfully renamed.",
         "renameFailed": "Renaming failed.",
         "deletedSuccess": "Successfully deleted.",
-        "deleteFailed": "Error occurred during while deleting."
+        "deleteFailed": "Error occurred during while deleting.",
+        "loading": "Loading..."
     }
 }
