@@ -21,10 +21,10 @@ export const BookPageList: React.FC<BookPageListProps> = ({
 }) => {
     return (
         <div className="flex-1 overflow-y-auto max-h-[65vh] pr-4 word-table-scroll">
-            <div className="flex flex-col items-start gap-0 w-full">
+            <div className="flex flex-col items-start gap-0">
                 <div className="relative mb-6">
                     <div
-                        className="flex items-center w-full absolute left-0 -top-3 z-10"
+                        className="flex items-center absolute left-0 -top-3 z-10"
                         style={{ pointerEvents: "none" }}
                     >
                         <div className={`flex-1 h-0.5 ${lineBgClass}`} />

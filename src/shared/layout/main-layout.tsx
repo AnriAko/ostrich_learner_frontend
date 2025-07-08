@@ -28,7 +28,7 @@ const MainLayout = () => {
 
             <div className="flex flex-1 overflow-hidden">
                 {user && <Sidebar isOpen={isSidebarOpen} />}
-                <main className="flex-1 container w-full overflow-auto">
+                <main className="flex-1 overflow-auto">
                     <Outlet />
                 </main>
             </div>

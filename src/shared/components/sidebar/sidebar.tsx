@@ -1,4 +1,3 @@
-// src/shared/components/sidebar/sidebar.tsx
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getMenuItems } from "./menu-config";
@@ -20,10 +19,14 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
 
     return (
         <aside
-            className={`${bgClass}
-                ${
-                    isOpen ? "w-60" : "w-16"
-                } overflow-hidden transition-[width] duration-200`}
+            className={`
+                ${bgClass}
+                ${isOpen ? "w-60" : "w-16"}
+                min-w-[4rem]
+                flex-shrink-0
+                overflow-hidden
+                transition-[width] duration-200
+            `}
         >
             <nav className="flex flex-col">
                 {menuItems.map(({ to, label, icon: Icon }) => (
@@ -32,15 +35,15 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
                         to={to}
                         className={({ isActive }) =>
                             `flex items-center gap-2 py-2 px-4 whitespace-nowrap overflow-hidden 
-                        ${hoverColor}
-                        ${
-                            isActive
-                                ? isDark
-                                    ? "inner-border-yellow"
-                                    : "inner-border-blue"
-                                : ""
-                        }
-                        ${linkColor}`
+                            ${hoverColor}
+                            ${
+                                isActive
+                                    ? isDark
+                                        ? "inner-border-yellow"
+                                        : "inner-border-blue"
+                                    : ""
+                            }
+                            ${linkColor}`
                         }
                     >
                         <span className="w-7 h-7 flex-shrink-0 flex items-center justify-center">
@@ -48,10 +51,10 @@ const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
                         </span>
 
                         <span
-                            className={`inline-block ${
+                            className={`inline-block transition-all duration-200 ${
                                 isOpen
-                                    ? "opacity-100 w-auto ml-2"
-                                    : "opacity-0 w-0 ml-0"
+                                    ? "opacity-100 ml-2 w-auto"
+                                    : "opacity-0 ml-0 w-0"
                             }`}
                         >
                             {label}
