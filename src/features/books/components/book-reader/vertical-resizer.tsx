@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 
 interface VerticalResizerProps {
@@ -7,14 +7,16 @@ interface VerticalResizerProps {
     minWidth?: number;
     sidebarWidth?: number;
     className?: string;
+    storageKey?: string; // 👈 имя ключа, по которому сохраняем ширину
 }
 
 export const VerticalResizer: React.FC<VerticalResizerProps> = ({
     containerRef,
     onResizeTo,
     minWidth = 370,
-    sidebarWidth = 320, // ← добавили
+    sidebarWidth = 320,
     className = "",
+    storageKey = "book_left_width", // 👈 можно переопределить при необходимости
 }) => {
     const isDragging = useRef(false);
     const [dragActive, setDragActive] = useState(false);
@@ -28,6 +30,26 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
     const lineIdle = isDark ? "bg-gray-400" : "bg-gray-500";
     const lineActive = "bg-white";
 
+    const centerShift = 8 + 20 + 6;
+
+    // ⬇️ Устанавливаем дефолтную ширину один раз, если в localStorage нет значения
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const saved = localStorage.getItem(storageKey);
+        if (saved) return;
+
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const containerWidth = containerRect.width;
+
+        const totalParts = 3; // 2:1
+        const leftWidth = (2 / totalParts) * containerWidth;
+        const finalWidth = Math.max(minWidth, leftWidth - centerShift);
+
+        onResizeTo(finalWidth);
+        localStorage.setItem(storageKey, String(finalWidth));
+    }, [containerRef, minWidth, centerShift, onResizeTo, storageKey]);
+
     const handleMouseMove = (e: MouseEvent) => {
         if (!isDragging.current || !containerRef.current) return;
 
@@ -35,15 +57,13 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
         const containerLeft = containerRect.left;
         const containerWidth = containerRect.width;
 
-        const min = minWidth;
         const max = containerWidth - sidebarWidth;
 
-        const centerShift = 8 + 20 + 6;
-
         let newLeftWidth = e.clientX - containerLeft - centerShift;
-        newLeftWidth = Math.min(Math.max(newLeftWidth, min), max);
+        newLeftWidth = Math.min(Math.max(newLeftWidth, minWidth), max);
 
         onResizeTo(newLeftWidth);
+        localStorage.setItem(storageKey, String(newLeftWidth));
     };
 
     const handleMouseUp = () => {

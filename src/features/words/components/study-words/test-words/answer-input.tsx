@@ -54,7 +54,7 @@ export default function AnswerInput({
                 id="user-test-input"
                 type="text"
                 ref={inputRef}
-                className={`flex-1 border px-2 py-1 rounded transition-colors duration-300 ${
+                className={`flex-1 border px-2 py-1 rounded ${
                     isDark
                         ? "bg-gray-700 text-white border-gray-600 placeholder-gray-400"
                         : "bg-white text-gray-700 border-gray-300 placeholder-gray-500"

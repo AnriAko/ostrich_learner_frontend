@@ -59,17 +59,26 @@ export const FlashcardPage: React.FC<FlashcardTrainerProps> = ({
 
     return (
         <div
-            className={`p-6 min-w-sm ${isDark ? "bg-gray-800" : "bg-gray-200"}`}
+            className={`p-6 min-w-sm ${isDark ? "bg-gray-800" : "bg-gray-300"}`}
             style={{ alignSelf: "flex-start" }}
         >
             <button
                 onClick={onClose}
-                className="mb-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition"
+                className={`mb-4 px-4 py-2 rounded transition-colors font-medium text-sm
+        ${
+            isDark
+                ? "bg-yellow-400 text-gray-800 hover:bg-yellow-300"
+                : "bg-blue-500 text-white hover:bg-blue-600"
+        }`}
             >
                 ←
             </button>
 
-            <FlashcardCounter learned={learnedCount} total={totalCount} />
+            <FlashcardCounter
+                learned={learnedCount}
+                total={totalCount}
+                theme={theme}
+            />
 
             <div className="perspective w-full h-52 mb-4">
                 <div

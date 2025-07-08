@@ -97,11 +97,14 @@ export const BookCard: React.FC<Props> = ({
                             onCancel={onCancelEdit}
                             onConfirm={onEditConfirm}
                         />
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-2">
                         {progressPercent > 0 && (
                             <BookProgressBar percent={progressPercent} />
                         )}
+                        <BookActionButton label={buttonLabel} />
                     </div>
-                    <BookActionButton label={buttonLabel} />
                 </div>
             </Link>
 

@@ -65,7 +65,7 @@ export default function ProgressBar({
                     return (
                         <div
                             key={idx}
-                            className={`${bgColor} h-full transition-colors duration-300`}
+                            className={`${bgColor} h-full`}
                             style={{ flex: "1 1 0%" }}
                         />
                     );

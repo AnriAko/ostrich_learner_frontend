@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface BookPageListProps {
     pages: { t: string }[];
@@ -19,8 +20,10 @@ export const BookPageList: React.FC<BookPageListProps> = ({
     lineBgClass,
     badgeBgClass,
 }) => {
+    const { t } = useTranslation();
+
     return (
-        <div className="flex-1 overflow-y-auto max-h-[65vh] pr-4 word-table-scroll">
+        <div className="flex-1 overflow-y-auto max-h-[64vh] pr-4 word-table-scroll">
             <div className="flex flex-col items-start gap-0">
                 <div className="relative mb-6 min-w-[370px]">
                     <div
@@ -41,6 +44,7 @@ export const BookPageList: React.FC<BookPageListProps> = ({
                 {pages.map((pageData, index) => {
                     const globalPageNumber = (page - 1) * pageSize + index + 1;
                     const isLast = index === pages.length - 1;
+                    const isEmpty = !pageData.t.trim();
 
                     return (
                         <div
@@ -79,7 +83,9 @@ export const BookPageList: React.FC<BookPageListProps> = ({
                                 }}
                             >
                                 <div className="px-6 py-4 whitespace-pre-wrap pt-5 pd-5">
-                                    {pageData.t}
+                                    {isEmpty
+                                        ? t("bookOverview.emptyPage")
+                                        : pageData.t}
                                 </div>
                             </div>
                         </div>

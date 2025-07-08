@@ -94,7 +94,7 @@ export function PaginationControls({
 
     return (
         <div
-            className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-2 py-1 text-xs ${themeClasses.container} rounded-sm w-max max-w-full mb-2`}
+            className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs ${themeClasses.container} rounded-sm w-max max-w-full mb-2`}
         >
             <div className="flex items-center gap-1 flex-wrap">
                 <button

@@ -83,14 +83,14 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
 
     return (
         <div
-            className={`p-4 min-w-sm transition-colors duration-300 ${
+            className={`p-4 min-w-sm ${
                 isDark ? "bg-gray-800 text-white" : "bg-gray-100 text-gray-800"
             }`}
         >
             <div className="relative mb-4 h-10 flex items-center">
                 <button
                     onClick={onClose}
-                    className={`px-4 py-2 rounded transition ${
+                    className={`px-4 py-2 rounded ${
                         isDark
                             ? "bg-gray-700 text-gray-100 hover:bg-gray-600"
                             : "bg-gray-200 text-gray-700 hover:bg-gray-300"

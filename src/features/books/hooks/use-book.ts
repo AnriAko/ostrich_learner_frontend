@@ -6,9 +6,36 @@ import {
     UseMutationResult,
 } from "@tanstack/react-query";
 import { BookService } from "../service/book-service";
-import { BookDto } from "../dto/book.dto";
+import { BookDto, BookDtoWithoutPages } from "../dto/book.dto";
 import { PaginatedBooksDto } from "../dto/paginated-books.dto";
 import { BookPageResponseDto } from "../dto/book-page-response.dto";
+
+interface CreateBookVariables {
+    pdfFile: File;
+    userId: string;
+}
+
+interface CreateBookVariables {
+    pdfFile: File;
+    userId: string;
+    fileName?: string;
+}
+
+export const useCreateBookWithPdf = (): UseMutationResult<
+    BookDtoWithoutPages,
+    Error,
+    CreateBookVariables
+> => {
+    const queryClient = useQueryClient();
+
+    return useMutation<BookDtoWithoutPages, Error, CreateBookVariables>({
+        mutationFn: ({ pdfFile, userId, fileName }) =>
+            BookService.createBookWithPdf(pdfFile, userId, fileName),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["books", "user"] });
+        },
+    });
+};
 
 export const useGetBooksByUser = (
     userId: string,

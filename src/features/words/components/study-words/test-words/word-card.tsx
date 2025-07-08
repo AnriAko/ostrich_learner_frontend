@@ -14,7 +14,7 @@ export default function WordCard({ word, originLang }: WordCardProps) {
 
     return (
         <div
-            className={`border p-4 rounded mb-4 transition-colors duration-300 ${
+            className={`border p-4 rounded mb-4 ${
                 isDark
                     ? "bg-gray-800 border-gray-700 text-white"
                     : "bg-gray-100 border-gray-300 text-gray-800"

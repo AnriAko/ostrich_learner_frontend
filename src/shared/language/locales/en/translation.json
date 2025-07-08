@@ -139,6 +139,13 @@
         "renameFailed": "Renaming failed.",
         "deletedSuccess": "Successfully deleted.",
         "deleteFailed": "Error occurred during while deleting.",
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "emptyPage": "Empty page",
+        "userIdNotFound": "User ID not found or file not selected",
+        "uploadSuccess": "Book uploaded successfully",
+        "uploadFail": "Failed to upload book",
+        "uploadBookPdf": "Upload book PDF",
+        "pleaseWaitUpload": "Please wait, uploading...",
+        "pleaseWaitUploadClue": "Depending on the size of the book, this may take a couple of minutes."
     }
 }

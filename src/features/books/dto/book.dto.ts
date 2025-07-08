@@ -4,6 +4,12 @@ export interface BookDto {
     p_count: number; // total number of pages
     p: BookPageRawDto[]; // array of page data
 }
+export interface BookDtoWithoutPages {
+    _id: string;
+    b: string;
+    p_count: number;
+    userId: string;
+}
 
 export interface BookTranslationDto {
     pos_id: number; // position of the word in the page text
