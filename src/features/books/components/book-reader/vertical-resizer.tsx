@@ -34,10 +34,8 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
         const min = 200;
         const max = containerWidth;
 
-        // ml-5 = 20px, w-3 = 12px → centerShift = 20 + 6 = 26
-        const marginLeft = 20;
-        const resizerWidth = 12;
-        const centerShift = marginLeft + resizerWidth / 2;
+        // Accurate center offset: buffer (8) + ml-5 (20) + half resizer (6)
+        const centerShift = 8 + 20 + 6;
 
         let newLeftWidth = e.clientX - containerLeft - centerShift;
         newLeftWidth = Math.min(Math.max(newLeftWidth, min), max);
@@ -66,6 +64,7 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
         <div className="flex shrink-0" style={{ zIndex: 10 }}>
             {/* Buffer between lift and resizer */}
             <div className="w-2" />
+            {/* Resizer with ml-5 and rounded edges */}
             <div
                 onMouseDown={startDragging}
                 className={`
