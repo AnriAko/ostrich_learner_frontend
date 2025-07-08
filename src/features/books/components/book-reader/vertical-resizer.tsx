@@ -4,12 +4,16 @@ import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 interface VerticalResizerProps {
     containerRef: React.RefObject<HTMLDivElement | null>;
     onResizeTo: (newX: number) => void;
+    minWidth?: number;
+    sidebarWidth?: number;
     className?: string;
 }
 
 export const VerticalResizer: React.FC<VerticalResizerProps> = ({
     containerRef,
     onResizeTo,
+    minWidth = 370,
+    sidebarWidth = 320, // ← добавили
     className = "",
 }) => {
     const isDragging = useRef(false);
@@ -31,10 +35,9 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
         const containerLeft = containerRect.left;
         const containerWidth = containerRect.width;
 
-        const min = 200;
-        const max = containerWidth;
+        const min = minWidth;
+        const max = containerWidth - sidebarWidth;
 
-        // Accurate center offset: buffer (8) + ml-5 (20) + half resizer (6)
         const centerShift = 8 + 20 + 6;
 
         let newLeftWidth = e.clientX - containerLeft - centerShift;
@@ -62,9 +65,7 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
 
     return (
         <div className="flex shrink-0" style={{ zIndex: 10 }}>
-            {/* Buffer between lift and resizer */}
             <div className="w-2" />
-            {/* Resizer with ml-5 and rounded edges */}
             <div
                 onMouseDown={startDragging}
                 className={`

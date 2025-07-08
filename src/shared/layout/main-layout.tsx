@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/header/header";
 import Sidebar from "../components/sidebar/sidebar";
@@ -6,6 +6,8 @@ import Footer from "../components/footer";
 import { Theme } from "../../features/user-config/types/theme";
 import { useTheme } from "../context/theme-context/use-theme";
 import { useUser } from "../context/user-context/use-user";
+
+const LOCAL_STORAGE_KEY = "sidebar:isOpen";
 
 const MainLayout = () => {
     const { theme } = useTheme();
@@ -16,7 +18,19 @@ const MainLayout = () => {
         ? "bg-gray-800 text-gray-200"
         : "bg-gray-100 text-gray-900";
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    // Читаем из localStorage при инициализации; если нет — по умолчанию true
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(() => {
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+        return stored === null ? true : stored === "true";
+    });
+
+    useEffect(() => {
+        localStorage.setItem(
+            LOCAL_STORAGE_KEY,
+            isSidebarOpen ? "true" : "false"
+        );
+    }, [isSidebarOpen]);
+
     const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
     return (

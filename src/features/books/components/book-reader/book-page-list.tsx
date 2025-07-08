@@ -22,9 +22,9 @@ export const BookPageList: React.FC<BookPageListProps> = ({
     return (
         <div className="flex-1 overflow-y-auto max-h-[65vh] pr-4 word-table-scroll">
             <div className="flex flex-col items-start gap-0">
-                <div className="relative mb-6">
+                <div className="relative mb-6 min-w-[370px]">
                     <div
-                        className="flex items-center absolute left-0 -top-3 z-10"
+                        className="flex items-center absolute left-0 -top-3 z-10 w-full min-w-[370px]"
                         style={{ pointerEvents: "none" }}
                     >
                         <div className={`flex-1 h-0.5 ${lineBgClass}`} />
@@ -48,7 +48,7 @@ export const BookPageList: React.FC<BookPageListProps> = ({
                             className="w-full flex flex-col items-start relative mb-8"
                         >
                             <div
-                                className={`flex items-center w-full absolute left-0 -top-3 z-10`}
+                                className={`flex items-center w-full absolute left-0 -top-3 z-10 min-w-[370px]`}
                                 style={{ pointerEvents: "none" }}
                             >
                                 <div
@@ -66,7 +66,7 @@ export const BookPageList: React.FC<BookPageListProps> = ({
                             </div>
 
                             <div
-                                className={`relative w-full border-l-2 border-r-2 ${
+                                className={`relative w-full min-w-[370px] border-l-2 border-r-2 ${
                                     isLast ? "border-b-2" : ""
                                 } ${borderColorClass} ${
                                     isDark

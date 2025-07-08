@@ -18,11 +18,22 @@ export const BookReaderPage: React.FC = () => {
     const initialPage = parseInt(searchParams.get("page") || "1", 10);
     const initialPageSize = parseInt(searchParams.get("pageSize") || "1", 10);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const storageKey = `bookReader:leftWidth:${bookId}`;
+    const getInitialWidth = () => {
+        const saved = localStorage.getItem(storageKey);
+        return saved ? parseInt(saved, 10) : 600;
+    };
+
     const [page, setPage] = useState(initialPage);
     const [pageSize, setPageSize] = useState(initialPageSize);
-    const [leftWidth, setLeftWidth] = useState<number>(600);
+    const [leftWidth, setLeftWidth] = useState<number>(getInitialWidth);
 
-    const containerRef = useRef<HTMLDivElement>(null);
+    const handleResize = (newLeftWidth: number) => {
+        setLeftWidth(newLeftWidth);
+        localStorage.setItem(storageKey, newLeftWidth.toString());
+    };
 
     const { data: bookData, isLoading } = useGetBookPage(
         bookId ?? "",
@@ -78,9 +89,9 @@ export const BookReaderPage: React.FC = () => {
 
                 <VerticalResizer
                     containerRef={containerRef}
-                    onResizeTo={(newLeftWidth) => {
-                        setLeftWidth(newLeftWidth);
-                    }}
+                    onResizeTo={handleResize}
+                    minWidth={390}
+                    sidebarWidth={320}
                 />
 
                 <BookSidePanel />

@@ -1,5 +1,5 @@
 // src/shared/components/header/header.tsx
-
+import React from "react";
 import { Link } from "react-router-dom";
 import UserProfileMenu from "./user-profile-menu/user-profile-menu";
 import { useUser } from "../../context/user-context/use-user";
@@ -11,12 +11,12 @@ import { useTranslation } from "react-i18next";
 import { Menu } from "lucide-react";
 import Logo from "../../../assets/icons/Logo 256x256.svg";
 
-const Header = ({
-    toggleSidebar,
-}: {
+interface HeaderProps {
     isSidebarOpen: boolean;
     toggleSidebar: () => void;
-}) => {
+}
+
+const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
     const { user } = useUser();
     const { theme } = useTheme();
     const { t } = useTranslation();
