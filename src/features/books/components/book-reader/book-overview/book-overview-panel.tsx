@@ -1,11 +1,11 @@
-import { useUser } from "../../../shared/context/user-context/use-user";
-import { useGetBooksByUser } from "../hooks/use-book";
+import { useUser } from "../../../../../shared/context/user-context/use-user";
+import { useGetBooksByUser } from "../../../hooks/use-book";
 import { useState } from "react";
-import { BookList } from "./book-list/book-list";
-import { PaginationControls } from "../../../shared/components/pagination-control";
-import { useTheme } from "../../../shared/context/theme-context/use-theme";
+import { BookList } from "../../book-list/book-list";
+import { PaginationControls } from "../../../../../shared/components/pagination-control";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { useTranslation } from "react-i18next";
-import { UploadBookButton } from "./book-reader/upload-book-button";
+import { UploadBookButton } from "./upload-book-button";
 
 export const BookOverviewPanel = () => {
     const { user } = useUser();

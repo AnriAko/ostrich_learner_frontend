@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../context/theme-context/use-theme";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface Props {
     page: number;
@@ -9,7 +10,6 @@ interface Props {
     onPageSizeChange: (pageSize: number) => void;
     maxPage?: number;
     totalItems?: number;
-
     pageSizeOptions?: number[];
     itemsPerPageLabel?: string;
     totalFoundLabel?: string | ((count: number) => string);
@@ -29,20 +29,33 @@ export function PaginationControls({
     const { t } = useTranslation();
     const { theme } = useTheme();
     const isDark = theme === "dark";
-
     const maxPageSafe = maxPage && maxPage > 0 ? maxPage : 1;
     const [inputPage, setInputPage] = useState(page);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
         setInputPage(page);
     }, [page]);
 
+    const updateParams = (newPage: number, newPageSize = pageSize) => {
+        const newParams = new URLSearchParams(searchParams);
+        newParams.set("page", newPage.toString());
+        newParams.set("pageSize", newPageSize.toString());
+        setSearchParams(newParams);
+    };
+
     const handlePrev = () => {
-        if (page > 1) onPageChange(page - 1);
+        if (page > 1) {
+            onPageChange(page - 1);
+            updateParams(page - 1);
+        }
     };
 
     const handleNext = () => {
-        if (page < maxPageSafe) onPageChange(page + 1);
+        if (page < maxPageSafe) {
+            onPageChange(page + 1);
+            updateParams(page + 1);
+        }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,19 +66,23 @@ export function PaginationControls({
     };
 
     const handleInputBlur = () => {
-        if (inputPage < 1) {
-            onPageChange(1);
-        } else if (inputPage > maxPageSafe) {
-            onPageChange(maxPageSafe);
-        } else {
-            onPageChange(inputPage);
-        }
+        let newPage = inputPage;
+        if (newPage < 1) newPage = 1;
+        if (newPage > maxPageSafe) newPage = maxPageSafe;
+        onPageChange(newPage);
+        updateParams(newPage);
     };
 
     const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             (e.target as HTMLInputElement).blur();
         }
+    };
+
+    const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newSize = Number(e.target.value);
+        onPageSizeChange(newSize);
+        updateParams(1, newSize);
     };
 
     const themeClasses = isDark
@@ -136,9 +153,7 @@ export function PaginationControls({
                     <select
                         id="pageSizeSelect"
                         value={pageSize}
-                        onChange={(e) =>
-                            onPageSizeChange(Number(e.target.value))
-                        }
+                        onChange={handlePageSizeChange}
                         className={`h-5 px-2 text-xs rounded border shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-400 ${themeClasses.select}`}
                     >
                         {pageSizeOptions.map((size) => (

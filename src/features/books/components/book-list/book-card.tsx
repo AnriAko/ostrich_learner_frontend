@@ -2,10 +2,10 @@ import React from "react";
 import { BookOverviewDto } from "../../dto/book-overview.dto";
 import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 import { useTranslation } from "react-i18next";
-import { BookTitleBlock } from "./book-title-block";
+import { BookTitleBlock } from "../book-reader/book-overview/book-title-block";
 import { BookProgressBar } from "./book-progress-bar";
 import { BookActionButton } from "./book-action-button";
-import { BookContextMenuWrapper } from "./book-context-menu-wrapper";
+import { BookContextMenuWrapper } from "../book-reader/book-overview/book-context-menu-wrapper";
 import { Link } from "react-router-dom";
 
 interface Props {

@@ -1,5 +1,5 @@
 import React from "react";
-import { EditTitle } from "../edit-title";
+import { EditTitle } from "./edit-title";
 
 interface Props {
     isEditing: boolean;

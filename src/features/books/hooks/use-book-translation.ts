@@ -6,14 +6,21 @@ import {
 } from "../dto/book-translation.dto";
 import { WordDto } from "../../words/dto/word.dto";
 
-export const useAddTranslation = (bookId: string, page: number) => {
+export const useAddTranslation = () => {
     const queryClient = useQueryClient();
 
-    return useMutation<WordDto, Error, BookAddTranslationDto, unknown>({
-        mutationFn: (dto) => BookTranslationService.addTranslation(bookId, dto),
-        onSuccess: () => {
+    return useMutation<
+        WordDto,
+        Error,
+        { bookId: string; dto: BookAddTranslationDto },
+        unknown
+    >({
+        mutationFn: ({ bookId, dto }) =>
+            BookTranslationService.addTranslation(bookId, dto),
+
+        onSuccess: (_, { bookId, dto }) => {
             queryClient.invalidateQueries({
-                queryKey: ["books", "page", bookId, page],
+                queryKey: ["books", "page", bookId, dto.pageIndex],
             });
         },
     });

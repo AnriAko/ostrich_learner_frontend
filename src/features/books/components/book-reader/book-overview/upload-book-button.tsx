@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useCreateBookWithPdf } from "../../hooks/use-book";
-import { useUser } from "../../../../shared/context/user-context/use-user";
+import { useCreateBookWithPdf } from "../../../hooks/use-book";
+import { useUser } from "../../../../../shared/context/user-context/use-user";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useTheme } from "../../../../shared/context/theme-context/use-theme";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 
 export const UploadBookButton: React.FC = () => {
     const { t } = useTranslation();
@@ -89,7 +89,7 @@ export const UploadBookButton: React.FC = () => {
             />
             <label
                 htmlFor="upload-pdf"
-                className={`${baseButtonClass} inline-flex items-center h-5 px-2 text-xs rounded font-medium leading-[20px] transition-colors duration-200
+                className={`${baseButtonClass} inline-flex items-center h-5 px-5 text-xs rounded leading-[20px] font-bold
     ${isUploading ? disabledClass : enabledClass}`}
                 style={{ userSelect: "none" }}
             >

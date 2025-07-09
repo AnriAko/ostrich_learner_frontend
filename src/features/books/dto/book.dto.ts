@@ -12,10 +12,12 @@ export interface BookDtoWithoutPages {
 }
 
 export interface BookTranslationDto {
-    pos_id: number; // position of the word in the page text
-    translation_id: number; // SQL ID of the created translation
-    origin: string; // original word
-    translation: string; // translated word
+    pos_id: number;
+    origin: string;
+    translation: string;
+    translation_id: number;
+    sourceLang: string;
+    targetLang: string;
 }
 
 export interface BookPageRawDto {

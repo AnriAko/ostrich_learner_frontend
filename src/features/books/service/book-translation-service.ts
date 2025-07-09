@@ -11,7 +11,7 @@ export const BookTranslationService = {
         dto: BookAddTranslationDto
     ): Promise<WordDto> {
         const response = await api.post<WordDto>(
-            `/api/book-translation/${bookId}/word`,
+            `/book-translation/${bookId}/word`,
             dto
         );
         return response.data;
@@ -21,7 +21,7 @@ export const BookTranslationService = {
         bookId: string,
         dto: BookRemoveTranslationDto
     ): Promise<void> {
-        await api.delete(`/api/book-translation/${bookId}/word`, {
+        await api.delete(`/book-translation/${bookId}/word`, {
             data: dto,
         });
     },

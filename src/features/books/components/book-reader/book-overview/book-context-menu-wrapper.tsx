@@ -1,5 +1,5 @@
 import React from "react";
-import { BookMenu } from "../book-menu";
+import { BookMenu } from "./book-menu";
 
 interface Props {
     pos: { x: number; y: number };

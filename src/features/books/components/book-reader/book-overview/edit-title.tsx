@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Check, X } from "lucide-react";
-import { useTheme } from "../../../shared/context/theme-context/use-theme";
+import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { toast } from "react-toastify";
 
 interface EditTitleProps {
