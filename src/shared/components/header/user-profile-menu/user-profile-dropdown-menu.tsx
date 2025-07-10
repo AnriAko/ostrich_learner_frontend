@@ -29,12 +29,13 @@ const UserProfileDropdownMenu: FC<Props> = ({
         >
             {user ? (
                 <>
-                    <div className="px-4 py-2 font-bold text-sm">
+                    <div
+                        className="px-4 py-2 font-bold text-sm max-w-full truncate"
+                        title={user.nickname}
+                    >
                         {user.nickname}
-                        <div className="text-xs opacity-50 select-text">
-                            ID: {user.userId}
-                        </div>
                     </div>
+
                     <hr
                         className={
                             isDark ? "border-gray-600" : "border-gray-400"
@@ -42,7 +43,7 @@ const UserProfileDropdownMenu: FC<Props> = ({
                     />
 
                     <Link
-                        to="/progress"
+                        to="/achievements"
                         className={`block px-4 py-2 text-sm cursor-pointer ${
                             isDark ? "hover:bg-gray-700" : "hover:bg-gray-100"
                         }`}

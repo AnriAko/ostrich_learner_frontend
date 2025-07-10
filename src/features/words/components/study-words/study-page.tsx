@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlashcardPage } from "./flashcards/flashcard-page";
 import { useTheme } from "../../../../shared/context/theme-context/use-theme";
@@ -35,10 +35,22 @@ export const StudyPage: React.FC = () => {
     const mode = state?.mode;
     const wordsFromLocation = state?.words;
 
-    const { data: availableWords = [], isLoading: isLoadingAvailable } =
-        useGetAvailableForLearning(user?.userId ?? "");
-    const { data: repetitionWords = [], isLoading: isLoadingRepetition } =
-        useGetWordsForRepetition(user?.userId ?? "");
+    const {
+        data: availableWords = [],
+        isLoading: isLoadingAvailable,
+        refetch: refetchAvailable,
+    } = useGetAvailableForLearning(user?.userId ?? "");
+
+    const {
+        data: repetitionWords = [],
+        isLoading: isLoadingRepetition,
+        refetch: refetchRepetition,
+    } = useGetWordsForRepetition(user?.userId ?? "");
+
+    useEffect(() => {
+        refetchAvailable();
+        refetchRepetition();
+    }, [refetchAvailable, refetchRepetition]);
 
     const isInitialLoading = isLoadingAvailable || isLoadingRepetition;
 
@@ -70,7 +82,16 @@ export const StudyPage: React.FC = () => {
                         onClose={() => navigate(-1)}
                     />
                 ) : mode === "test" ? (
-                    <TestWordsPage words={wordsFromLocation} limit={limit} />
+                    <TestWordsPage
+                        words={wordsFromLocation}
+                        limit={limit}
+                        onTestFinished={async () => {
+                            await Promise.all([
+                                refetchAvailable(),
+                                refetchRepetition(),
+                            ]);
+                        }}
+                    />
                 ) : (
                     <p className="text-red-500">Unknown mode</p>
                 )

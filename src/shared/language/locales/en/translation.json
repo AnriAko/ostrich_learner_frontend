@@ -40,6 +40,51 @@
         "manageWords": "View words",
         "books": "View Books"
     },
+    "settings": {
+        "title": "Settings",
+        "nicknameLabel": "Nickname",
+        "nicknameMinLength": "Nickname must be at least 2 characters",
+        "nicknameUpdated": "Nickname updated to \"{{nickname}}\"",
+        "failedToUpdateNickname": "Failed to update nickname",
+        "confirmDeleteAccount": "Are you sure you want to delete your account?",
+        "accountDeleted": "Account deleted",
+        "failedToDeleteAccount": "Failed to delete account",
+        "loadingProfile": "Loading profile...",
+        "save": "Save",
+        "saving": "Saving...",
+        "dangerZone": "Danger zone",
+        "deleteAccount": "Delete Account",
+        "deleting": "Deleting...",
+        "theme": "Theme",
+        "interfaceLanguage": "Interface Language"
+    },
+    "themeNames": {
+        "dark": "Dark",
+        "light": "Light"
+    },
+    "calendar": {
+        "loading": "Loading calendar...",
+        "error": "Error loading calendar",
+        "title": "Learned Words Calendar",
+        "noWordsLearned": "No words learned",
+        "wordsLearned": "{{count}} word learned",
+        "wordsLearned_plural": "{{count}} words learned",
+        "weekDays": {
+            "Sun": "Sun",
+            "Mon": "Mon",
+            "Tue": "Tue",
+            "Wed": "Wed",
+            "Thu": "Thu",
+            "Fri": "Fri",
+            "Sat": "Sat"
+        }
+    },
+    "achievements": {
+        "title": "Achievements",
+        "previous": "Previous",
+        "next": "Next",
+        "loginRequired": "Please login to see achievements"
+    },
     "manageWords": "View words",
     "addWordsPage": {
         "title": "Add a new word",

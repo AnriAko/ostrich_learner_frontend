@@ -6,19 +6,10 @@ type CreateUserStatusMessageProps = {
 };
 
 const CreateUserStatusMessage = ({
-    isSuccess,
     isError,
     error,
     t,
 }: CreateUserStatusMessageProps) => {
-    if (isSuccess) {
-        return (
-            <p className="text-center text-green-500">
-                {t("createUser.success")}
-            </p>
-        );
-    }
-
     if (isError) {
         return (
             <p className="text-center text-red-500">

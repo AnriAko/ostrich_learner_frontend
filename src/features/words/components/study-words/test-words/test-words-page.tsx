@@ -15,9 +15,14 @@ import TestMainButton from "./test-main-button";
 interface TestWordsPageProps {
     words: WordDto[];
     limit: number;
+    onTestFinished?: () => void;
 }
 
-export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
+export default function TestWordsPage({
+    words,
+    limit,
+    onTestFinished,
+}: TestWordsPageProps) {
     const { t } = useTranslation();
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
@@ -39,7 +44,12 @@ export default function TestWordsPage({ words, limit }: TestWordsPageProps) {
         resetResult,
     } = useTestWord(words, limit);
 
-    const onClose = () => navigate(-1);
+    const onClose = async () => {
+        if (onTestFinished) {
+            await onTestFinished();
+        }
+        navigate(-1);
+    };
 
     const [userAnswer, setUserAnswer] = useState("");
 

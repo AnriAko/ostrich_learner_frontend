@@ -40,7 +40,52 @@
         "manageWords": "სიტყვების მიმოხილვა",
         "books": "წიგნების მიმოხილვა"
     },
+    "settings": {
+        "title": "პარამეტრები",
+        "nicknameLabel": "ნიკნეიმი",
+        "nicknameMinLength": "ნიკნეიმი უნდა იყოს მინიმუმ 2 სიმბოლო",
+        "nicknameUpdated": "ნიკნეიმი განახლდა: \"{{nickname}}\"",
+        "failedToUpdateNickname": "ნიკნეიმის განახლება ვერ განხორციელდა",
+        "confirmDeleteAccount": "ნამდვილად გსურთ ანგარიშის წაშლა?",
+        "accountDeleted": "ანგარიში წაიშალა",
+        "failedToDeleteAccount": "ანგარიშის წაშლა ვერ განხორციელდა",
+        "loadingProfile": "პროფილის დატვირთვა...",
+        "save": "შენახვა",
+        "saving": "დატვირთვა...",
+        "dangerZone": "საფრთხის ზონა",
+        "deleteAccount": "პროფილის წაშლა",
+        "deleting": "წაშლა...",
+        "theme": "თემა",
+        "interfaceLanguage": "ინტერფეისის ენა"
+    },
+    "themeNames": {
+        "dark": "მუქი",
+        "light": "ღია"
+    },
     "manageWords": "სიტყვების მიმოხილვა",
+    "calendar": {
+        "loading": "კალენდრის დატვირთვა...",
+        "error": "შეცდომა კალენდრის დატვირთვისას",
+        "title": "სწავლული სიტყვების კალენდარი",
+        "noWordsLearned": "სიტყვა არ არის ნასწავლი",
+        "wordsLearned": "{{count}} სიტყვა ნასწავლი",
+        "wordsLearned_plural": "{{count}} სიტყვა ნასწავლი",
+        "weekDays": {
+            "Sun": "კვი",
+            "Mon": "ორშ",
+            "Tue": "სამშ",
+            "Wed": "ოთხ",
+            "Thu": "ხუთ",
+            "Fri": "პარ",
+            "Sat": "შაბ"
+        }
+    },
+    "achievements": {
+        "title": "მიმდინარეობები",
+        "previous": "წინა",
+        "next": "შემდეგი",
+        "loginRequired": "გთხოვთ შეხვიდეთ, რომ იხილოთ მიღწევები"
+    },
 
     "addWordsPage": {
         "title": "დაამატე ახალი სიტყვა",

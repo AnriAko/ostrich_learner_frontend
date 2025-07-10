@@ -103,13 +103,15 @@ export const StudyPageActions: React.FC<StudyPageActionsProps> = ({
                     </>
                 )}
 
-                <span
-                    className={`text-xs font-medium ${
-                        isDark ? "text-gray-200" : "text-gray-800"
-                    }`}
-                >
-                    {t("common.or")}
-                </span>
+                {(availableWords.length > 0 || repetitionWords.length > 0) && (
+                    <span
+                        className={`text-xs font-medium ${
+                            isDark ? "text-gray-200" : "text-gray-800"
+                        }`}
+                    >
+                        {t("common.or")}
+                    </span>
+                )}
 
                 <button
                     onClick={onChooseWords}

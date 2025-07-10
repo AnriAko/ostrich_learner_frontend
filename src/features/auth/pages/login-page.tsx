@@ -36,7 +36,7 @@ const LoginPage = () => {
 
     return (
         <div
-            className={`max-w-xl mx-auto mt-12 p-6 border-2 rounded-lg ${
+            className={`max-w-90 mx-auto mt-12 p-6 border-2 rounded-lg ${
                 isDark
                     ? "border-gray-600 bg-gray-800 text-white"
                     : "border-gray-300 bg-white text-black"

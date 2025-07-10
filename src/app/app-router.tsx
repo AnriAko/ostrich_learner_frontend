@@ -11,6 +11,9 @@ import StudyPage from "../features/words/components/study-words/study-page";
 import { BooksPage } from "../features/books/components/book-page";
 import { BookReaderPage } from "../features/books/components/book-reader/book-reader-page";
 
+import AchievementsPage from "../features/user/components/achievements/achievements-page";
+import SettingsPage from "../features/user/components/settings/settings-page";
+
 const AppRouter = () => {
     return (
         <Routes>
@@ -19,6 +22,8 @@ const AppRouter = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/create" element={<CreateUserPage />} />
+                <Route path="/achievements" element={<AchievementsPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
 
                 {/* Private DashboardLayout */}
                 <Route path="/dashboard" element={<DashboardLayout />}>

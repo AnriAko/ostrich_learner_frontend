@@ -40,6 +40,52 @@
         "manageWords": "Просмотр слов",
         "books": "Просмотр книг"
     },
+    "settings": {
+        "title": "Настройки",
+        "nicknameLabel": "Псевдоним",
+        "nicknameMinLength": "Псевдоним должен быть не короче 2 символов",
+        "nicknameUpdated": "Псевдоним обновлён на \"{{nickname}}\"",
+        "failedToUpdateNickname": "Не удалось обновить псевдоним",
+        "confirmDeleteAccount": "Вы уверены, что хотите удалить свою учётную запись?",
+        "accountDeleted": "Учётная запись удалена",
+        "failedToDeleteAccount": "Не удалось удалить учётную запись",
+        "loadingProfile": "Загрузка профиля...",
+        "save": "Сохранить",
+        "saving": "Сохранение...",
+        "dangerZone": "Опасная зона",
+        "deleteAccount": "Удалить аккаунт",
+        "deleting": "Удаление...",
+        "theme": "Тема",
+        "interfaceLanguage": "Язык интерфейса"
+    },
+    "themeNames": {
+        "dark": "Темная",
+        "light": "Светлая"
+    },
+    "calendar": {
+        "loading": "Загрузка календаря...",
+        "error": "Ошибка загрузки календаря",
+        "title": "Календарь выученных слов",
+        "noWordsLearned": "Слов не выучено",
+        "wordsLearned": "{{count}} слово выучено",
+        "wordsLearned_plural": "{{count}} слова выучено",
+        "wordsLearned_plural_2": "{{count}} слов выучено",
+        "weekDays": {
+            "Sun": "Вс",
+            "Mon": "Пн",
+            "Tue": "Вт",
+            "Wed": "Ср",
+            "Thu": "Чт",
+            "Fri": "Пт",
+            "Sat": "Сб"
+        }
+    },
+    "achievements": {
+        "title": "Достижения",
+        "previous": "Назад",
+        "next": "Вперёд",
+        "loginRequired": "Пожалуйста, войдите, чтобы увидеть достижения"
+    },
     "addWordsPage": {
         "title": "Добавить новое слово",
         "fromLanguage": "Исходный язык",
