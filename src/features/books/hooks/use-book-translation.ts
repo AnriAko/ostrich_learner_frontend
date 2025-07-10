@@ -1,4 +1,3 @@
-// use-book-translation.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { BookTranslationService } from "../service/book-translation-service";
 import {
@@ -13,15 +12,16 @@ export const useAddTranslation = () => {
     return useMutation<
         WordDto,
         Error,
-        { bookId: string; dto: BookAddTranslationDto },
-        unknown
+        { bookId: string; dto: BookAddTranslationDto; visiblePages: number[] }
     >({
         mutationFn: ({ bookId, dto }) =>
             BookTranslationService.addTranslation(bookId, dto),
 
-        onSuccess: (_, { bookId, dto }) => {
-            queryClient.invalidateQueries({
-                queryKey: ["books", "page", "pageSize", bookId, dto.pageIndex],
+        onSuccess: (_, { bookId, visiblePages }) => {
+            visiblePages.forEach((pageIndex) => {
+                queryClient.invalidateQueries({
+                    queryKey: ["books", "page", "pageSize", bookId, pageIndex],
+                });
             });
         },
     });
@@ -30,18 +30,19 @@ export const useAddTranslation = () => {
 export const useRemoveTranslation = (bookId: string) => {
     const queryClient = useQueryClient();
 
-    return useMutation<void, Error, BookRemoveTranslationDto>({
-        mutationFn: (dto) => {
-            console.log(
-                "[useRemoveTranslation] Mutation called with dto:",
-                dto
-            );
+    return useMutation<
+        void,
+        Error,
+        { visiblePages: number[] } & BookRemoveTranslationDto
+    >({
+        mutationFn: ({ visiblePages, ...dto }) => {
             return BookTranslationService.removeTranslation(bookId, dto);
         },
-        onSuccess: (_, dto) => {
-            console.log("[useRemoveTranslation] Success for dto:", dto);
-            queryClient.invalidateQueries({
-                queryKey: ["books", "page", "pageSize", bookId, dto.pageIndex],
+        onSuccess: (_, { visiblePages }) => {
+            visiblePages.forEach((pageIndex) => {
+                queryClient.invalidateQueries({
+                    queryKey: ["books", "page", "pageSize", bookId, pageIndex],
+                });
             });
         },
         onError: (error, dto) => {

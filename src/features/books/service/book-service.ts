@@ -47,7 +47,6 @@ export class BookService {
         const { data } = await api.get(`${ROUTE_URL}/${bookId}`, {
             params: { page, pageSize },
         });
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", data);
         return data;
     }
 

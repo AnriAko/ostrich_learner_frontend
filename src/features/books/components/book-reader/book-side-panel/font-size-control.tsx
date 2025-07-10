@@ -12,7 +12,7 @@ export const FontSizeControl: React.FC<FontSizeControlProps> = ({
     labelClass,
 }) => (
     <div>
-        <label className={`text-sm font-semibold mb-1 ${labelClass}`}>
+        <label className={`text-xs font-semibold ${labelClass}`}>
             Font Size
         </label>
         <input
@@ -21,8 +21,9 @@ export const FontSizeControl: React.FC<FontSizeControlProps> = ({
             max={32}
             value={fontSize}
             onChange={(e) => setFontSize(Number(e.target.value))}
-            className="w-full"
+            className="w-full h-1.5"
         />
-        <div className="text-sm mt-1">{fontSize}px</div>
+
+        <div className="text-xs">{fontSize}px</div>
     </div>
 );

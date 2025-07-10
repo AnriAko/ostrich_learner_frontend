@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {
+    useState,
+    useRef,
+    useEffect,
+    useImperativeHandle,
+    forwardRef,
+} from "react";
 import { useParams } from "react-router-dom";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
@@ -21,13 +27,14 @@ interface BookSidePanelProps {
     origin: string;
 }
 
-export const BookSidePanel: React.FC<BookSidePanelProps> = ({
-    fontSize,
-    setFontSize,
-    page,
-    posId,
-    origin,
-}) => {
+export interface BookSidePanelHandles {
+    focusTranslationInput: () => void;
+}
+
+export const BookSidePanel = forwardRef<
+    BookSidePanelHandles,
+    BookSidePanelProps
+>(({ fontSize, setFontSize, page, posId, origin }, ref) => {
     const { theme } = useTheme();
     const isDark = theme === Theme.dark;
     const labelClass = isDark ? "text-gray-300" : "text-gray-800";
@@ -47,16 +54,23 @@ export const BookSidePanel: React.FC<BookSidePanelProps> = ({
 
     const translationInputRef = useRef<HTMLInputElement>(null);
 
+    useImperativeHandle(ref, () => ({
+        focusTranslationInput: () => {
+            translationInputRef.current?.focus();
+        },
+    }));
+
     useEffect(() => {
         setOrigin(origin);
         setTranslation("");
-        translationInputRef.current?.focus();
     }, [origin]);
 
     const addMutation = useAddTranslation();
 
     const handleAdd = (e: React.FormEvent) => {
         e.preventDefault();
+        (document.activeElement as HTMLElement)?.blur();
+
         if (!originState.trim() || !translation.trim() || !userId || !bookId)
             return;
 
@@ -72,13 +86,12 @@ export const BookSidePanel: React.FC<BookSidePanelProps> = ({
             },
         };
 
-        console.log("[BookSidePanel] Submitting translation DTO:", {
-            bookId,
-            dto,
-        });
+        const visiblePages = Array.from(
+            document.querySelectorAll("[data-pageid]")
+        ).map((el) => parseInt(el.getAttribute("data-pageid") || "0", 10));
 
         addMutation.mutate(
-            { bookId: bookId!, dto },
+            { bookId: bookId!, dto, visiblePages },
             {
                 onSuccess: () => {
                     toast.success(t("wordAdded", "Word successfully added!"), {
@@ -87,22 +100,35 @@ export const BookSidePanel: React.FC<BookSidePanelProps> = ({
                     });
                     setOrigin("");
                     setTranslation("");
-                    translationInputRef.current?.focus();
                 },
                 onError: (error: unknown) => {
-                    const e = error as AxiosError<any>;
+                    interface ErrorResponse {
+                        message?: string | { message?: string };
+                    }
+
+                    const e = error as AxiosError<ErrorResponse>;
+
                     const raw =
-                        (e?.response?.data?.message?.message as string) ||
-                        (e?.message as string) ||
+                        typeof e?.response?.data?.message === "string"
+                            ? e.response.data.message
+                            : typeof e?.response?.data?.message?.message ===
+                              "string"
+                            ? e.response.data.message.message
+                            : undefined;
+
+                    const errorMessage =
+                        raw ||
+                        e?.message ||
                         (error instanceof Error
                             ? error.message
                             : String(error));
+
                     let key = "errors.default";
                     let toastId = "word-error";
 
                     if (
-                        typeof raw === "string" &&
-                        raw.includes("already exists")
+                        typeof errorMessage === "string" &&
+                        errorMessage.includes("already exists")
                     ) {
                         key = "errors.wordExists";
                         toastId = "word-exists";
@@ -124,7 +150,7 @@ export const BookSidePanel: React.FC<BookSidePanelProps> = ({
 
     return (
         <div className="mx-5 shrink-0">
-            <div className="min-w-[240px] flex flex-col gap-4">
+            <div className="min-w-[200px] flex flex-col gap-4">
                 <FontSizeControl
                     fontSize={fontSize}
                     setFontSize={setFontSize}
@@ -155,4 +181,4 @@ export const BookSidePanel: React.FC<BookSidePanelProps> = ({
             </div>
         </div>
     );
-};
+});

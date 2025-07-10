@@ -38,11 +38,6 @@ export const BookPageList: React.FC<BookPageListProps> = ({
                 />
 
                 {pages.map((pageData, index) => {
-                    console.log(
-                        `Translations for page ${index + firstGlobalPage}:`,
-                        pageData.tr
-                    );
-
                     return (
                         <BookPageBlock
                             key={index}

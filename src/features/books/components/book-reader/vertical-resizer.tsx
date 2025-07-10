@@ -7,7 +7,7 @@ interface VerticalResizerProps {
     minWidth?: number;
     sidebarWidth?: number;
     className?: string;
-    storageKey?: string; // 👈 имя ключа, по которому сохраняем ширину
+    storageKey?: string;
 }
 
 export const VerticalResizer: React.FC<VerticalResizerProps> = ({
@@ -16,7 +16,7 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
     minWidth = 370,
     sidebarWidth = 320,
     className = "",
-    storageKey = "book_left_width", // 👈 можно переопределить при необходимости
+    storageKey = "book_left_width",
 }) => {
     const isDragging = useRef(false);
     const [dragActive, setDragActive] = useState(false);
@@ -32,7 +32,6 @@ export const VerticalResizer: React.FC<VerticalResizerProps> = ({
 
     const centerShift = 8 + 20 + 6;
 
-    // ⬇️ Устанавливаем дефолтную ширину один раз, если в localStorage нет значения
     useEffect(() => {
         if (!containerRef.current) return;
 

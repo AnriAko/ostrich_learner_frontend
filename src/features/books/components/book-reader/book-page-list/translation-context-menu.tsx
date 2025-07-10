@@ -57,7 +57,7 @@ export const TranslationContextMenu: React.FC<TranslationContextMenuProps> = ({
                     fontWeight: "bold",
                 }}
             >
-                {t("bookOverview.removeTranslation") || "Удалить перевод"}
+                {t("bookOverview.removeTranslation")}
             </button>
         </div>
     );

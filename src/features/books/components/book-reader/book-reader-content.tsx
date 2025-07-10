@@ -1,7 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { useTheme } from "../../../../shared/context/theme-context/use-theme";
 import { BookPageList } from "./book-page-list/book-page-list";
-import { BookSidePanel } from "./book-side-panel/book-side-panel";
+import {
+    BookSidePanel,
+    BookSidePanelHandles,
+} from "./book-side-panel/book-side-panel";
 import { VerticalResizer } from "./vertical-resizer";
 import { BookPageRawDto } from "../../dto/book.dto";
 
@@ -43,6 +46,14 @@ export const BookReaderContent: React.FC<BookReaderContentProps> = ({
 
     const [leftWidth, setLeftWidth] = React.useState<number>(getInitialWidth);
     const [fontSize, setFontSize] = React.useState<number>(16);
+
+    const bookSidePanelRef = useRef<BookSidePanelHandles>(null);
+
+    useEffect(() => {
+        if (selectedWord?.origin.length) {
+            bookSidePanelRef.current?.focusTranslationInput();
+        }
+    }, [selectedWord]);
 
     const handleResize = (newLeftWidth: number) => {
         setLeftWidth(newLeftWidth);
@@ -129,6 +140,7 @@ export const BookReaderContent: React.FC<BookReaderContentProps> = ({
                 />
 
                 <BookSidePanel
+                    ref={bookSidePanelRef}
                     fontSize={fontSize}
                     setFontSize={setFontSize}
                     page={selectedWord?.pageIndex ?? page}

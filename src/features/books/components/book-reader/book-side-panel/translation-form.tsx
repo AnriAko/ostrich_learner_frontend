@@ -23,19 +23,25 @@ export const TranslationForm: React.FC<TranslationFormProps> = ({
     handleAdd,
     isDark,
 }) => (
-    <form onSubmit={handleAdd} className="flex flex-col gap-3 text-sm">
-        <div className="flex flex-col gap-2">
+    <form
+        onSubmit={handleAdd}
+        className="flex flex-col gap-2 text-xs w-[200px] self-start"
+    >
+        <div className="flex flex-col gap-1 w-full">
             <label className={labelClass}>Word</label>
             <input
                 type="text"
                 value={originState}
                 onChange={(e) => setOrigin(e.target.value)}
                 required
-                className={`w-full p-2 rounded border ${inputClass}`}
+                className={`w-full py-1 px-2 rounded border text-xs 
+        outline-none ring-0 focus:outline-none 
+        focus:ring-0 focus:border-gray-500 focus:shadow-none 
+        ${inputClass}`}
             />
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1 w-full">
             <label className={labelClass}>Translation</label>
             <input
                 ref={translationInputRef}
@@ -43,13 +49,16 @@ export const TranslationForm: React.FC<TranslationFormProps> = ({
                 value={translation}
                 onChange={(e) => setTranslation(e.target.value)}
                 required
-                className={`w-full p-2 rounded border ${inputClass}`}
+                className={`w-full py-1 px-2 rounded border text-xs 
+        outline-none ring-0 focus:outline-none 
+        focus:ring-0 focus:border-gray-500 focus:shadow-none 
+        ${inputClass}`}
             />
         </div>
 
         <button
             type="submit"
-            className={`py-1.5 px-2 rounded text-sm font-semibold ${
+            className={`py-1 px-2 rounded text-xs font-semibold w-full ${
                 isDark
                     ? "bg-yellow-600 text-white hover:bg-yellow-700"
                     : "bg-blue-600 text-white hover:bg-blue-700"

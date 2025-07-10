@@ -51,13 +51,6 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
 
     const removeTranslation = useRemoveTranslation(bookId);
 
-    useEffect(() => {
-        console.log(
-            `[Page ${globalPageNumber}] Translations array:`,
-            translations
-        );
-    }, [globalPageNumber, translations]);
-
     const isEmpty = !pageText.trim();
 
     const tokens = isEmpty
@@ -104,11 +97,19 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
 
     const handleRemoveClick = () => {
         if (contextMenuTranslationId !== null && contextMenuPosId !== null) {
-            const dto: BookRemoveTranslationDto = {
+            const visiblePages: number[] = Array.from(
+                document.querySelectorAll("[data-pageid]")
+            )
+                .map((el) => Number(el.getAttribute("data-pageid")))
+                .filter((num) => !isNaN(num));
+
+            const dto: BookRemoveTranslationDto & { visiblePages: number[] } = {
                 pageIndex: globalPageNumber,
                 translationId: contextMenuTranslationId,
                 posId: contextMenuPosId,
+                visiblePages,
             };
+
             removeTranslation.mutate(dto, {
                 onSuccess: () => {
                     toast.success(t("bookOverview.deletedSuccess"));

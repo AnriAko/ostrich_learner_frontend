@@ -21,6 +21,6 @@ export interface BookTranslationDto {
 }
 
 export interface BookPageRawDto {
-    t: string; // full text of the page
-    tr: BookTranslationDto[]; // translations for words on this page
+    t: string;
+    tr: BookTranslationDto[];
 }
