@@ -23,6 +23,48 @@
         "or": "Or",
         "login": "Log in"
     },
+    "dashboard": {
+        "welcome": "Welcome to Ostrich Learner!",
+        "modules": {
+            "title": "Main modules and their features",
+            "addWords": {
+                "title": "Adding Words",
+                "feature1": "Add words with support for 3 languages (English, Georgian, Russian)",
+                "feature2": "Prevents adding duplicate word-translation pairs"
+            },
+            "learnWords": {
+                "title": "Learning Words",
+                "feature1": "Study new and repeat old words with customizable flashcards",
+                "feature2": "Generate tests for new and repeatable words",
+                "feature3": "Test data is sent to the server to save results and check answers"
+            },
+            "viewWords": {
+                "title": "Viewing Words",
+                "feature1": "View dictionaries and delete unnecessary words",
+                "feature2": "Create your own flashcards for learning",
+                "feature3": "Generate tests based on selected words",
+                "feature4": "Filter words by various fields"
+            },
+            "translationManagement": {
+                "title": "Book Reading",
+                "feature1": "Upload PDF books, which are saved as plain text",
+                "feature2": "Read books with adjustable font size and page width",
+                "feature3": "Customizable pagination to optimize reading and resource usage",
+                "feature4": "Add translations directly from book pages",
+                "feature5": "Remembers approximately where the user left off"
+            },
+            "configuration": {
+                "title": "Header Settings",
+                "feature1": "Switch interface language (English, Georgian, Russian)",
+                "feature2": "Toggle theme (dark or light)"
+            }
+        },
+        "additional": {
+            "title": "Additional options in the profile menu",
+            "achievement": "Achievements page to view learning activity",
+            "settings": "Update nickname and delete account"
+        }
+    },
     "userMenu": {
         "profile": "Profile",
         "achievements": "Achievements",

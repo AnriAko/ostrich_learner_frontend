@@ -13,6 +13,7 @@ import { BookReaderPage } from "../features/books/components/book-reader/book-re
 
 import AchievementsPage from "../features/user/components/achievements/achievements-page";
 import SettingsPage from "../features/user/components/settings/settings-page";
+import DashboardHomePage from "../features/home/components/dashboard-home-page";
 
 const AppRouter = () => {
     return (
@@ -25,8 +26,8 @@ const AppRouter = () => {
                 <Route path="/achievements" element={<AchievementsPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
 
-                {/* Private DashboardLayout */}
                 <Route path="/dashboard" element={<DashboardLayout />}>
+                    <Route index element={<DashboardHomePage />} />{" "}
                     <Route path="add" element={<AddWordsPage />} />
                     <Route path="study" element={<StudyPage />} />
                     <Route path="manage" element={<WordManagement />} />
