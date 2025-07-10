@@ -18,7 +18,6 @@ const MainLayout = () => {
         ? "bg-gray-800 text-gray-200"
         : "bg-gray-100 text-gray-900";
 
-    // Читаем из localStorage при инициализации; если нет — по умолчанию true
     const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(() => {
         const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
         return stored === null ? true : stored === "true";

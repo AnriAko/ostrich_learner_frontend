@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
 import { useUser } from "../../../../../shared/context/user-context/use-user";
-import { Language } from "../../../../words/types/language";
+import { Language, SupportedLanguages } from "../../../../words/types/language";
 import { useAddTranslation } from "../../../hooks/use-book-translation";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -31,6 +31,8 @@ export interface BookSidePanelHandles {
     focusTranslationInput: () => void;
 }
 
+const LS_KEY_LANGS = "bookSidePanelLanguages";
+
 export const BookSidePanel = forwardRef<
     BookSidePanelHandles,
     BookSidePanelProps
@@ -49,8 +51,52 @@ export const BookSidePanel = forwardRef<
 
     const [originState, setOrigin] = useState("");
     const [translation, setTranslation] = useState("");
-    const [sourceLang, setSourceLang] = useState<Language>(Language.English);
-    const [targetLang, setTargetLang] = useState<Language>(Language.Georgian);
+
+    const [sourceLang, setSourceLang] = useState<Language>(() => {
+        try {
+            const saved = localStorage.getItem(LS_KEY_LANGS);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (
+                    parsed?.sourceLang &&
+                    SupportedLanguages.some((l) => l.id === parsed.sourceLang)
+                ) {
+                    return parsed.sourceLang;
+                }
+            }
+        } catch {
+            //ignore
+        }
+        return Language.English;
+    });
+
+    const [targetLang, setTargetLang] = useState<Language>(() => {
+        try {
+            const saved = localStorage.getItem(LS_KEY_LANGS);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (
+                    parsed?.targetLang &&
+                    SupportedLanguages.some((l) => l.id === parsed.targetLang)
+                ) {
+                    return parsed.targetLang;
+                }
+            }
+        } catch {
+            //ignore
+        }
+        return Language.Georgian;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(
+            LS_KEY_LANGS,
+            JSON.stringify({
+                sourceLang,
+                targetLang,
+            })
+        );
+    }, [sourceLang, targetLang]);
 
     const translationInputRef = useRef<HTMLInputElement>(null);
 

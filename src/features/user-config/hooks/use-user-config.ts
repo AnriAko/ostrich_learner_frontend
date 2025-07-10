@@ -71,7 +71,7 @@ export const useUpdateUserInterfaceLanguage = () => {
             setUser(data!);
             UserStorage.set(data!);
             i18n.changeLanguage(data!.interfaceLanguage);
-            setInterfaceLanguage(data!.interfaceLanguage); // Обновляем язык интерфейса из контекста
+            setInterfaceLanguage(data!.interfaceLanguage);
         },
     });
 };

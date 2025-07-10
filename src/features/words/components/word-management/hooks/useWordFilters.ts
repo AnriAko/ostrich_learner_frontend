@@ -1,4 +1,3 @@
-// useWordFilters.ts
 import { useState, useEffect } from "react";
 import { WordFilterDto } from "../dto/word-filter.dto";
 import { useUser } from "../../../../../shared/context/user-context/use-user";

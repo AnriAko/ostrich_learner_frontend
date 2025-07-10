@@ -1,4 +1,3 @@
-// src/shared/context/useUser.ts
 import { useContext } from "react";
 import { ThemeContext } from "./theme-context";
 

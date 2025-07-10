@@ -1,4 +1,3 @@
-// src/shared/context/useUser.ts
 import { useContext } from "react";
 import { InterfaceLanguageContext } from "./interface-language-context";
 

@@ -1,4 +1,3 @@
-// src/features/add-words/components/add-word-form.tsx
 import { useTranslation } from "react-i18next";
 import { LanguageSelector } from "./language-selector";
 import { WordInputs } from "./word-inputs";

@@ -1,4 +1,3 @@
-// src/features/home/components/HomePage.tsx
 import { Navigate } from "react-router-dom";
 import { useUser } from "../../../shared/context/user-context/use-user";
 

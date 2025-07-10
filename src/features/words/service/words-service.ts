@@ -83,12 +83,12 @@ export class WordService {
         filters: WordFilterDto
     ): Promise<FilteredWordsResponse> {
         const allowedKeys = Object.keys(filters) as (keyof WordFilterDto)[];
-        const params: Record<string, any> = {};
+        const params: Record<string, string | number | boolean> = {};
 
         for (const key of allowedKeys) {
             const value = filters[key];
             if (value !== undefined && value !== null) {
-                params[key] = value;
+                params[key] = value as string | number | boolean;
             }
         }
 

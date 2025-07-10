@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";
 import { Theme } from "../../../../user-config/types/theme";
@@ -35,6 +35,40 @@ export const FlashcardPage: React.FC<FlashcardTrainerProps> = ({
         isShuffled,
     } = useFlashcardsButtons(words);
 
+    useEffect(() => {
+        function handleKeyDown(event: KeyboardEvent) {
+            switch (event.key) {
+                case "ArrowUp":
+                case "ArrowDown":
+                    event.preventDefault();
+                    setFlipped((prev) => !prev);
+                    break;
+                case "Enter":
+                    event.preventDefault();
+                    markAsLearned();
+                    break;
+                case "ArrowLeft":
+                    event.preventDefault();
+                    goToPrev();
+                    break;
+                case "ArrowRight":
+                    event.preventDefault();
+                    goToNext();
+                    break;
+                case "Backspace":
+                    event.preventDefault();
+                    skip();
+                    break;
+                default:
+                    break;
+            }
+        }
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [markAsLearned, skip, goToNext, goToPrev, setFlipped]);
+
     const cardFrontBack = isDark
         ? "bg-gray-900 text-gray-200"
         : "bg-gray-200 text-gray-800";
@@ -65,11 +99,11 @@ export const FlashcardPage: React.FC<FlashcardTrainerProps> = ({
             <button
                 onClick={onClose}
                 className={`mb-4 px-4 py-2 rounded transition-colors font-medium text-sm
-        ${
-            isDark
-                ? "bg-yellow-400 text-gray-800 hover:bg-yellow-300"
-                : "bg-blue-500 text-white hover:bg-blue-600"
-        }`}
+                ${
+                    isDark
+                        ? "bg-yellow-400 text-gray-800 hover:bg-yellow-300"
+                        : "bg-blue-500 text-white hover:bg-blue-600"
+                }`}
             >
                 ←
             </button>

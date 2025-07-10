@@ -4,14 +4,12 @@ import type { CreateUserDto } from "../dto/create-user.dto";
 import { GetUserDto } from "../dto/get-user.dto";
 import { UserConfig } from "../../user-config/types/user-config";
 
-// Hook for fetching all users
 export const useGetAllUsers = () =>
     useQuery<GetUserDto[]>({
         queryKey: ["users"],
         queryFn: AuthService.getAllUsers,
     });
 
-// Hook for creating a new user
 export const useCreateUser = () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -23,12 +21,11 @@ export const useCreateUser = () => {
     });
 };
 
-// Hook for fetching a user by ID
 export const useGetUserById = (id: string) =>
     useQuery<GetUserDto | null>({
         queryKey: ["user", id],
         queryFn: () => AuthService.getUserById(id),
-        enabled: !!id, // Only fetch if id exists
+        enabled: !!id,
     });
 
 export const useGetFullUserById = (id: string) =>

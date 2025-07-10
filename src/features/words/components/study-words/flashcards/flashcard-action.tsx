@@ -1,5 +1,3 @@
-// src/entities/word/ui/flashcard/components/FlashcardButtons.tsx
-
 import React from "react";
 import { Check, X, Shuffle } from "lucide-react";
 import { useTheme } from "../../../../../shared/context/theme-context/use-theme";

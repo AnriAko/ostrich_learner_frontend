@@ -56,7 +56,7 @@ export const InterfaceLanguageContextProvider = ({
         }
     }, [interfaceLanguage]);
 
-    if (!isLanguageReady) return null; // или <Loader /> если хочешь спиннер
+    if (!isLanguageReady) return null;
 
     return (
         <InterfaceLanguageContext.Provider

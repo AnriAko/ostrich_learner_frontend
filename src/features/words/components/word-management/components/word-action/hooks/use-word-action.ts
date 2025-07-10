@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const useDeleteWordsLogic = (
     onSuccessCallback?: () => void,
-    onErrorCallback?: (err: any) => void
+    onErrorCallback?: (err: unknown) => void
 ) => {
     const { theme } = useTheme();
     const { t } = useTranslation();
@@ -33,14 +33,17 @@ export const useDeleteWordsLogic = (
             );
 
             onSuccessCallback?.();
-        } catch (err: any) {
-            toast.error(
-                t("errors.default") + ": " + (err?.message || "Unknown error"),
-                {
-                    theme,
-                    toastId: "delete-error",
-                }
-            );
+        } catch (err: unknown) {
+            let errorMessage = "Unknown error";
+
+            if (err instanceof Error) {
+                errorMessage = err.message;
+            }
+
+            toast.error(t("errors.default") + ": " + errorMessage, {
+                theme,
+                toastId: "delete-error",
+            });
 
             onErrorCallback?.(err);
         }
