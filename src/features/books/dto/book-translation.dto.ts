@@ -14,5 +14,6 @@ export interface BookAddTranslationDto {
 
 export interface BookRemoveTranslationDto {
     pageIndex: number;
+    posId: number;
     translationId: number;
 }

@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 import { useRemoveTranslation } from "../../../hooks/use-book-translation";
 import { BookRemoveTranslationDto } from "../../../dto/book-translation.dto";
+import { TranslationContextMenu } from "./translation-context-menu";
 
 interface BookPageBlockProps {
     bookId: string;
@@ -43,10 +45,12 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
     const [contextMenuTranslationId, setContextMenuTranslationId] = useState<
         number | null
     >(null);
+    const [contextMenuPosId, setContextMenuPosId] = useState<number | null>(
+        null
+    );
 
-    const removeTranslation = useRemoveTranslation(bookId, globalPageNumber);
+    const removeTranslation = useRemoveTranslation(bookId);
 
-    // Логируем массив переводов один раз при смене страницы или переводов
     useEffect(() => {
         console.log(
             `[Page ${globalPageNumber}] Translations array:`,
@@ -56,7 +60,6 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
 
     const isEmpty = !pageText.trim();
 
-    // Разбиваем текст страницы на токены (слова, пробелы, знаки препинания)
     const tokens = isEmpty
         ? []
         : pageText.match(/(\p{L}+|[^\s\p{L}]+|\s+)/gu) || [];
@@ -65,7 +68,6 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
         ? "cursor-default select-none hover:bg-gray-700"
         : "cursor-default select-none hover:bg-gray-300";
 
-    // Создаем карту переводов по pos_id для быстрого поиска
     const trMap = new Map<
         number,
         { translation: string; translation_id: number }
@@ -74,12 +76,12 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
         trMap.set(pos_id, { translation, translation_id });
     });
 
-    // Обработчик клика вне компонента для скрытия контекстного меню
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             if (!containerRef.current?.contains(e.target as Node)) {
                 setContextMenuPos(null);
                 setContextMenuTranslationId(null);
+                setContextMenuPosId(null);
             }
         };
         document.addEventListener("click", handleClickOutside);
@@ -88,28 +90,42 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
         };
     }, []);
 
-    // Контекстное меню на ПКМ
-    const handleRightClick = (e: React.MouseEvent, translationId: number) => {
+    const handleRightClick = (
+        e: React.MouseEvent,
+        translationId: number,
+        posId: number
+    ) => {
         e.preventDefault();
         e.stopPropagation();
         setContextMenuTranslationId(translationId);
+        setContextMenuPosId(posId);
         setContextMenuPos({ x: e.clientX, y: e.clientY });
     };
 
-    // Удаление перевода
     const handleRemoveClick = () => {
-        if (contextMenuTranslationId !== null) {
+        if (contextMenuTranslationId !== null && contextMenuPosId !== null) {
             const dto: BookRemoveTranslationDto = {
                 pageIndex: globalPageNumber,
                 translationId: contextMenuTranslationId,
+                posId: contextMenuPosId,
             };
-            removeTranslation.mutate(dto);
-            setContextMenuPos(null);
-            setContextMenuTranslationId(null);
+            removeTranslation.mutate(dto, {
+                onSuccess: () => {
+                    toast.success(t("bookOverview.deletedSuccess"));
+                    setContextMenuPos(null);
+                    setContextMenuTranslationId(null);
+                    setContextMenuPosId(null);
+                },
+                onError: (error: any) => {
+                    toast.error(
+                        t("bookOverview.deleteFailed") ||
+                            ` ${error.message || error}`
+                    );
+                },
+            });
         }
     };
 
-    // Счетчик позиции слова на странице (обнуляется при каждом рендере)
     let posId = 0;
 
     return (
@@ -149,12 +165,6 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
                                   posId++;
                                   const tr = trMap.get(posId);
 
-                                  if (tr) {
-                                      console.log(
-                                          `[Page ${globalPageNumber}] Word #${posId}: "${token}" → ✅ Match (${tr.translation})`
-                                      );
-                                  }
-
                                   return (
                                       <span
                                           key={i}
@@ -176,7 +186,8 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
                                               tr &&
                                               handleRightClick(
                                                   e,
-                                                  tr.translation_id
+                                                  tr.translation_id,
+                                                  posId
                                               )
                                           }
                                       >
@@ -205,36 +216,18 @@ export const BookPageBlock: React.FC<BookPageBlockProps> = ({
                 </div>
             </div>
 
-            {contextMenuPos && (
-                <div
-                    style={{
-                        position: "fixed",
-                        top: contextMenuPos.y,
-                        left: contextMenuPos.x,
-                        backgroundColor: isDark ? "#333" : "#fff",
-                        border: `1px solid ${isDark ? "#555" : "#ccc"}`,
-                        boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
-                        borderRadius: 4,
-                        zIndex: 1000,
-                        padding: "8px",
+            {contextMenuPos && contextMenuTranslationId !== null && (
+                <TranslationContextMenu
+                    posX={contextMenuPos.x}
+                    posY={contextMenuPos.y}
+                    isDark={isDark}
+                    onRemove={handleRemoveClick}
+                    onClose={() => {
+                        setContextMenuPos(null);
+                        setContextMenuTranslationId(null);
+                        setContextMenuPosId(null);
                     }}
-                >
-                    <button
-                        onClick={handleRemoveClick}
-                        style={{
-                            color: "white",
-                            backgroundColor: "#e3342f",
-                            border: "none",
-                            padding: "6px 12px",
-                            borderRadius: 3,
-                            cursor: "pointer",
-                            fontWeight: "bold",
-                        }}
-                    >
-                        {t("bookOverview.removeTranslation") ||
-                            "Удалить перевод"}
-                    </button>
-                </div>
+                />
             )}
         </div>
     );

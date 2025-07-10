@@ -71,7 +71,7 @@ export const BookCard: React.FC<Props> = ({
 
     return (
         <div
-            className={`group border rounded-lg p-4 flex flex-col justify-start cursor-pointer ${bgClass} min-w-[150px] min-h-[120px] h-[25vh] basis-[18%] mb-[2%]`}
+            className={`group border rounded-lg p-4 flex flex-col justify-start cursor-pointer ${bgClass} w-[180px] h-[208px]`}
             title={!isEditing ? book.b : undefined}
             onContextMenu={(e) => {
                 e.preventDefault();

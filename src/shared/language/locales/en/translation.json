@@ -133,6 +133,7 @@
         "viewBooks": "View books",
         "updateTitle": "Update title",
         "deleteBook": "Delete book",
+        "noBooks": "You don't have uploaded books",
         "continueReading": "Continue reading",
         "startReading": "Start reading",
         "renameSuccess": "Successfully renamed.",
@@ -144,8 +145,9 @@
         "userIdNotFound": "User ID not found or file not selected",
         "uploadSuccess": "Book uploaded successfully",
         "uploadFail": "Failed to upload book",
-        "uploadBookPdf": "Upload book PDF",
+        "uploadBookPdf": "+ Upload book PDF",
         "pleaseWaitUpload": "Please wait, uploading...",
-        "pleaseWaitUploadClue": "Depending on the size of the book, this may take a couple of minutes."
+        "pleaseWaitUploadClue": "Depending on the size of the book, this may take a couple of minutes.",
+        "removeTranslation": "Remove translation"
     }
 }

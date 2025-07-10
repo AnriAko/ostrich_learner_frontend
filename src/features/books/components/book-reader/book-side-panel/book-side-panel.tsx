@@ -72,6 +72,11 @@ export const BookSidePanel: React.FC<BookSidePanelProps> = ({
             },
         };
 
+        console.log("[BookSidePanel] Submitting translation DTO:", {
+            bookId,
+            dto,
+        });
+
         addMutation.mutate(
             { bookId: bookId!, dto },
             {

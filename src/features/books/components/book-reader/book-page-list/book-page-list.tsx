@@ -4,7 +4,7 @@ import { BookPageBlock } from "./book-page-block";
 import { BookPageRawDto } from "../../../dto/book.dto";
 
 interface BookPageListProps {
-    bookId: string; // добавляем сюда!
+    bookId: string;
     pages: BookPageRawDto[];
     page: number;
     pageSize: number;

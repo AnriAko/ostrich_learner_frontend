@@ -132,6 +132,8 @@
         "viewBooks": "Просмотр книг",
         "updateTitle": "Обновить заголовок",
         "deleteBook": "Удалить книгу",
+        "noBooks": "У вас нет загруженных книг",
+
         "continueReading": "Продолжить чтение",
         "startReading": "Начать чтение",
         "renameSuccess": "Заголовок обновлен.",
@@ -143,8 +145,9 @@
         "userIdNotFound": "Айди пользователя не найдено либо файл не выбран",
         "uploadSuccess": "Книга успешно загружена",
         "uploadFail": "Не удалось загрузить книгу",
-        "uploadBookPdf": "Загрузить PDF книгу",
+        "uploadBookPdf": " + Загрузить PDF книгу",
         "pleaseWaitUpload": "Пожалуйста, подождите...",
-        "pleaseWaitUploadClue": "В зависимости от размера книги это может занять несколько минут."
+        "pleaseWaitUploadClue": "В зависимости от размера книги это может занять несколько минут.",
+        "removeTranslation": "Удалить перевод"
     }
 }

@@ -21,10 +21,9 @@ export const BookOverviewPanel = () => {
         pageSize
     );
 
-    if (isLoading) return <p>Loading books...</p>;
-    if (!data?.data.length) return <p>No books found.</p>;
-
-    const maxPage = Math.ceil(data.total / pageSize);
+    const books = data?.data ?? [];
+    const total = data?.total ?? 0;
+    const maxPage = Math.max(1, Math.ceil(total / pageSize));
 
     const bgClass = isDark
         ? "bg-gray-900 text-gray-300"
@@ -49,7 +48,7 @@ export const BookOverviewPanel = () => {
                         page={page}
                         pageSize={pageSize}
                         maxPage={maxPage}
-                        totalItems={data.total}
+                        totalItems={total}
                         onPageChange={setPage}
                         onPageSizeChange={(newSize) => {
                             setPageSize(newSize);
@@ -69,7 +68,17 @@ export const BookOverviewPanel = () => {
             </div>
 
             <div className="flex-1 overflow-y-auto min-h-0 word-table-scroll">
-                <BookList books={data.data} />
+                {isLoading ? (
+                    <p className="text-sm text-gray-500 px-2">
+                        {t("bookOverview.loading", "Loading books...")}
+                    </p>
+                ) : books.length === 0 ? (
+                    <p className="text-sm text-gray-500 px-2 mt-8">
+                        {t("bookOverview.noBooks")}
+                    </p>
+                ) : (
+                    <BookList books={books} />
+                )}
             </div>
         </div>
     );

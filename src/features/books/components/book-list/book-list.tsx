@@ -57,41 +57,49 @@ export const BookList: React.FC<BookListProps> = ({ books }) => {
 
     return (
         <div className="w-full overflow-y-auto pr-1 relative">
-            <div className="flex flex-wrap gap-[2%]">
-                {books.map((book) => (
-                    <BookCard
-                        key={book._id}
-                        book={book}
-                        isEditing={editingBookId === book._id}
-                        isMenuOpen={menuBookId === book._id}
-                        menuPos={menuPos}
-                        onContextMenu={(pos) => {
-                            setMenuBookId(book._id);
-                            setMenuPos(pos);
-                        }}
-                        onCancelEdit={() => setEditingBookId(null)}
-                        onEditConfirm={async (title) => {
-                            try {
-                                await updateTitle.mutateAsync({
-                                    id: book._id,
-                                    userId: book.userId,
-                                    title,
-                                });
-                                toast.success(t("bookOverview.renameSuccess"));
-                            } catch {
-                                toast.error(t("bookOverview.renameFailed"));
-                            }
-                            setEditingBookId(null);
-                        }}
-                        onStartEdit={handleUpdateTitleClick}
-                        onDelete={() => handleDelete(book._id)}
-                        onCloseMenu={() => {
-                            setMenuBookId(null);
-                            setMenuPos(null);
-                        }}
-                    />
-                ))}
-            </div>
+            {books.length === 0 ? (
+                <div className="text-center text-gray-500 py-10 text-sm">
+                    {t("bookOverview.noBooks")}
+                </div>
+            ) : (
+                <div className="flex flex-wrap gap-[15px]">
+                    {books.map((book) => (
+                        <BookCard
+                            key={book._id}
+                            book={book}
+                            isEditing={editingBookId === book._id}
+                            isMenuOpen={menuBookId === book._id}
+                            menuPos={menuPos}
+                            onContextMenu={(pos) => {
+                                setMenuBookId(book._id);
+                                setMenuPos(pos);
+                            }}
+                            onCancelEdit={() => setEditingBookId(null)}
+                            onEditConfirm={async (title) => {
+                                try {
+                                    await updateTitle.mutateAsync({
+                                        id: book._id,
+                                        userId: book.userId,
+                                        title,
+                                    });
+                                    toast.success(
+                                        t("bookOverview.renameSuccess")
+                                    );
+                                } catch {
+                                    toast.error(t("bookOverview.renameFailed"));
+                                }
+                                setEditingBookId(null);
+                            }}
+                            onStartEdit={handleUpdateTitleClick}
+                            onDelete={() => handleDelete(book._id)}
+                            onCloseMenu={() => {
+                                setMenuBookId(null);
+                                setMenuPos(null);
+                            }}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

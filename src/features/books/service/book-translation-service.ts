@@ -10,9 +10,14 @@ export const BookTranslationService = {
         bookId: string,
         dto: BookAddTranslationDto
     ): Promise<WordDto> {
+        const adjustedDto: BookAddTranslationDto = {
+            ...dto,
+            pageIndex: dto.pageIndex - 1,
+        };
+
         const response = await api.post<WordDto>(
             `/book-translation/${bookId}/word`,
-            dto
+            adjustedDto
         );
         return response.data;
     },
@@ -21,8 +26,13 @@ export const BookTranslationService = {
         bookId: string,
         dto: BookRemoveTranslationDto
     ): Promise<void> {
+        const adjustedDto: BookRemoveTranslationDto = {
+            ...dto,
+            pageIndex: dto.pageIndex - 1,
+        };
+
         await api.delete(`/book-translation/${bookId}/word`, {
-            data: dto,
+            data: adjustedDto,
         });
     },
 };
