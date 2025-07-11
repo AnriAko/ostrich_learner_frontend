@@ -7,6 +7,7 @@ interface LearnedWordsCalendarProps {
     year: number;
     month: number; // 1–12
     theme: "light" | "dark";
+    onTotalChange?: (count: number) => void;
 }
 
 const daysInMonth = (year: number, month: number) =>
@@ -17,6 +18,7 @@ export const LearnedWordsCalendar: React.FC<LearnedWordsCalendarProps> = ({
     year,
     month,
     theme,
+    onTotalChange,
 }) => {
     const { t } = useTranslation();
 
@@ -32,8 +34,17 @@ export const LearnedWordsCalendar: React.FC<LearnedWordsCalendarProps> = ({
         for (const stat of data) {
             result[stat.date] = stat.count;
         }
+
+        if (onTotalChange) {
+            const total = Object.values(result).reduce(
+                (sum, val) => sum + val,
+                0
+            );
+            onTotalChange(total);
+        }
+
         return result;
-    }, [data]);
+    }, [data, onTotalChange]);
 
     if (isLoading)
         return (
@@ -83,9 +94,9 @@ export const LearnedWordsCalendar: React.FC<LearnedWordsCalendarProps> = ({
     const dayNumberColor = theme === "dark" ? "text-gray-100" : "text-gray-800";
 
     return (
-        <div className={`${bgClass}`} style={{ minWidth: 420, maxWidth: 600 }}>
+        <div className={`${bgClass}`} style={{ minWidth: 552, maxWidth: 552 }}>
             <div
-                className={`w-full max-w-[600px] py-6 space-y-6 rounded ${contentBgClass}`}
+                className={`w-full max-w-[552px] py-6 pr-6 space-y-6 rounded ${contentBgClass}`}
             >
                 <h2
                     className={`text-2xl font-semibold mb-6 ${titleColorClass}`}

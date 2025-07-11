@@ -13,6 +13,7 @@ const AchievementsPage = () => {
     const today = new Date();
     const [year, setYear] = useState(today.getFullYear());
     const [month, setMonth] = useState(today.getMonth() + 1); // 1-12
+    const [totalWords, setTotalWords] = useState(0);
 
     if (!user)
         return (
@@ -62,34 +63,90 @@ const AchievementsPage = () => {
                 className={`w-full p-6 space-y-6 rounded ${contentBgClass}`}
                 style={{ minWidth: 420, maxWidth: 600, margin: 0 }}
             >
-                <h1 className={`text-2xl mb-4 font-bold ${titleColorClass}`}>
-                    {t("achievements.title", "Achievements")}
-                </h1>
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-6 mb-4">
+                    <div className="space-y-2 min-w-[280px] sm:min-w-[320px]">
+                        <h1
+                            className={`text-2xl font-bold ${titleColorClass} whitespace-nowrap`}
+                        >
+                            {t("achievements.title", "Achievements")}
+                        </h1>
 
-                <div className="flex items-center space-x-4 mb-4">
-                    <button
-                        onClick={handlePrevMonth}
-                        className={`px-3 py-1 rounded ${buttonBgClass} ${buttonTextClass}`}
-                    >
-                        ← {t("achievements.previous", "Previous")}
-                    </button>
-                    <div className="font-semibold text-lg">
-                        {year} - {month.toString().padStart(2, "0")}
+                        <div className="flex items-center space-x-4 flex-wrap">
+                            <button
+                                onClick={handlePrevMonth}
+                                className={`px-3 py-1 rounded ${buttonBgClass} ${buttonTextClass}`}
+                            >
+                                ← {t("achievements.previous", "Previous")}
+                            </button>
+                            <div className="font-semibold text-lg whitespace-nowrap">
+                                {year} - {month.toString().padStart(2, "0")}
+                            </div>
+                            <button
+                                onClick={handleNextMonth}
+                                className={`px-3 py-1 rounded ${buttonBgClass} ${buttonTextClass}`}
+                            >
+                                {t("achievements.next", "Next")} →
+                            </button>
+                        </div>
+
+                        <div className="text-sm font-medium">
+                            {t(
+                                "achievements.totalLearned",
+                                "Total words learned this month"
+                            )}
+                            :{" "}
+                            <span className="font-bold text-green-500">
+                                {totalWords}
+                            </span>
+                        </div>
                     </div>
-                    <button
-                        onClick={handleNextMonth}
-                        className={`px-3 py-1 rounded ${buttonBgClass} ${buttonTextClass}`}
-                    >
-                        {t("achievements.next", "Next")} →
-                    </button>
+                    <div className="text-sm space-y-2 min-w-[180px] sm:min-w-[200px] ml-5">
+                        <div className="flex flex-col gap-1">
+                            <div className="flex items-center gap-2 mb-0.5 whitespace-nowrap">
+                                <div className="h-4 w-10 rounded bg-gray-400 shrink-0" />
+                                {t("achievements.level0", "0 words")}
+                            </div>
+                            <div className="flex items-center gap-2 mb-0.5 whitespace-nowrap">
+                                <div
+                                    className={`h-4 w-10 rounded bg-gradient-to-r ${
+                                        isDark
+                                            ? "from-green-600 to-green-700"
+                                            : "from-green-300 to-green-400"
+                                    } shrink-0`}
+                                />
+                                {t("achievements.level1", "1–19 words")}
+                            </div>
+                            <div className="flex items-center gap-2 mb-0.5 whitespace-nowrap">
+                                <div
+                                    className={`h-4 w-10 rounded bg-gradient-to-r ${
+                                        isDark
+                                            ? "from-green-400 to-green-500"
+                                            : "from-green-500 to-green-600"
+                                    } shrink-0`}
+                                />
+                                {t("achievements.level2", "20–29 words")}
+                            </div>
+                            <div className="flex items-center gap-2 mb-0.5 whitespace-nowrap">
+                                <div
+                                    className={`h-4 w-10 rounded bg-gradient-to-r ${
+                                        isDark
+                                            ? "from-green-200 to-green-300"
+                                            : "from-green-700 to-green-800"
+                                    } shrink-0`}
+                                />
+                                {t("achievements.level3", "30+ words")}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
+                <div className="mb-1">
                     <LearnedWordsCalendar
                         userId={user.userId}
                         year={year}
                         month={month}
                         theme={isDark ? "dark" : "light"}
+                        onTotalChange={(count: number) => setTotalWords(count)}
                     />
                 </div>
             </div>

@@ -104,14 +104,24 @@
         "dark": "Темная",
         "light": "Светлая"
     },
+    "achievements": {
+        "title": "Достижения",
+        "loginRequired": "Пожалуйста, войдите, чтобы увидеть достижения",
+        "previous": "Предыдущий",
+        "next": "Следующий",
+        "totalLearned": "Всего выучено слов за месяц",
+        "legend": "Обозначения цвета",
+        "level0": "0 слов",
+        "level1": "1–19 слов",
+        "level2": "20–29 слов",
+        "level3": "30+ слов"
+    },
     "calendar": {
         "loading": "Загрузка календаря...",
         "error": "Ошибка загрузки календаря",
-        "title": "Календарь выученных слов",
-        "noWordsLearned": "Слов не выучено",
-        "wordsLearned": "{{count}} слово выучено",
-        "wordsLearned_plural": "{{count}} слова выучено",
-        "wordsLearned_plural_2": "{{count}} слов выучено",
+        "title": "Календарь изучения слов",
+        "wordsLearned": "{{count}} слов выучено",
+        "noWordsLearned": "Слова не изучались",
         "weekDays": {
             "Sun": "Вс",
             "Mon": "Пн",
@@ -121,12 +131,6 @@
             "Fri": "Пт",
             "Sat": "Сб"
         }
-    },
-    "achievements": {
-        "title": "Достижения",
-        "previous": "Назад",
-        "next": "Вперёд",
-        "loginRequired": "Пожалуйста, войдите, чтобы увидеть достижения"
     },
     "addWordsPage": {
         "title": "Добавить новое слово",

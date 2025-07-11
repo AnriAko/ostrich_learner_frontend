@@ -108,9 +108,8 @@
         "loading": "Loading calendar...",
         "error": "Error loading calendar",
         "title": "Learned Words Calendar",
-        "noWordsLearned": "No words learned",
         "wordsLearned": "{{count}} word learned",
-        "wordsLearned_plural": "{{count}} words learned",
+        "noWordsLearned": "No words learned",
         "weekDays": {
             "Sun": "Sun",
             "Mon": "Mon",
@@ -125,7 +124,13 @@
         "title": "Achievements",
         "previous": "Previous",
         "next": "Next",
-        "loginRequired": "Please login to see achievements"
+        "loginRequired": "Please login to see achievements",
+        "totalLearned": "Total words learned this month",
+        "legend": "Color legend",
+        "level0": "0 words",
+        "level1": "1–19 words",
+        "level2": "20–29 words",
+        "level3": "30+ words"
     },
     "manageWords": "View words",
     "addWordsPage": {
