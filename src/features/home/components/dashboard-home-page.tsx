@@ -1,11 +1,14 @@
 import { useTranslation } from "react-i18next";
 import { useTheme } from "../../../shared/context/theme-context/use-theme";
+import { Link } from "react-router-dom";
 
 const DashboardHomePage = () => {
     const { t } = useTranslation();
     const { theme } = useTheme();
 
     const headingColor = theme === "dark" ? "text-yellow-300" : "text-blue-500";
+    const linkColor = theme === "dark" ? "text-yellow-300" : "text-blue-500";
+    const linkClass = `${linkColor} hover:underline`;
 
     return (
         <div
@@ -20,13 +23,15 @@ const DashboardHomePage = () => {
                     {t("dashboard.welcome")}
                 </h1>
 
-                <h2 className={`text-xl font-semibold mb-3 ${headingColor}`}>
+                <h2 className={`text-xl font-semibold mb-3`}>
                     {t("dashboard.modules.title")}
                 </h2>
 
                 <section className="mb-4">
                     <h3 className="font-semibold">
-                        {t("dashboard.modules.addWords.title")}
+                        <Link to="/dashboard/add" className={linkClass}>
+                            {t("dashboard.modules.addWords.title")}
+                        </Link>
                     </h3>
                     <ul className="list-disc ml-6">
                         <li>{t("dashboard.modules.addWords.feature1")}</li>
@@ -36,7 +41,9 @@ const DashboardHomePage = () => {
 
                 <section className="mb-4">
                     <h3 className="font-semibold">
-                        {t("dashboard.modules.learnWords.title")}
+                        <Link to="/dashboard/study" className={linkClass}>
+                            {t("dashboard.modules.learnWords.title")}
+                        </Link>
                     </h3>
                     <ul className="list-disc ml-6">
                         <li>{t("dashboard.modules.learnWords.feature1")}</li>
@@ -47,7 +54,9 @@ const DashboardHomePage = () => {
 
                 <section className="mb-4">
                     <h3 className="font-semibold">
-                        {t("dashboard.modules.viewWords.title")}
+                        <Link to="/dashboard/manage" className={linkClass}>
+                            {t("dashboard.modules.viewWords.title")}
+                        </Link>
                     </h3>
                     <ul className="list-disc ml-6">
                         <li>{t("dashboard.modules.viewWords.feature1")}</li>
@@ -59,7 +68,9 @@ const DashboardHomePage = () => {
 
                 <section className="mb-4">
                     <h3 className="font-semibold">
-                        {t("dashboard.modules.translationManagement.title")}
+                        <Link to="/dashboard/books" className={linkClass}>
+                            {t("dashboard.modules.translationManagement.title")}
+                        </Link>
                     </h3>
                     <ul className="list-disc ml-6">
                         <li>
@@ -97,7 +108,6 @@ const DashboardHomePage = () => {
                     <ul className="list-disc ml-6">
                         <li>{t("dashboard.modules.configuration.feature1")}</li>
                         <li>{t("dashboard.modules.configuration.feature2")}</li>
-                        <li>{t("dashboard.modules.configuration.feature3")}</li>
                     </ul>
                 </section>
 
@@ -106,8 +116,22 @@ const DashboardHomePage = () => {
                         {t("dashboard.additional.title")}
                     </h3>
                     <ul className="list-disc ml-6">
-                        <li>{t("dashboard.additional.achievement")}</li>
-                        <li>{t("dashboard.additional.settings")}</li>
+                        <li>
+                            <Link
+                                to="/dashboard/achievements"
+                                className={linkClass}
+                            >
+                                {t("dashboard.additional.achievement")}
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/dashboard/settings"
+                                className={linkClass}
+                            >
+                                {t("dashboard.additional.settings")}
+                            </Link>
+                        </li>
                     </ul>
                 </section>
             </div>

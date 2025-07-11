@@ -26,7 +26,7 @@
     "dashboard": {
         "welcome": "Welcome to Ostrich Learner!",
         "modules": {
-            "title": "Main modules and their features",
+            "title": "Main modules and their features:",
             "addWords": {
                 "title": "Adding Words",
                 "feature1": "Add words with support for 3 languages (English, Georgian, Russian)",
@@ -46,7 +46,7 @@
                 "feature4": "Filter words by various fields"
             },
             "translationManagement": {
-                "title": "Book Reading",
+                "title": "Viewing Books",
                 "feature1": "Upload PDF books, which are saved as plain text",
                 "feature2": "Read books with adjustable font size and page width",
                 "feature3": "Customizable pagination to optimize reading and resource usage",
@@ -54,7 +54,7 @@
                 "feature5": "Remembers approximately where the user left off"
             },
             "configuration": {
-                "title": "Header Settings",
+                "title": "Interface Settings",
                 "feature1": "Switch interface language (English, Georgian, Russian)",
                 "feature2": "Toggle theme (dark or light)"
             }
