@@ -63,6 +63,11 @@
             "title": "Additional options in the profile menu",
             "achievement": "Achievements page to view learning activity",
             "settings": "Update nickname and delete account"
+        },
+        "download": {
+            "title": "Download App for desktop",
+            "exeInstaller": "ostrich_learner_setup.exe",
+            "msiInstaller": "ostrich_learner_setup.msi"
         }
     },
     "userMenu": {

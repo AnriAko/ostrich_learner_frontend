@@ -52,6 +52,11 @@
             "title": "დამატებითი ფუნქციები პროფილის მენიუში",
             "achievement": "მიღწევების გვერდი სწავლების აქტივობის სანახავად",
             "settings": "სახელის განახლება და პროფილის წაშლა"
+        },
+        "download": {
+            "title": "დესკტოპ ვერსიის გადმოქაჩვა",
+            "exeInstaller": "ostrich_learner_setup.exe",
+            "msiInstaller": "ostrich_learner_setup.msi"
         }
     },
     "createUser": {

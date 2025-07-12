@@ -134,6 +134,31 @@ const DashboardHomePage = () => {
                         </li>
                     </ul>
                 </section>
+                <section className="mt-8">
+                    <h3 className="text-xl font-semibold mb-3">
+                        {t("dashboard.download.title")}
+                    </h3>
+                    <ul className="list-disc ml-6">
+                        <li>
+                            <a
+                                href="/src/static/ostrich-learner_0.1.0_x64-setup.exe"
+                                download
+                                className={linkClass}
+                            >
+                                {t("dashboard.download.exeInstaller")}
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="/src/static/ostrich-learner_0.1.0_x64_en-US.msi"
+                                download
+                                className={linkClass}
+                            >
+                                {t("dashboard.download.msiInstaller")}
+                            </a>
+                        </li>
+                    </ul>
+                </section>
             </div>
         </div>
     );

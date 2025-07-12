@@ -63,6 +63,11 @@
             "title": "Дополнительные возможности в меню профиля",
             "achievement": "Страница достижений для просмотра активности",
             "settings": "Обновление никнейма и удаление аккаунта"
+        },
+        "download": {
+            "title": "Скачать десктоп версию",
+            "exeInstaller": "ostrich_learner_setup.exe",
+            "msiInstaller": "ostrich_learner_setup.msi"
         }
     },
     "userMenu": {
